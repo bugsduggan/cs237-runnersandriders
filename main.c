@@ -16,6 +16,10 @@ typedef struct Competitor {
 } Competitor;
 
 typedef struct Event {
+  char* title;
+  char* date;
+  int start_hrs;
+  int start_mins;
   Competitor** competitor_list;
 } Event;
 
@@ -59,11 +63,29 @@ void locate_competitor(Event* event) {
 
 int main(int argc, char* argv[]) {
   int input;
+  char* filename;
+  FILE* fr;
+  char line[80];
   Event* event;
 
   /* Init data structures and whatnot */
   event = malloc(sizeof(Event));
   event->competitor_list = NULL;
+
+  printf("Please enter the name of the file containing event data: ");
+  scanf("%79[a-zA-Z0-9]", &filename);
+  fr = fopen(filename, "rt");
+  fgets(line, 80, fr);
+  sscanf(line, "%s", &event->title);
+  fgets(line, 80, fr);
+  sscanf(line, "%s", &event->date);
+  fgets(line, 80, fr);
+  // TODO parse the start time
+  fclose(fr);
+
+  /* Double-check the info we've got so far */
+  printf("%s\n", event->title);
+  printf("%s\n", event->date);
 
   /* The main program loop, shows the menu and prompts for input */
   input = -1;
