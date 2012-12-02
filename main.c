@@ -9,6 +9,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef struct Competitor {
+  int id;
+  char* name;
+  struct Competitor* next;
+} Competitor;
+
+typedef struct Event {
+  Competitor** competitor_list;
+} Event;
+
 void print_menu() {
   printf("\n");
   printf("Please select from the following options:\n");
@@ -31,10 +41,29 @@ int prompt() {
   return result;
 }
 
+void locate_competitor(Event* event) {
+  int input;
+  Competitor* competitor;
+
+  printf("Please enter competitor id: ");
+  scanf("%d", &input);
+  competitor = (*event->competitor_list);
+  while (competitor != NULL) {
+    if (competitor->id == input) {
+      printf("%d: %s STATUS\n", competitor->id, competitor->name); // TODO Plug-in the actual status
+      return;
+    }
+    competitor = competitor->next;
+  }
+}
+
 int main(int argc, char* argv[]) {
   int input;
+  Event* event;
 
   /* Init data structures and whatnot */
+  event = malloc(sizeof(Event));
+  event->competitor_list = NULL;
 
   /* The main program loop, shows the menu and prompts for input */
   input = -1;
@@ -42,7 +71,7 @@ int main(int argc, char* argv[]) {
     print_menu();
     input = prompt();
     if (input == 1) { // locate competitor
-
+      locate_competitor(event);
     } else if (input == 2) { // show not started
 
     } else if (input == 3) { // show on course
