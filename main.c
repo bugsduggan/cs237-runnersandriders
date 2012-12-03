@@ -118,6 +118,7 @@ int main(int argc, char* argv[]) {
     } else if (input == 7) { // show results
 
     } else if (input == 8) { // quit
+      free(event); // And probably a whole lot more besides
       return EXIT_SUCCESS;
     } else {
       // invalid input, do nothing
