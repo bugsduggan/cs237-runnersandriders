@@ -53,9 +53,9 @@ void read_event(Event* event, char* filename) {
   FILE* fp = fopen(filename, "r");
 
   fgets(line, 80, fp);
-  strcpy(event->title, line);
+  event->title = strdup(line);
   fgets(line, 80, fp);
-  strcpy(event->date, line);
+  event->date = strdup(line);
   fgets(line, 80, fp);
   token = strtok(line, delim);
   event->start_hrs = atoi(token);
@@ -91,12 +91,8 @@ int main(int argc, char* argv[]) {
   event->competitor_list = NULL;
 
   printf("Please enter the name of the file containing event data: ");
-  scanf("%s", &filename);
+  scanf("%79[a-zA-Z0-9._/]", filename);
   read_event(event, filename);
-
-  /* Double-check the info we've got so far */
-  printf("%s\n", event->title);
-  printf("%s\n", event->date);
 
   /* The main program loop, shows the menu and prompts for input */
   input = -1;
