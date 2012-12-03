@@ -79,6 +79,19 @@ char* getline_foo() {
   return linep;
 }
 
+/* This function was taken from
+ * http://cboard.cprogramming.com/c-programming/95462-compiler-error-warning-implicit-declaration-function-strdup.html
+ * as it's not part of the c89 standard */
+char *strdup(const char *str)
+{
+  int n = strlen(str) + 1;
+  char *dup = malloc(n);
+  if(dup) {
+    strcpy(dup, str);
+  }
+  return dup;
+}
+
 void print_menu() {
   printf("\n");
   printf("Please select from the following options:\n");
@@ -107,7 +120,7 @@ void read_event(Event* event, char* filename) {
   char* delim = ":";
   FILE* fp = fopen(filename, "r");
 
-  fgets(line, 80, fp); // Now this is borked somehow
+  fgets(line, 80, fp); /* Now this is borked somehow */
   event->title = strdup(line);
   fgets(line, 80, fp);
   event->date = strdup(line);
@@ -173,7 +186,7 @@ void locate_competitor(Event* event) {
   while (competitor != NULL) {
     if (competitor->id == input) {
       printf("%d: %s ", competitor->id, competitor->name);
-      // TODO if the competitor is running, it should show where he/she is on the course
+      /* TODO if the competitor is running, it should show where he/she is on the course */
       if (competitor->status == NOT_STARTED) {
         printf("Not started\n");
       } else if (competitor->status == RUNNING) {
@@ -210,25 +223,25 @@ int main(int argc, char* argv[]) {
   while (1) {
     print_menu();
     input = prompt();
-    if (input == 1) { // locate competitor
+    if (input == 1) { /* locate competitor */
       locate_competitor(event);
-    } else if (input == 2) { // show not started
+    } else if (input == 2) { /* show not started */
 
-    } else if (input == 3) { // show on course
+    } else if (input == 3) { /* show on course */
 
-    } else if (input == 4) { // show finished
+    } else if (input == 4) { /* show finished */
 
-    } else if (input == 5) { // supply checkpoints manually
+    } else if (input == 5) { /* supply checkpoints manually */
 
-    } else if (input == 6) { // read from file
+    } else if (input == 6) { /* read from file */
 
-    } else if (input == 7) { // show results
+    } else if (input == 7) { /* show results */
 
-    } else if (input == 8) { // quit
-      free(event); // And probably a whole lot more besides
+    } else if (input == 8) { /* quit */
+      free(event); /* And probably a whole lot more besides */
       return EXIT_SUCCESS;
     } else {
-      // invalid input, do nothing
+      /* invalid input, do nothing */
     }
   }
 
