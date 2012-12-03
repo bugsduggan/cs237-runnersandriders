@@ -3,11 +3,12 @@
  *
  * The main entry point to the program.
  *
- * Tom Leaman (tom@tomleaman.co.uk)
+ * Tom Leaman (thl5@aber.ac.uk)
  */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct Competitor {
   int id;
@@ -45,6 +46,25 @@ int prompt() {
   return result;
 }
 
+void read_event(Event* event, char* filename) {
+  char line[80];
+  char* token;
+  char* delim = ":";
+  FILE* fp = fopen(filename, "r");
+
+  fgets(line, 80, fp);
+  strcpy(event->title, line);
+  fgets(line, 80, fp);
+  strcpy(event->date, line);
+  fgets(line, 80, fp);
+  token = strtok(line, delim);
+  event->start_hrs = atoi(token);
+  token = strtok(NULL, delim);
+  event->start_mins = atoi(token);
+
+  fclose(fp);
+}
+
 void locate_competitor(Event* event) {
   int input;
   Competitor* competitor;
@@ -63,9 +83,7 @@ void locate_competitor(Event* event) {
 
 int main(int argc, char* argv[]) {
   int input;
-  char* filename;
-  FILE* fr;
-  char line[80];
+  char filename[80];
   Event* event;
 
   /* Init data structures and whatnot */
@@ -73,15 +91,8 @@ int main(int argc, char* argv[]) {
   event->competitor_list = NULL;
 
   printf("Please enter the name of the file containing event data: ");
-  scanf("%79[a-zA-Z0-9]", &filename);
-  fr = fopen(filename, "rt");
-  fgets(line, 80, fr);
-  sscanf(line, "%s", &event->title);
-  fgets(line, 80, fr);
-  sscanf(line, "%s", &event->date);
-  fgets(line, 80, fr);
-  // TODO parse the start time
-  fclose(fr);
+  scanf("%s", &filename);
+  read_event(event, filename);
 
   /* Double-check the info we've got so far */
   printf("%s\n", event->title);
