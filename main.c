@@ -9,24 +9,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "node.h"
 
 typedef enum {
   NOT_STARTED,
   RUNNING,
   FINISHED
 } status_t; 
-
-typedef enum {
-  CP,
-  MC,
-  JN
-} node_t;
-
-typedef struct Node {
-  int id;
-  node_t type;
-  struct Node* next;
-} Node;
 
 typedef struct Competitor {
   int id;
@@ -40,7 +29,7 @@ typedef struct Event {
   char* date;
   int start_hrs;
   int start_mins;
-  Node** node_list;
+  Node_list* nodes;
   Competitor** competitor_list;
 } Event;
 
@@ -133,49 +122,6 @@ void read_event(Event* event, char* filename) {
   fclose(fp);
 }
 
-void read_nodes(Event* event, char* filename) {
-  char line[80];
-  char* token;
-  char* delim = " ";
-  FILE* fp = fopen(filename, "r");
-  Node* node;
-  Node* prev;
-
-  fgets(line, 80, fp);
-  node = malloc(sizeof(Node));
-  token = strtok(line, delim);
-  node->id = atoi(token);
-  token = strtok(NULL, delim);
-  if (strncmp(token, "CP", 2) == 0) {
-    node->type = CP;
-  } else if (strncmp(token, "MC", 2) == 0) {
-    node->type = MC;
-  } else {
-    node->type = JN;
-  }
-  node->next = NULL;
-  event->node_list = &node;
-  prev = node;
-  while (fgets(line, 80, fp) != NULL) {
-    node = NULL;
-    node = malloc(sizeof(Node));
-    token = strtok(line, delim);
-    node->id = atoi(token);
-    token = strtok(NULL, delim);
-    if (strncmp(token, "CP", 2) == 0) {
-      node->type = CP;
-    } else if (strncmp(token, "MC", 2) == 0) {
-      node->type = MC;
-    } else {
-      node->type = JN;
-    }
-    node->next = NULL;
-    prev->next = node;
-  }
-
-  fclose(fp);
-}
-
 void locate_competitor(Event* event) {
   int input;
   Competitor* competitor;
@@ -207,7 +153,7 @@ int main(int argc, char* argv[]) {
 
   /* Init data structures and whatnot */
   event = malloc(sizeof(Event));
-  event->node_list = NULL;
+  event->nodes = NULL;
   event->competitor_list = NULL;
 
   printf("Please enter the name of the file containing event data: ");
@@ -218,7 +164,7 @@ int main(int argc, char* argv[]) {
   printf("Please enter the name of the file containing node data: ");
   filename = getline_foo();
   strtok(filename, "\n");
-  read_nodes(event, filename);
+  event->nodes = make_nodes(filename);
 
   /* The main program loop, shows the menu and prompts for input */
   input = -1;
