@@ -15,5 +15,6 @@ typedef struct Node_list {
 
 void Node_insert(Node_list* list, Node* new_node);
 Node_list* make_nodes(char* filename);
+void Node_destroy(Node_list* list);
 
 #endif

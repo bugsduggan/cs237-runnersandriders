@@ -4,3 +4,4 @@ main: node.o
 
 clean:
 	rm -rf main
+	rm -rf node.o

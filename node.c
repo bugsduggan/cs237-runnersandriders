@@ -64,3 +64,19 @@ Node_list* make_nodes(char* filename) {
   fclose(fp);
   return list;
 }
+
+void Node_destroy_r(Node* head) {
+  if (head) {
+    Node_destroy_r(head->next);
+    free(head);
+  }
+}
+
+void Node_destroy(Node_list* list) {
+  if (list) {
+    if (list->head) {
+      Node_destroy_r(list->head);
+    }
+    free(list);
+  }
+}

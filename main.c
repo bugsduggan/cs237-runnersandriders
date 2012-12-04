@@ -11,26 +11,12 @@
 #include <string.h>
 #include "node.h"
 
-typedef enum {
-  NOT_STARTED,
-  RUNNING,
-  FINISHED
-} status_t; 
-
-typedef struct Competitor {
-  int id;
-  char* name;
-  status_t status;
-  struct Competitor* next;
-} Competitor;
-
 typedef struct Event {
   char* title;
   char* date;
   int start_hrs;
   int start_mins;
   Node_list* nodes;
-  Competitor** competitor_list;
 } Event;
 
 /* The following function was taken from
@@ -122,30 +108,6 @@ void read_event(Event* event, char* filename) {
   fclose(fp);
 }
 
-void locate_competitor(Event* event) {
-  int input;
-  Competitor* competitor;
-
-  printf("Please enter competitor id: ");
-  scanf("%d", &input);
-  competitor = (*event->competitor_list);
-  while (competitor != NULL) {
-    if (competitor->id == input) {
-      printf("%d: %s ", competitor->id, competitor->name);
-      /* TODO if the competitor is running, it should show where he/she is on the course */
-      if (competitor->status == NOT_STARTED) {
-        printf("Not started\n");
-      } else if (competitor->status == RUNNING) {
-        printf("Running\n");
-      } else {
-        printf("Finished\n");
-      }
-      return;
-    }
-    competitor = competitor->next;
-  }
-}
-
 int main(int argc, char* argv[]) {
   int input;
   char* filename;
@@ -154,17 +116,18 @@ int main(int argc, char* argv[]) {
   /* Init data structures and whatnot */
   event = malloc(sizeof(Event));
   event->nodes = NULL;
-  event->competitor_list = NULL;
 
   printf("Please enter the name of the file containing event data: ");
   filename = getline_foo();
   strtok(filename, "\n");
   read_event(event, filename);
+  free(filename);
 
   printf("Please enter the name of the file containing node data: ");
   filename = getline_foo();
   strtok(filename, "\n");
   event->nodes = make_nodes(filename);
+  free(filename);
 
   /* The main program loop, shows the menu and prompts for input */
   input = -1;
@@ -172,7 +135,7 @@ int main(int argc, char* argv[]) {
     print_menu();
     input = prompt();
     if (input == 1) { /* locate competitor */
-      locate_competitor(event);
+
     } else if (input == 2) { /* show not started */
 
     } else if (input == 3) { /* show on course */
@@ -186,6 +149,9 @@ int main(int argc, char* argv[]) {
     } else if (input == 7) { /* show results */
 
     } else if (input == 8) { /* quit */
+      Node_destroy(event->nodes);
+      free(event->title);
+      free(event->date);
       free(event); /* And probably a whole lot more besides */
       return EXIT_SUCCESS;
     } else {
