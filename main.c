@@ -120,7 +120,7 @@ void read_event(Event* event, char* filename) {
   char* delim = ":";
   FILE* fp = fopen(filename, "r");
 
-  fgets(line, 80, fp); /* Now this is borked somehow */
+  fgets(line, 80, fp);
   event->title = strdup(line);
   fgets(line, 80, fp);
   event->date = strdup(line);
@@ -212,10 +212,12 @@ int main(int argc, char* argv[]) {
 
   printf("Please enter the name of the file containing event data: ");
   filename = getline_foo();
+  strtok(filename, "\n");
   read_event(event, filename);
 
   printf("Please enter the name of the file containing node data: ");
   filename = getline_foo();
+  strtok(filename, "\n");
   read_nodes(event, filename);
 
   /* The main program loop, shows the menu and prompts for input */
