@@ -32,10 +32,10 @@ void test_out_of_bounds(Vector* vector) {
   int ret_val;
   printf("Trying vector->size: ");
   Vector_remove(vector, vector->size, &ret_val);
-  printf("\n");
+  printf("Didn't crash!\n");
   printf("Trying -1: ");
   Vector_remove(vector, vector->size, &ret_val);
-  printf("\n");
+  printf("Didn't crash!\n");
 }
 
 int main(int argc, char* argv[]) {
