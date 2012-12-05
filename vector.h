@@ -10,7 +10,7 @@
 #define MIN_CAPACITY 4
 
 typedef struct Vector {
-  int elem_size;
+  size_t elem_size;
   void (*dispose_fn)(void*);
   int size;
   int capacity;

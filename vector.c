@@ -8,7 +8,7 @@
 #include <string.h>
 #include "vector.h"
 
-void Vector_grow(Vector* vector) {
+static void Vector_grow(Vector* vector) {
   void* new_base;
   vector->capacity *= 2;
   new_base = malloc(vector->elem_size * vector->capacity);
