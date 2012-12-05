@@ -1,6 +1,6 @@
 CFLAGS=-Wall -g -std=c89
 
-main: data.o
+main: data.o vector.o
 
 vectortest: vector.o
 
