@@ -21,7 +21,7 @@ Vector* Vector_new(int elem_size, void (*dispose_fn)(void*));
 void Vector_dispose(Vector* vector);
 
 void Vector_add(Vector* vector, void* elem);
-void* Vector_remove(Vector* vector, int index);
-void* Vector_get(Vector* vector, int index);
+void Vector_remove(Vector* vector, int index, void* ret_val);
+void Vector_get(Vector* vector, int index, void* ret_val);
 
 #endif
