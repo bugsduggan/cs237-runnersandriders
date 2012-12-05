@@ -39,6 +39,18 @@ typedef struct Course_list {
   Course* head;
 } Course_list;
 
+/* entrant data structures */
+typedef struct Entrant {
+  int id;
+  char course_id;
+  char* name;
+  struct Entrant* next;
+} Entrant;
+
+typedef struct Entrant_list {
+  Entrant* head;
+} Entrant_list;
+
 /* event data structures */
 typedef struct Event {
   char* title;
@@ -48,6 +60,7 @@ typedef struct Event {
   Node_list* nodes;
   Track_list* tracks;
   Course_list* courses;
+  Entrant_list* entrants;
 } Event;
 
 /*
@@ -65,6 +78,10 @@ void Track_destroy(Track_list* list);
 /* course functions */
 Course_list* make_courses(char* filename);
 void Course_destroy(Course_list* list);
+
+/* entrant functions */
+Entrant_list* make_entrants(char* filename);
+void Entrant_destroy(Entrant_list* list);
 
 /* event functions */
 Event* make_event(char* filename);

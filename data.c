@@ -120,13 +120,13 @@ Track_list* make_tracks(char* filename) {
     token = strtok(line, " ");
     new_track->id = atoi(token);
     /* read start node */
-    token = strtok(line, " ");
+    token = strtok(NULL, " ");
     new_track->start_node = atoi(token);
     /* read end node */
-    token = strtok(line, " ");
+    token = strtok(NULL, " ");
     new_track->end_node = atoi(token);
     /* read safe completion time */
-    token = strtok(line, " ");
+    token = strtok(NULL, " ");
     new_track->safe_time = atoi(token);
     new_track->next = NULL;
     Track_insert(list, new_track);
@@ -187,12 +187,12 @@ Course_list* make_courses(char* filename) {
     token = strtok(line, " ");
     new_course->id = token[0]; /* should be one char anyway! */
     /* read num nodes */
-    token = strtok(line, " ");
+    token = strtok(NULL, " ");
     new_course->n_nodes = atoi(token);
     /* read nodes */
     new_course->nodes = malloc(sizeof(int) * new_course->n_nodes);
     for (i = 0; i < new_course->n_nodes; i++) {
-      token = strtok(line, " ");
+      token = strtok(NULL, " ");
       new_course->nodes[i] = atoi(token);
     }
     new_course->next = NULL;
@@ -221,6 +221,70 @@ void Course_destroy(Course_list* list) {
 }
 
 /*
+ * entrant functions
+ */
+
+void Entrant_insert_r(Entrant* head, Entrant* new_entrant) {
+  if (head->next) {
+    Entrant_insert_r(head->next, new_entrant);
+  } else {
+    head->next = new_entrant;
+  }
+}
+
+void Entrant_insert(Entrant_list* list, Entrant* new_entrant) {
+  if (list->head) {
+    Entrant_insert_r(list->head, new_entrant);
+  } else {
+    list->head = new_entrant;
+  }
+}
+
+Entrant_list* make_entrants(char* filename) {
+  char line[80];
+  char* token;
+  FILE* fp;
+  Entrant_list* list = malloc(sizeof(Entrant_list));
+  list->head = NULL;
+
+  fp = fopen(filename, "r");
+  while (fgets(line, 80, fp) != NULL) {
+    Entrant* new_entrant = malloc(sizeof(Entrant));
+    /* read id */
+    token = strtok(line, " ");
+    new_entrant->id = atoi(token);
+    /* read course id */
+    token = strtok(NULL, " ");
+    new_entrant->course_id = token[0]; /* should be one char anyway! */
+    /* read name */
+    token = strtok(NULL, " ");
+    new_entrant->name = strdup(token);
+    new_entrant->next = NULL;
+    Entrant_insert(list, new_entrant);
+  }
+
+  fclose(fp);
+  return list;
+}
+
+void Entrant_destroy_r(Entrant* head) {
+  if (head) {
+    Entrant_destroy_r(head->next);
+    if (head->name) free(head->name);
+    free(head);
+  }
+}
+
+void Entrant_destroy(Entrant_list* list) {
+  if (list) {
+    if (list->head) {
+      Entrant_destroy_r(list->head);
+    }
+    free(list);
+  }
+}
+
+/*
  * event functions
  */
 
@@ -232,6 +296,7 @@ Event* make_event(char* filename) {
   event->nodes = NULL;
   event->tracks = NULL;
   event->courses = NULL;
+  event->entrants = NULL;
 
   fp = fopen(filename, "r");
   /* read title */
@@ -258,6 +323,7 @@ void Event_destroy(Event* event) {
     Node_destroy(event->nodes);
     Track_destroy(event->tracks);
     Course_destroy(event->courses);
+    Entrant_destroy(event->entrants);
     free(event);
   }
 }

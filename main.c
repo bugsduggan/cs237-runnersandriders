@@ -50,10 +50,10 @@ void print_menu() {
   printf("\n");
   printf("Please select from the following options:\n");
   printf("\n");
-  printf("\t1. Locate a competitor\n");
-  printf("\t2. Show how many competitors have not yet started\n");
-  printf("\t3. Show how many competitors are currently on the course\n");
-  printf("\t4. Show how many competitors have finished\n");
+  printf("\t1. Locate a entrant\n");
+  printf("\t2. Show how many entrants have not yet started\n");
+  printf("\t3. Show how many entrants are currently on the course\n");
+  printf("\t4. Show how many entrants have finished\n");
   printf("\t5. Supply checkpoint times manually\n");
   printf("\t6. Supply checkpoint times from a file\n");
   printf("\t7. Display results list\n");
@@ -99,12 +99,18 @@ int main(int argc, char* argv[]) {
   event->courses = make_courses(filename);
   free(filename);
 
+  printf("Please enter the name of the file containing entrant data: ");
+  filename = getline_foo();
+  strtok(filename, "\n");
+  event->entrants = make_entrants(filename);
+  free(filename);
+
   /* The main program loop, shows the menu and prompts for input */
   input = -1;
   while (1) {
     print_menu();
     input = prompt();
-    if (input == 1) { /* locate competitor */
+    if (input == 1) { /* locate entrant */
 
     } else if (input == 2) { /* show not started */
 
