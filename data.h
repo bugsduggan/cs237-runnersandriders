@@ -27,6 +27,18 @@ typedef struct Track_list {
   Track* head;
 } Track_list;
 
+/* course data structures */
+typedef struct Course {
+  char id;
+  int n_nodes;
+  int* nodes; /* an array of node IDs which make up this course */
+  struct Course* next;
+} Course;
+
+typedef struct Course_list {
+  Course* head;
+} Course_list;
+
 /* event data structures */
 typedef struct Event {
   char* title;
@@ -35,6 +47,7 @@ typedef struct Event {
   int start_mins;
   Node_list* nodes;
   Track_list* tracks;
+  Course_list* courses;
 } Event;
 
 /*
@@ -48,6 +61,10 @@ void Node_destroy(Node_list* list);
 /* track functions */
 Track_list* make_tracks(char* filename);
 void Track_destroy(Track_list* list);
+
+/* course functions */
+Course_list* make_courses(char* filename);
+void Course_destroy(Course_list* list);
 
 /* event functions */
 Event* make_event(char* filename);

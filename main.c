@@ -93,6 +93,12 @@ int main(int argc, char* argv[]) {
   event->tracks = make_tracks(filename);
   free(filename);
 
+  printf("Please enter the name of the file containing course data: ");
+  filename = getline_foo();
+  strtok(filename, "\n");
+  event->courses = make_courses(filename);
+  free(filename);
+
   /* The main program loop, shows the menu and prompts for input */
   input = -1;
   while (1) {

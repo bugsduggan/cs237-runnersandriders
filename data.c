@@ -116,12 +116,16 @@ Track_list* make_tracks(char* filename) {
   fp = fopen(filename, "r");
   while (fgets(line, 80, fp) != NULL) {
     Track* new_track = malloc(sizeof(Track));
+    /* read id */
     token = strtok(line, " ");
     new_track->id = atoi(token);
+    /* read start node */
     token = strtok(line, " ");
     new_track->start_node = atoi(token);
+    /* read end node */
     token = strtok(line, " ");
     new_track->end_node = atoi(token);
+    /* read safe completion time */
     token = strtok(line, " ");
     new_track->safe_time = atoi(token);
     new_track->next = NULL;
@@ -149,6 +153,74 @@ void Track_destroy(Track_list* list) {
 }
 
 /*
+ * course functions
+ */
+
+void Course_insert_r(Course* head, Course* new_course) {
+  if (head->next) {
+    Course_insert_r(head->next, new_course);
+  } else {
+    head->next = new_course;
+  }
+}
+
+void Course_insert(Course_list* list, Course* new_course) {
+  if (list->head) {
+    Course_insert_r(list->head, new_course);
+  } else {
+    list->head = new_course;
+  }
+}
+
+Course_list* make_courses(char* filename) {
+  char line[80];
+  char* token;
+  FILE* fp;
+  int i = 0;
+  Course_list* list = malloc(sizeof(Course_list));
+  list->head = NULL;
+
+  fp = fopen(filename, "r");
+  while (fgets(line, 80, fp) != NULL) {
+    Course* new_course = malloc(sizeof(Course));
+    /* read id */
+    token = strtok(line, " ");
+    new_course->id = token[0]; /* should be one char anyway! */
+    /* read num nodes */
+    token = strtok(line, " ");
+    new_course->n_nodes = atoi(token);
+    /* read nodes */
+    new_course->nodes = malloc(sizeof(int) * new_course->n_nodes);
+    for (i = 0; i < new_course->n_nodes; i++) {
+      token = strtok(line, " ");
+      new_course->nodes[i] = atoi(token);
+    }
+    new_course->next = NULL;
+    Course_insert(list, new_course);
+  }
+
+  fclose(fp);
+  return list;
+}
+
+void Course_destroy_r(Course* head) {
+  if (head) {
+    Course_destroy_r(head->next);
+    if (head->nodes) free(head->nodes);
+    free(head);
+  }
+}
+
+void Course_destroy(Course_list* list) {
+  if (list) {
+    if (list->head) {
+      Course_destroy_r(list->head);
+    }
+    free(list);
+  }
+}
+
+/*
  * event functions
  */
 
@@ -159,6 +231,7 @@ Event* make_event(char* filename) {
   Event* event = malloc(sizeof(Event));
   event->nodes = NULL;
   event->tracks = NULL;
+  event->courses = NULL;
 
   fp = fopen(filename, "r");
   /* read title */
@@ -184,6 +257,7 @@ void Event_destroy(Event* event) {
     if (event->date) free(event->date);
     Node_destroy(event->nodes);
     Track_destroy(event->tracks);
+    Course_destroy(event->courses);
     free(event);
   }
 }
