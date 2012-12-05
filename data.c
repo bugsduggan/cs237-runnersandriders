@@ -299,6 +299,18 @@ Entrant* find_entrant(Entrant_list* list, int id) {
   return NULL;
 }
 
+int count_entrants(Entrant_list* list, entrant_status status) {
+  Entrant* curr = list->head;
+  int i = 0;
+  while (curr != NULL) {
+    if (curr->status == status) {
+      i++;
+    }
+    curr = curr->next;
+  }
+  return i;
+}
+
 /*
  * event functions
  */

@@ -88,6 +88,7 @@ void Course_destroy(Course_list* list);
 Entrant_list* make_entrants(char* filename);
 void Entrant_destroy(Entrant_list* list);
 Entrant* find_entrant(Entrant_list* list, int id);
+int count_entrants(Entrant_list* list, entrant_status status);
 
 /* event functions */
 Event* make_event(char* filename);

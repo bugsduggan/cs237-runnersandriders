@@ -136,11 +136,11 @@ int main(int argc, char* argv[]) {
     if (input == 1) { /* locate entrant */
       locate_entrant(event);
     } else if (input == 2) { /* show not started */
-
-    } else if (input == 3) { /* show on course */
-
+      printf("\n\tNot started: %d\n", count_entrants(event->entrants, NOT_STARTED));
+    } else if (input == 3) { /* show started */
+      printf("\n\tNot started: %d\n", count_entrants(event->entrants, STARTED));
     } else if (input == 4) { /* show finished */
-
+      printf("\n\tNot started: %d\n", count_entrants(event->entrants, FINISHED));
     } else if (input == 5) { /* supply checkpoints manually */
 
     } else if (input == 6) { /* read from file */
