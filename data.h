@@ -40,10 +40,15 @@ typedef struct Course_list {
 } Course_list;
 
 /* entrant data structures */
+typedef enum {NOT_STARTED, STARTED, FINISHED} entrant_status;
+
 typedef struct Entrant {
   int id;
   char course_id;
   char* name;
+  entrant_status status;
+  int total_time;
+  int last_checkpoint;
   struct Entrant* next;
 } Entrant;
 
@@ -82,6 +87,7 @@ void Course_destroy(Course_list* list);
 /* entrant functions */
 Entrant_list* make_entrants(char* filename);
 void Entrant_destroy(Entrant_list* list);
+Entrant* find_entrant(Entrant_list* list, int id);
 
 /* event functions */
 Event* make_event(char* filename);

@@ -257,8 +257,12 @@ Entrant_list* make_entrants(char* filename) {
     token = strtok(NULL, " ");
     new_entrant->course_id = token[0]; /* should be one char anyway! */
     /* read name */
-    token = strtok(NULL, " ");
+    token = strtok(NULL, "\n");
     new_entrant->name = strdup(token);
+    /* initialise other fields */
+    new_entrant->status = NOT_STARTED;
+    new_entrant->total_time = 0;
+    new_entrant->last_checkpoint = -1;
     new_entrant->next = NULL;
     Entrant_insert(list, new_entrant);
   }
@@ -282,6 +286,17 @@ void Entrant_destroy(Entrant_list* list) {
     }
     free(list);
   }
+}
+
+Entrant* find_entrant(Entrant_list* list, int id) {
+  Entrant* curr = list->head;
+  while (curr != NULL) {
+    if (curr->id == id) {
+      return curr;
+    }
+    curr = curr->next;
+  }
+  return NULL;
 }
 
 /*

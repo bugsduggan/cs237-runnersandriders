@@ -68,6 +68,29 @@ int prompt() {
   return result;
 }
 
+void locate_entrant(Event* event) {
+  int input;
+  Entrant* entrant;
+
+  printf("Enter entrant id: ");
+  input = prompt();
+  entrant = find_entrant(event->entrants, input);
+  printf("\n");
+  if (entrant == NULL) {
+    printf("\tEntrant not found\n");
+  } else {
+    printf("\t%d: %s (running course %c) - ", entrant->id, entrant->name, entrant->course_id);
+    if (entrant->status == NOT_STARTED) {
+      printf("Not started");
+    } else if (entrant->status == FINISHED) {
+      printf("Finished - %d", entrant->total_time);
+    } else {
+      printf("Started - Last checkpoint: %d", entrant->last_checkpoint);
+    }
+    printf("\n");
+  }
+}
+
 int main(int argc, char* argv[]) {
   int input;
   char* filename;
@@ -111,7 +134,7 @@ int main(int argc, char* argv[]) {
     print_menu();
     input = prompt();
     if (input == 1) { /* locate entrant */
-
+      locate_entrant(event);
     } else if (input == 2) { /* show not started */
 
     } else if (input == 3) { /* show on course */
