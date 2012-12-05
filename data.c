@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "node.h"
+#include "data.h"
 
 void Node_insert_r(Node* head, Node* new_node) {
   if (head->next) {

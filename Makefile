@@ -1,7 +1,7 @@
 CFLAGS=-Wall -g -std=c89
 
-main: node.o
+main: data.o
 
 clean:
 	rm -rf main
-	rm -rf node.o
+	rm -rf data.o

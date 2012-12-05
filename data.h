@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef DATA_H
+#define DATA_H
 
 typedef enum {CP, MC, JN} node_type;
 
