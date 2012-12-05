@@ -19,7 +19,7 @@ typedef struct Vector {
 
 /*
  * Vector* vector = Vector_new(sizeof(int), NULL);
- * Vector* vector = Vector_new(sizeof(struct Foo), *dispose_fn);
+ * Vector* vector = Vector_new(sizeof(char**), dispose_fn);
  */
 Vector* Vector_new(int elem_size, void (*dispose_fn)(void*));
 void Vector_dispose(Vector* vector);

@@ -54,7 +54,7 @@ void Vector_remove(Vector* vector, int index, void* ret_val) {
     if (index >= 0 && index < vector->size) {
       memcpy(ret_val, (char*)vector->base + vector->elem_size * index, vector->elem_size);
       if (index + 1 < vector->size) { /* not last elem */
-        memcpy((char*)vector->base + vector->elem_size * index,
+        memmove((char*)vector->base + vector->elem_size * index,
             (char*)vector->base + vector->elem_size * (index + 1),
             vector->elem_size * (vector->size - index - 1));
       }
