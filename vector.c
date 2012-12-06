@@ -69,3 +69,7 @@ void Vector_get(Vector* vector, int index, void* ret_val) {
       memcpy(ret_val, (char*)vector->base + vector->elem_size * index, vector->elem_size);
   }
 }
+
+int Vector_size(Vector* vector) {
+  return vector->size;
+}

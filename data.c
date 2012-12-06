@@ -1,356 +1,71 @@
+/*
+ * data
+ *
+ * Tom Leaman (thl5@aber.ac.uk)
+ */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
+#include "vector.h"
+#include "util.h"
 #include "data.h"
 
-/*
- * general helper funcs
- */
+#include <stdio.h>
 
-/* This function was taken from
- * http://cboard.cprogramming.com/c-programming/95462-compiler-error-warning-implicit-declaration-function-strdup.html
- * as it's not part of the c89 standard */
-char *strdup(const char *str)
-{
-  int n = strlen(str) + 1;
-  char *dup = malloc(n);
-  if(dup) {
-    strcpy(dup, str);
-  }
-  return dup;
+void node_dispose(void* node) {
+  Node* foo = *(Node**)node;
+  if (foo) free(foo);
 }
 
-/*
- * node functions
- */
-
-void Node_insert_r(Node* head, Node* new_node) {
-  if (head->next) {
-    Node_insert_r(head->next, new_node);
-  } else {
-    head->next = new_node;
-  }
-}
-
-void Node_insert(Node_list* list, Node* new_node) {
-  if (list->head) {
-    Node_insert_r(list->head, new_node);
-  } else {
-    list->head = new_node;
-  }
-}
-
-Node_list* make_nodes(char* filename) {
-  char line[80];
+Vector* nodes_read(char* filename) {
+  Vector* lines = read_file(filename);
+  Vector* nodes = Vector_new(sizeof(Node*), node_dispose);
+  char* line;
   char* token;
-  FILE* fp;
-  Node_list* list = malloc(sizeof(Node_list));
-  list->head = NULL;
+  int i = 0;
 
-  fp = fopen(filename, "r");
-  while (fgets(line, 80, fp) != NULL) {
-    Node* new_node = malloc(sizeof(Node));
+  for (i = 0; i < Vector_size(lines); i++) {
+    Node* node = malloc(sizeof(Node));
+    Vector_get(lines, i, &line);
+    /* read node id */
     token = strtok(line, " ");
-    new_node->id = atoi(token);
+    node->id = atoi(token);
+    /* read node type */
     token = strtok(NULL, " ");
-    strtok(token, "\n");
     if (strcmp(token, "CP") == 0) {
-      new_node->type = CP;
+      node->type = CP;
     } else if (strcmp(token, "MC") == 0) {
-      new_node->type = MC;
+      node->type = MC;
     } else {
-      new_node->type = JN;
+      node->type = JN;
     }
-    new_node->next = NULL;
-    Node_insert(list, new_node);
+    Vector_add(nodes, &node);
   }
-
-  fclose(fp);
-  return list;
+  Vector_dispose(lines);
+  return nodes;
 }
 
-void Node_destroy_r(Node* head) {
-  if (head) {
-    Node_destroy_r(head->next);
-    free(head);
-  }
+void nodes_dispose(Vector* nodes) {
+  Vector_dispose(nodes);
 }
 
-void Node_destroy(Node_list* list) {
-  if (list) {
-    if (list->head) {
-      Node_destroy_r(list->head);
-    }
-    free(list);
-  }
-}
-
-/*
- * track functions
- */
-
-void Track_insert_r(Track* head, Track* new_track) {
-  if (head->next) {
-    Track_insert_r(head->next, new_track);
-  } else {
-    head->next = new_track;
-  }
-}
-
-void Track_insert(Track_list* list, Track* new_track) {
-  if (list->head) {
-    Track_insert_r(list->head, new_track);
-  } else {
-    list->head = new_track;
-  }
-}
-
-Track_list* make_tracks(char* filename) {
-  char line[80];
-  char* token;
-  FILE* fp;
-  Track_list* list = malloc(sizeof(Track_list));
-  list->head = NULL;
-
-  fp = fopen(filename, "r");
-  while (fgets(line, 80, fp) != NULL) {
-    Track* new_track = malloc(sizeof(Track));
-    /* read id */
-    token = strtok(line, " ");
-    new_track->id = atoi(token);
-    /* read start node */
-    token = strtok(NULL, " ");
-    new_track->start_node = atoi(token);
-    /* read end node */
-    token = strtok(NULL, " ");
-    new_track->end_node = atoi(token);
-    /* read safe completion time */
-    token = strtok(NULL, " ");
-    new_track->safe_time = atoi(token);
-    new_track->next = NULL;
-    Track_insert(list, new_track);
-  }
-
-  fclose(fp);
-  return list;
-}
-
-void Track_destroy_r(Track* head) {
-  if (head) {
-    Track_destroy_r(head->next);
-    free(head);
-  }
-}
-
-void Track_destroy(Track_list* list) {
-  if (list) {
-    if (list->head) {
-      Track_destroy_r(list->head);
-    }
-    free(list);
-  }
-}
-
-/*
- * course functions
- */
-
-void Course_insert_r(Course* head, Course* new_course) {
-  if (head->next) {
-    Course_insert_r(head->next, new_course);
-  } else {
-    head->next = new_course;
-  }
-}
-
-void Course_insert(Course_list* list, Course* new_course) {
-  if (list->head) {
-    Course_insert_r(list->head, new_course);
-  } else {
-    list->head = new_course;
-  }
-}
-
-Course_list* make_courses(char* filename) {
-  char line[80];
-  char* token;
-  FILE* fp;
+int main(int argc, char* argv[]) {
+  Vector* nodes = nodes_read("main_data/nodes.txt");
   int i = 0;
-  Course_list* list = malloc(sizeof(Course_list));
-  list->head = NULL;
+  Node* node;
 
-  fp = fopen(filename, "r");
-  while (fgets(line, 80, fp) != NULL) {
-    Course* new_course = malloc(sizeof(Course));
-    /* read id */
-    token = strtok(line, " ");
-    new_course->id = token[0]; /* should be one char anyway! */
-    /* read num nodes */
-    token = strtok(NULL, " ");
-    new_course->n_nodes = atoi(token);
-    /* read nodes */
-    new_course->nodes = malloc(sizeof(int) * new_course->n_nodes);
-    for (i = 0; i < new_course->n_nodes; i++) {
-      token = strtok(NULL, " ");
-      new_course->nodes[i] = atoi(token);
+  for (i = 0; i < Vector_size(nodes); i++) {
+    Vector_get(nodes, i, &node);
+    printf("%d: ", node->id);
+    if (node->type == CP) {
+      printf("CP");
+    } else if (node->type == MC) {
+      printf("MC");
+    } else {
+      printf("JN");
     }
-    new_course->next = NULL;
-    Course_insert(list, new_course);
+    printf("\n");
   }
-
-  fclose(fp);
-  return list;
-}
-
-void Course_destroy_r(Course* head) {
-  if (head) {
-    Course_destroy_r(head->next);
-    if (head->nodes) free(head->nodes);
-    free(head);
-  }
-}
-
-void Course_destroy(Course_list* list) {
-  if (list) {
-    if (list->head) {
-      Course_destroy_r(list->head);
-    }
-    free(list);
-  }
-}
-
-/*
- * entrant functions
- */
-
-void Entrant_insert_r(Entrant* head, Entrant* new_entrant) {
-  if (head->next) {
-    Entrant_insert_r(head->next, new_entrant);
-  } else {
-    head->next = new_entrant;
-  }
-}
-
-void Entrant_insert(Entrant_list* list, Entrant* new_entrant) {
-  if (list->head) {
-    Entrant_insert_r(list->head, new_entrant);
-  } else {
-    list->head = new_entrant;
-  }
-}
-
-Entrant_list* make_entrants(char* filename) {
-  char line[80];
-  char* token;
-  FILE* fp;
-  Entrant_list* list = malloc(sizeof(Entrant_list));
-  list->head = NULL;
-
-  fp = fopen(filename, "r");
-  while (fgets(line, 80, fp) != NULL) {
-    Entrant* new_entrant = malloc(sizeof(Entrant));
-    /* read id */
-    token = strtok(line, " ");
-    new_entrant->id = atoi(token);
-    /* read course id */
-    token = strtok(NULL, " ");
-    new_entrant->course_id = token[0]; /* should be one char anyway! */
-    /* read name */
-    token = strtok(NULL, "\n");
-    new_entrant->name = strdup(token);
-    /* initialise other fields */
-    new_entrant->status = NOT_STARTED;
-    new_entrant->total_time = 0;
-    new_entrant->last_checkpoint = -1;
-    new_entrant->next = NULL;
-    Entrant_insert(list, new_entrant);
-  }
-
-  fclose(fp);
-  return list;
-}
-
-void Entrant_destroy_r(Entrant* head) {
-  if (head) {
-    Entrant_destroy_r(head->next);
-    if (head->name) free(head->name);
-    free(head);
-  }
-}
-
-void Entrant_destroy(Entrant_list* list) {
-  if (list) {
-    if (list->head) {
-      Entrant_destroy_r(list->head);
-    }
-    free(list);
-  }
-}
-
-Entrant* find_entrant(Entrant_list* list, int id) {
-  Entrant* curr = list->head;
-  while (curr != NULL) {
-    if (curr->id == id) {
-      return curr;
-    }
-    curr = curr->next;
-  }
-  return NULL;
-}
-
-int count_entrants(Entrant_list* list, entrant_status status) {
-  Entrant* curr = list->head;
-  int i = 0;
-  while (curr != NULL) {
-    if (curr->status == status) {
-      i++;
-    }
-    curr = curr->next;
-  }
-  return i;
-}
-
-/*
- * event functions
- */
-
-Event* make_event(char* filename) {
-  char line[80];
-  char* token;
-  FILE* fp;
-  Event* event = malloc(sizeof(Event));
-  event->nodes = NULL;
-  event->tracks = NULL;
-  event->courses = NULL;
-  event->entrants = NULL;
-
-  fp = fopen(filename, "r");
-  /* read title */
-  fgets(line, 80, fp);
-  event->title = strdup(line);
-  /* read date */
-  fgets(line, 80, fp);
-  event->date = strdup(line);
-  /* read start time (hrs:mins) */
-  fgets(line, 80, fp);
-  token = strtok(line, ":");
-  event->start_hrs = atoi(token);
-  token = strtok(NULL, ":");
-  event->start_mins = atoi(token);
-
-  fclose(fp);
-  return event;
-}
-
-void Event_destroy(Event* event) {
-  if (event) {
-    if (event->title) free(event->title);
-    if (event->date) free(event->date);
-    Node_destroy(event->nodes);
-    Track_destroy(event->tracks);
-    Course_destroy(event->courses);
-    Entrant_destroy(event->entrants);
-    free(event);
-  }
+  nodes_dispose(nodes);
+  return EXIT_SUCCESS;
 }
