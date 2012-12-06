@@ -184,6 +184,32 @@ void entrants_dispose(Vector* entrants) {
   Vector_dispose(entrants);
 }
 
+void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins) {
+  Entrant* entrant;
+  Course* course;
+  Node* node; /* the last node of the entrant's course */
+  int i = 0;
+
+  for (i = 0; i < Vector_size(event->entrants); i++) {
+    Vector_get(event->entrants, i, &entrant);
+    if (entrant->id == entrant_id) break;
+  }
+
+  if (entrant->status == NOT_STARTED) entrant->status = STARTED;
+  entrant->last_seen = node_id;
+  entrant->duration = time_to_duration(hrs, mins)
+    - time_to_duration(event->start_hrs, event->start_mins);
+
+  /* check if entrant has finished */
+  for (i = 0; i < Vector_size(event->courses); i++) {
+    Vector_get(event->courses, i, &course);
+    if (entrant->course_id == course->id) {
+      Vector_get_last(course->nodes, &node);
+      if (node->id == node_id) entrant->status = FINISHED;
+    }
+  }
+}
+
 /*
  * Event stuff
  */

@@ -83,3 +83,7 @@ Vector* read_file(char* filename) {
 
   return lines;
 }
+
+int time_to_duration(int hrs, int mins) {
+  return (hrs * 60) + mins;
+}

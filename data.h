@@ -81,6 +81,7 @@ void courses_dispose(Vector* courses);
 /* Entrant stuff */
 Vector* entrants_read(char* filename);
 void entrants_dispose(Vector* entrants);
+void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins);
 
 /* Event stuff */
 Event* event_read(char* filename);

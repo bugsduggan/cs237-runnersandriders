@@ -105,7 +105,26 @@ void count_entrants(Event* event, entrant_status status) {
 }
 
 void supply_checkpoint_manual(Event* event) {
+  int node_id;
+  int entrant_id;
+  int hrs;
+  int mins;
+  char* line;
+  char* token;
 
+  printf("\nEnter node id: ");
+  scanf("%d", &node_id);
+  printf("Enter entrant id: ");
+  scanf("%d", &entrant_id);
+  printf("Enter time (hh:mm): ");
+  line = readline();
+  token = strtok(line, ":");
+  hrs = atoi(token);
+  token = strtok(NULL, ":");
+  mins = atoi(token);
+  free(line);
+
+  entrant_update_location(event, entrant_id, node_id, hrs, mins);
 }
 
 void supply_checkpoint_file(Event* event) {
