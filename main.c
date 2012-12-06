@@ -44,8 +44,58 @@ Event* generate_data() {
   return event;
 }
 
+void print_menu() {
+  printf("\n");
+  printf("Please select from the following options:\n");
+  printf("\n");
+  printf("\t1. Locate a entrant\n");
+  printf("\t2. Show how many entrants have not yet started\n");
+  printf("\t3. Show how many entrants are currently on the course\n");
+  printf("\t4. Show how many entrants have finished\n");
+  printf("\t5. Supply checkpoint times manually\n");
+  printf("\t6. Supply checkpoint times from a file\n");
+  printf("\t7. Display results list\n");
+  printf("\t8. Exit the program\n");
+  printf("\n");
+}
+
+int prompt() {
+  int result;
+  printf(">>  ");
+  scanf("%d", &result);
+  return result;
+}
+
 int main(int argc, char* argv[]) {
   Event* event = generate_data();
+  int input = -1;
+
+  /*
+   * Main program loop
+   */
+  while (1) {
+    print_menu();
+    input = prompt();
+    if (input == 1) {
+
+    } else if (input == 2) {
+
+    } else if (input == 3) {
+
+    } else if (input == 4) {
+
+    } else if (input == 5) {
+
+    } else if (input == 6) {
+
+    } else if (input == 7) {
+
+    } else if (input == 8) {
+      break;
+    } else {
+      /* invalid input, do nothing */
+    }
+  }
 
   event_dispose(event);
   return EXIT_SUCCESS;
