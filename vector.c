@@ -70,6 +70,14 @@ void Vector_get(Vector* vector, int index, void* ret_val) {
   }
 }
 
+void Vector_get_last(Vector* vector, void* ret_val) {
+  if (vector) {
+    if (vector->size > 0) {
+      memcpy(ret_val, (char*)vector->base + vector->elem_size * (vector->size - 1), vector->elem_size);
+    }
+  }
+}
+
 int Vector_size(Vector* vector) {
   return vector->size;
 }

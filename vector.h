@@ -33,6 +33,7 @@ void Vector_add(Vector* vector, void* elem);
  */
 void Vector_remove(Vector* vector, int index, void* ret_val);
 void Vector_get(Vector* vector, int index, void* ret_val);
+void Vector_get_last(Vector* vector, void* ret_val);
 
 int Vector_size(Vector* vector);
 

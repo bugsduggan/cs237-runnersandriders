@@ -40,6 +40,13 @@ void test_out_of_bounds_simple(Vector* vector) {
   printf("Didn't crash!\n");
 }
 
+void test_get_last_simple(Vector* vector) {
+  int ret_val;
+  printf("Getting last: ");
+  Vector_get_last(vector, &ret_val);
+  printf("%d\n", ret_val);
+}
+
 void test_simple() {
   Vector* vector = Vector_new(sizeof(int), NULL);
   test_add_simple(vector);
@@ -49,6 +56,8 @@ void test_simple() {
   test_get_simple(vector);
   printf("\n");
   test_out_of_bounds_simple(vector);
+  printf("\n");
+  test_get_last_simple(vector);
   Vector_dispose(vector);
 }
 
