@@ -66,6 +66,29 @@ int prompt() {
   return result;
 }
 
+void locate_entrant(Event* event) {
+  int i = 0;
+  int entrant_id;
+  Entrant* entrant;
+
+  printf("Enter competitor id: ");
+  scanf("%d", &entrant_id);
+  for (i = 0; i < Vector_size(event->entrants); i++) {
+    Vector_get(event->entrants, i, &entrant);
+    if (entrant->id == entrant_id) {
+      printf("\n\t%d: %s - ", entrant->id, entrant->name);
+      if (entrant->status == NOT_STARTED) {
+        printf("NOT STARTED");
+      } else if (entrant->status == STARTED) {
+        printf("STARTED");
+      } else {
+        printf("FINISHED");
+      }
+      printf("\n");
+    }
+  }
+}
+
 int main(int argc, char* argv[]) {
   Event* event = generate_data();
   int input = -1;
@@ -77,7 +100,7 @@ int main(int argc, char* argv[]) {
     print_menu();
     input = prompt();
     if (input == 1) {
-
+      locate_entrant(event);
     } else if (input == 2) {
 
     } else if (input == 3) {
