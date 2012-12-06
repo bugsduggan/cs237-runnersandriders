@@ -73,10 +73,11 @@ void locate_entrant(Event* event) {
 
   printf("Enter competitor id: ");
   scanf("%d", &entrant_id);
+  printf("\n");
   for (i = 0; i < Vector_size(event->entrants); i++) {
     Vector_get(event->entrants, i, &entrant);
     if (entrant->id == entrant_id) {
-      printf("\n\t%d: %s - ", entrant->id, entrant->name);
+      printf("\t%d: %s - ", entrant->id, entrant->name);
       if (entrant->status == NOT_STARTED) {
         printf("NOT STARTED");
       } else if (entrant->status == STARTED) {
@@ -85,8 +86,34 @@ void locate_entrant(Event* event) {
         printf("FINISHED");
       }
       printf("\n");
+      return; /* this is just so we don't print the error message */
     }
   }
+  printf("Invalid entrant id\n");
+}
+
+void count_entrants(Event* event, entrant_status status) {
+  int result = 0;
+  int i = 0;
+  Entrant* entrant;
+
+  for (i = 0; i < Vector_size(event->entrants); i++) {
+    Vector_get(event->entrants, i, &entrant);
+    if (entrant->status == status) result++;
+  }
+  printf("\n\t%d\n", result);
+}
+
+void supply_checkpoint_manual(Event* event) {
+
+}
+
+void supply_checkpoint_file(Event* event) {
+
+}
+
+void display_results(Event* event) {
+
 }
 
 int main(int argc, char* argv[]) {
@@ -102,17 +129,17 @@ int main(int argc, char* argv[]) {
     if (input == 1) {
       locate_entrant(event);
     } else if (input == 2) {
-
+      count_entrants(event, NOT_STARTED);
     } else if (input == 3) {
-
+      count_entrants(event, STARTED);
     } else if (input == 4) {
-
+      count_entrants(event, FINISHED);
     } else if (input == 5) {
-
+      supply_checkpoint_manual(event);
     } else if (input == 6) {
-
+      supply_checkpoint_file(event);
     } else if (input == 7) {
-
+      display_results(event);
     } else if (input == 8) {
       break;
     } else {

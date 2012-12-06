@@ -35,10 +35,19 @@ typedef struct Course {
 } Course;
 
 /* Entrant stuff */
+typedef enum {
+  NOT_STARTED,
+  STARTED,
+  FINISHED
+} entrant_status;
+
 typedef struct Entrant {
   int id;
   char course_id;
   char* name;
+  entrant_status status;
+  int last_seen; /* last node visited */
+  int duration;
 } Entrant;
 
 /* Event stuff */

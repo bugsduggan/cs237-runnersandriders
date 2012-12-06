@@ -170,6 +170,10 @@ Vector* entrants_read(char* filename) {
     /* read name */
     token = strtok(NULL, "\n"); /* read to the end of the line */
     entrant->name = strdup(token);
+    /* init other values */
+    entrant->status = NOT_STARTED;
+    entrant->last_seen = -1;
+    entrant->duration = 0;
     Vector_add(entrants, &entrant);
   }
   Vector_dispose(lines);
