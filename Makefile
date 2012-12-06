@@ -1,11 +1,9 @@
 CFLAGS=-Wall -g -std=c89
 
-main: data.o vector.o
-
-vectortest: vector.o
+main: data.o vector.o util.o
 
 clean:
 	rm -rf main
 	rm -rf data.o
-	rm -rf vectortest
+	rm -rf util.o
 	rm -rf vector.o
