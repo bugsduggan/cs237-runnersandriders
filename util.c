@@ -58,6 +58,7 @@ char* readline() {
       break;
   }
   *line = '\0';
+  strtok(linep, "\n"); /* this line is mine, just to strip the newline */
   return linep;
 }
 
