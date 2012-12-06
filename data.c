@@ -48,24 +48,3 @@ Vector* nodes_read(char* filename) {
 void nodes_dispose(Vector* nodes) {
   Vector_dispose(nodes);
 }
-
-int main(int argc, char* argv[]) {
-  Vector* nodes = nodes_read("main_data/nodes.txt");
-  int i = 0;
-  Node* node;
-
-  for (i = 0; i < Vector_size(nodes); i++) {
-    Vector_get(nodes, i, &node);
-    printf("%d: ", node->id);
-    if (node->type == CP) {
-      printf("CP");
-    } else if (node->type == MC) {
-      printf("MC");
-    } else {
-      printf("JN");
-    }
-    printf("\n");
-  }
-  nodes_dispose(nodes);
-  return EXIT_SUCCESS;
-}
