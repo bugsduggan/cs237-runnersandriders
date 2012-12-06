@@ -19,6 +19,10 @@ char* strdup(const char* str) {
   return dup;
 }
 
+char* readline() {
+  return NULL;
+}
+
 void string_dispose(void* string) {
   char* foo = *(char**) string;
   if (foo) free(foo);

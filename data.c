@@ -56,8 +56,8 @@ void nodes_dispose(Vector* nodes) {
  */
 
 void track_dispose(void* track) {
-  Track* track = *(Track**) track;
-  if (track) free(track);
+  Track* foo = *(Track**) track;
+  if (foo) free(foo);
 }
 
 Vector* tracks_read(char* filename) {
@@ -97,10 +97,10 @@ void tracks_dispose(Vector* tracks) {
  */
 
 void course_dispose(void* course) {
-  Course* course = *(Course**) course;
-  if (course) {
-    if (course->nodes) free(course->nodes);
-    free(course);
+  Course* foo = *(Course**) course;
+  if (foo) {
+    if (foo->nodes) Vector_dispose(foo->nodes);
+    free(foo);
   }
 }
 
@@ -111,6 +111,7 @@ Vector* courses_read(char* filename) {
   char* token;
   int i = 0;
   int j = 0;
+  int n = 0;
 
   for (i = 0; i < Vector_size(lines); i++) {
     Course* course = malloc(sizeof(Course));
@@ -122,10 +123,11 @@ Vector* courses_read(char* filename) {
     token = strtok(NULL, " ");
     course->num_nodes = atoi(token);
     /* read nodes */
-    course->nodes = int[course->num_nodes];
+    course->nodes = Vector_new(sizeof(int), NULL);
     for (j = 0; j < course->num_nodes; j++) {
       token = strtok(NULL, " ");
-      course->nodes[j] = atoi(token);
+      n = atoi(token);
+      Vector_add(course->nodes, &n);
     }
     Vector_add(courses, &course);
   }
@@ -142,10 +144,10 @@ void courses_dispose(Vector* courses) {
  */
 
 void entrant_dispose(void* entrant) {
-  Entrant* entrant = *(Entrant**) entrant;
-  if (entrant) {
-    if (entrant->name) free(entrant->name);
-    free(entrant);
+  Entrant* foo = *(Entrant**) entrant;
+  if (foo) {
+    if (foo->name) free(foo->name);
+    free(foo);
   }
 }
 

@@ -31,7 +31,7 @@ typedef struct Track {
 typedef struct Course {
   char id;
   int num_nodes;
-  int nodes[];
+  Vector* nodes;
 } Course;
 
 /* Entrant stuff */
@@ -51,7 +51,7 @@ typedef struct Event {
   Vector* tracks;
   Vector* courses;
   Vector* entrants;
-}
+} Event;
 
 /*
  * Functions

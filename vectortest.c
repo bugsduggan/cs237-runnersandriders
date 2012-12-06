@@ -2,16 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "vector.h"
-
-char *strdup(const char *str)
-{
-  int n = strlen(str) + 1;
-  char *dup = malloc(n);
-  if(dup) {
-    strcpy(dup, str);
-  }
-  return dup;
-}
+#include "util.h"
 
 void test_add_simple(Vector* vector) {
   int i = 0;
