@@ -68,17 +68,10 @@ int prompt() {
   return result;
 }
 
-void locate_entrant(Event* event) {
-  char* line;
+void display_entrant_stats(Event* event, int entrant_id) {
   int i = 0;
-  int entrant_id;
   Entrant* entrant;
 
-  printf("Enter competitor id: ");
-  line = readline();
-  entrant_id = atoi(line);
-  free(line);
-  printf("\n");
   for (i = 0; i < Vector_size(event->entrants); i++) {
     Vector_get(event->entrants, i, &entrant);
     if (entrant->id == entrant_id) {
@@ -86,15 +79,28 @@ void locate_entrant(Event* event) {
       if (entrant->status == NOT_STARTED) {
         printf("NOT STARTED");
       } else if (entrant->status == STARTED) {
-        printf("STARTED");
+        printf("STARTED - Last seen: %d Current time: %d",
+            entrant->last_seen, entrant->duration);
       } else {
-        printf("FINISHED");
+        printf("FINISHED - Total time: %d", entrant->duration);
       }
       printf("\n");
       return; /* this is just so we don't print the error message */
     }
   }
   printf("Invalid entrant id\n");
+}
+
+void locate_entrant(Event* event) {
+  char* line;
+  int entrant_id;
+
+  printf("Enter competitor id: ");
+  line = readline();
+  entrant_id = atoi(line);
+  free(line);
+  printf("\n");
+  display_entrant_stats(event, entrant_id);
 }
 
 void count_entrants(Event* event, entrant_status status) {
@@ -139,11 +145,48 @@ void supply_checkpoint_manual(Event* event) {
 }
 
 void supply_checkpoint_file(Event* event) {
+  char* line;
+  Vector* lines;
+  char* token;
+  int i = 0;
+  int node_id;
+  int entrant_id;
+  int hrs;
+  int mins;
 
+  /* grab filename */
+  printf("Enter checkpoint data file: ");
+  line = readline();
+  lines = read_file(line);
+  free(line);
+  for (i = 0; i < Vector_size(lines); i++) {
+    Vector_get(lines, i, &line);
+    /* grab checkpoint type */
+    token = strtok(line, " ");
+    /* do nothing with it (for now) */
+    /* grab node id */
+    token = strtok(NULL, " ");
+    node_id = atoi(token);
+    /* grab entrant id */
+    token = strtok(NULL, " ");
+    entrant_id = atoi(token);
+    /* grab time */
+    token = strtok(NULL, ":");
+    hrs = atoi(token);
+    token = strtok(NULL, ":");
+    mins = atoi(token);
+    entrant_update_location(event, entrant_id, node_id, hrs, mins);
+  }
+  Vector_dispose(lines);
 }
 
 void display_results(Event* event) {
+  int i = 0;
 
+  printf("\n");
+  for (i = 0; i < Vector_size(event->entrants); i++) {
+    display_entrant_stats(event, i + 1);
+  }
 }
 
 int main(int argc, char* argv[]) {
