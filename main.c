@@ -60,9 +60,11 @@ void print_menu() {
 }
 
 int prompt() {
+  char* line;
   int result;
   printf(">>  ");
-  scanf("%d", &result);
+  line = readline();
+  result = atoi(line);
   return result;
 }
 
@@ -113,9 +115,15 @@ void supply_checkpoint_manual(Event* event) {
   char* token;
 
   printf("\nEnter node id: ");
-  scanf("%d", &node_id);
+  line = readline();
+  node_id = atoi(line);
+  free(line);
+
   printf("Enter entrant id: ");
-  scanf("%d", &entrant_id);
+  line = readline();
+  entrant_id = atoi(line);
+  free(line);
+
   printf("Enter time (hh:mm): ");
   line = readline();
   token = strtok(line, ":");
