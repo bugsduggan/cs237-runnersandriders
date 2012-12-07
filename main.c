@@ -59,16 +59,6 @@ void print_menu() {
   printf("\n");
 }
 
-int prompt() {
-  char* line;
-  int result;
-  printf(">>  ");
-  line = readline();
-  result = atoi(line);
-  free(line);
-  return result;
-}
-
 void display_entrant_stats(Event* event, int entrant_id) {
   int i = 0;
   Entrant* entrant;
