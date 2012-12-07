@@ -69,12 +69,15 @@ int prompt() {
 }
 
 void locate_entrant(Event* event) {
+  char* line;
   int i = 0;
   int entrant_id;
   Entrant* entrant;
 
   printf("Enter competitor id: ");
-  scanf("%d", &entrant_id);
+  line = readline();
+  entrant_id = atoi(line);
+  free(line);
   printf("\n");
   for (i = 0; i < Vector_size(event->entrants); i++) {
     Vector_get(event->entrants, i, &entrant);
