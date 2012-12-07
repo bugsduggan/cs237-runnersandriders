@@ -125,7 +125,8 @@ Vector* courses_read(char* filename, Vector* nodes) {
     token = strtok(NULL, " ");
     course->num_nodes = atoi(token);
     /* read nodes */
-    course->nodes = Vector_new(sizeof(Node*), node_dispose);
+    /* pass NULL for the dispose function, we're relying on nodes_dispose to do the work */
+    course->nodes = Vector_new(sizeof(Node*), NULL);
     for (j = 0; j < course->num_nodes; j++) {
       token = strtok(NULL, " ");
       node_id = atoi(token);

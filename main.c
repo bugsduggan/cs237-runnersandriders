@@ -65,6 +65,7 @@ int prompt() {
   printf(">>  ");
   line = readline();
   result = atoi(line);
+  free(line);
   return result;
 }
 
