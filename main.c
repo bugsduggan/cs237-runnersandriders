@@ -12,35 +12,12 @@
 #include "data.h"
 
 Event* generate_data() {
-  char* filename;
   Event* event;
-
-  /* read in data files */
-  printf("Event file: ");
-  filename = readline();
-  event = event_read(filename);
-  free(filename);
-  /* nodes */
-  printf("Nodes file: ");
-  filename = readline();
-  event->nodes = nodes_read(filename);
-  free(filename);
-  /* tracks */
-  printf("Tracks file: ");
-  filename = readline();
-  event->tracks = tracks_read(filename);
-  free(filename);
-  /* courses */
-  printf("Courses file: ");
-  filename = readline();
-  event->courses = courses_read(filename, event->nodes);
-  free(filename);
-  /* entrants */
-  printf("Entrants file: ");
-  filename = readline();
-  event->entrants = entrants_read(filename);
-  free(filename);
-
+  event = event_read(get_file("Event file: "));
+  event->nodes = nodes_read(get_file("Nodes file: "));
+  event->tracks = tracks_read(get_file("Tracks file: "));
+  event->courses = courses_read(get_file("Courses file: "), event->nodes);
+  event->entrants = entrants_read(get_file("Entrants file: "));
   return event;
 }
 
@@ -70,10 +47,10 @@ void display_entrant_stats(Event* event, int entrant_id) {
       if (entrant->status == NOT_STARTED) {
         printf("NOT STARTED");
       } else if (entrant->status == STARTED) {
-        printf("STARTED - Last seen: %d Current time: %d",
+        printf("STARTED - Last seen: %d Current time: %d mins",
             entrant->last_seen, entrant->duration);
       } else {
-        printf("FINISHED - Total time: %d", entrant->duration);
+        printf("FINISHED - Total time: %d mins", entrant->duration);
       }
       printf("\n");
       return; /* this is just so we don't print the error message */
@@ -146,10 +123,7 @@ void supply_checkpoint_file(Event* event) {
   int mins;
 
   /* grab filename */
-  printf("Enter checkpoint data file: ");
-  line = readline();
-  lines = read_file(line);
-  free(line);
+  lines = read_file(get_file("Enter checkpoint data file: "));
   for (i = 0; i < Vector_size(lines); i++) {
     Vector_get(lines, i, &line);
     /* grab checkpoint type */

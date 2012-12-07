@@ -5,6 +5,7 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "vector.h"
 #include "util.h"
@@ -19,8 +20,8 @@ void node_dispose(void* node) {
   if (foo) free(foo);
 }
 
-Vector* nodes_read(char* filename) {
-  Vector* lines = read_file(filename);
+Vector* nodes_read(FILE* fp) {
+  Vector* lines = read_file(fp);
   Vector* nodes = Vector_new(sizeof(Node*), node_dispose);
   char* line;
   char* token;
@@ -60,8 +61,8 @@ void track_dispose(void* track) {
   if (foo) free(foo);
 }
 
-Vector* tracks_read(char* filename) {
-  Vector* lines = read_file(filename);
+Vector* tracks_read(FILE* fp) {
+  Vector* lines = read_file(fp);
   Vector* tracks = Vector_new(sizeof(Track*), track_dispose);
   char* line;
   char* token;
@@ -104,8 +105,8 @@ void course_dispose(void* course) {
   }
 }
 
-Vector* courses_read(char* filename, Vector* nodes) {
-  Vector* lines = read_file(filename);
+Vector* courses_read(FILE* fp, Vector* nodes) {
+  Vector* lines = read_file(fp);
   Vector* courses = Vector_new(sizeof(Course*), course_dispose);
   char* line;
   char* token;
@@ -171,8 +172,8 @@ void entrant_dispose(void* entrant) {
   }
 }
 
-Vector* entrants_read(char* filename) {
-  Vector* lines = read_file(filename);
+Vector* entrants_read(FILE* fp) {
+  Vector* lines = read_file(fp);
   Vector* entrants = Vector_new(sizeof(Entrant*), entrant_dispose);
   char* line;
   char* token;
@@ -239,8 +240,8 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
  * Event stuff
  */
 
-Event* event_read(char* filename) {
-  Vector* lines = read_file(filename);
+Event* event_read(FILE* fp) {
+  Vector* lines = read_file(fp);
   Event* event = malloc(sizeof(Event));
   char* line;
   char* token;

@@ -68,24 +68,24 @@ typedef struct Event {
  */
 
 /* Node stuff */
-Vector* nodes_read(char* filename); /* populates vector with pointers to nodes */
+Vector* nodes_read(FILE* fp); /* populates vector with pointers to nodes */
 void nodes_dispose(Vector* nodes); /* disposes of a vector of nodes */
 
 /* Track stuff */
-Vector* tracks_read(char* filename);
+Vector* tracks_read(FILE* fp);
 void tracks_dispose(Vector* tracks);
 
 /* Course stuff */
-Vector* courses_read(char* filename, Vector* nodes); /* requires nodes to link */
+Vector* courses_read(FILE* fp, Vector* nodes); /* requires nodes to link */
 void courses_dispose(Vector* courses);
 
 /* Entrant stuff */
-Vector* entrants_read(char* filename);
+Vector* entrants_read(FILE* fp);
 void entrants_dispose(Vector* entrants);
 void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins);
 
 /* Event stuff */
-Event* event_read(char* filename);
+Event* event_read(FILE* fp);
 void event_dispose(Event* event);
 
 #endif
