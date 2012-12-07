@@ -83,6 +83,7 @@ void courses_dispose(Vector* courses);
 Vector* entrants_read(FILE* fp);
 void entrants_dispose(Vector* entrants);
 void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins);
+void entrants_sort(Vector* entrants);
 
 /* Event stuff */
 Event* event_read(FILE* fp);

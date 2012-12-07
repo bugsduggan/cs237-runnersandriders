@@ -236,6 +236,60 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
   if (entrant->status == NOT_STARTED) entrant->status = STARTED;
 }
 
+/* a < b = -1; a == b = 0; a > b = 1 */
+int compare_entrant(void* v1, void* v2) {
+  Entrant* a = *(Entrant**) v1;
+  Entrant* b = *(Entrant**) v2;
+
+  /*
+   * The plan is to put finished entrants at the top
+   * shortest duration first
+   *
+   * Then started entrants
+   * nodes closest to the finish at the top
+   *
+   * Then not started
+   * sorted by id
+   */
+  if (a->status == NOT_STARTED) {
+    if (b->status == NOT_STARTED) {
+      /* sort by id */
+      if (a->id < b->id) {
+        return -1;
+      } else {
+        return 1;
+      }
+    } else {
+      return 1;
+    }
+  } else if (a->status == STARTED) {
+    if (b->status == STARTED) {
+      /* sort by node closest to finish */
+      return 0; /* for now */
+    } else if (b->status == NOT_STARTED) {
+      return -1;
+    } else {
+      return 1;
+    }
+  } else {
+    /* a is FINISHED */
+    if (b->status == FINISHED) {
+      /* sort by duration */
+      if (a->duration > b->duration) {
+        return 1;
+      } else {
+        return -1;
+      }
+    } else {
+      return -1;
+    }
+  }
+}
+
+void entrants_sort(Vector* entrants) {
+  Vector_sort(entrants, compare_entrant);
+}
+
 /*
  * Event stuff
  */

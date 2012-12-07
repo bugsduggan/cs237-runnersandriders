@@ -37,4 +37,6 @@ void Vector_get_last(Vector* vector, void* ret_val);
 
 int Vector_size(Vector* vector);
 
+void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*));
+
 #endif
