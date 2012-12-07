@@ -46,6 +46,7 @@ typedef struct Entrant {
   char course_id;
   char* name;
   entrant_status status;
+  int nodes_visited;
   int last_seen; /* last node visited */
   int duration;
 } Entrant;

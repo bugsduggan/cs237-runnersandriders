@@ -172,6 +172,7 @@ Vector* entrants_read(char* filename) {
     entrant->name = strdup(token);
     /* init other values */
     entrant->status = NOT_STARTED;
+    entrant->nodes_visited = 0;
     entrant->last_seen = -1;
     entrant->duration = 0;
     Vector_add(entrants, &entrant);
@@ -187,7 +188,6 @@ void entrants_dispose(Vector* entrants) {
 void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins) {
   Entrant* entrant;
   Course* course;
-  Node* node; /* the last node of the entrant's course */
   int i = 0;
 
   for (i = 0; i < Vector_size(event->entrants); i++) {
@@ -196,6 +196,7 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
   }
 
   if (entrant->status == NOT_STARTED) entrant->status = STARTED;
+  entrant->nodes_visited++;
   entrant->last_seen = node_id;
   entrant->duration = time_to_duration(hrs, mins)
     - time_to_duration(event->start_hrs, event->start_mins);
@@ -203,9 +204,10 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
   /* check if entrant has finished */
   for (i = 0; i < Vector_size(event->courses); i++) {
     Vector_get(event->courses, i, &course);
+    /* find the right course for the entrant */
     if (entrant->course_id == course->id) {
-      Vector_get_last(course->nodes, &node);
-      if (node->id == node_id) entrant->status = FINISHED;
+      if (entrant->nodes_visited == course->num_nodes)
+        entrant->status = FINISHED;
     }
   }
 }

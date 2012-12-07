@@ -80,6 +80,14 @@ void test_add_complex(Vector* vector) {
   str = strdup("Barney");
   Vector_add(vector, &str);
   printf("Size: %d Capacity: %d\n", vector->size, vector->capacity);
+  printf("Adding 'Pebbles': ");
+  str = strdup("Pebbles");
+  Vector_add(vector, &str);
+  printf("Size: %d Capacity: %d\n", vector->size, vector->capacity);
+  printf("Adding 'Bam-Bam': ");
+  str = strdup("Bam-Bam");
+  Vector_add(vector, &str);
+  printf("Size: %d Capacity: %d\n", vector->size, vector->capacity);
 }
 
 void test_remove_complex(Vector* vector) {
@@ -97,6 +105,13 @@ void test_get_complex(Vector* vector) {
   printf("%s Size: %d Capacity: %d\n", str, vector->size, vector->capacity);
 }
 
+void test_get_last_complex(Vector* vector) {
+  char* str;
+  printf("Getting last elem: ");
+  Vector_get_last(vector, &str);
+  printf("%s Size: %d Capacity: %d\n", str, vector->size, vector->capacity);
+}
+
 void test_complex() {
   Vector* vector = Vector_new(sizeof(char**), dispose_str);
   test_add_complex(vector);
@@ -105,6 +120,8 @@ void test_complex() {
   printf("\n");
   test_get_complex(vector);
   /* no real need to test out of bounds again */
+  printf("\n");
+  test_get_last_complex(vector);
   Vector_dispose(vector);
 }
 
