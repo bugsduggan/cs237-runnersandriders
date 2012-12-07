@@ -40,7 +40,6 @@ void display_entrant_stats(Event* event, int entrant_id) {
   int i = 0;
   Entrant* entrant;
 
-  entrants_sort(event->entrants);
   for (i = 0; i < Vector_size(event->entrants); i++) {
     Vector_get(event->entrants, i, &entrant);
     if (entrant->id == entrant_id) {
@@ -149,6 +148,7 @@ void supply_checkpoint_file(Event* event) {
 void display_results(Event* event) {
   int i = 0;
 
+  entrants_sort(event->entrants);
   printf("\n");
   for (i = 0; i < Vector_size(event->entrants); i++) {
     display_entrant_stats(event, i + 1);

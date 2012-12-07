@@ -236,6 +236,18 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
   if (entrant->status == NOT_STARTED) entrant->status = STARTED;
 }
 
+int compare_entrant_not_started(Entrant* a, Entrant* b) {
+  return 0;
+}
+
+int compare_entrant_started(Entrant* a, Entrant* b) {
+  return 0;
+}
+
+int compare_entrant_finished(Entrant* a, Entrant* b) {
+  return 0;
+}
+
 /* a < b = -1; a == b = 0; a > b = 1 */
 int compare_entrant(void* v1, void* v2) {
   Entrant* a = *(Entrant**) v1;
@@ -253,35 +265,23 @@ int compare_entrant(void* v1, void* v2) {
    */
   if (a->status == NOT_STARTED) {
     if (b->status == NOT_STARTED) {
-      /* sort by id */
-      if (a->id < b->id) {
-        return -1;
-      } else {
-        return 1;
-      }
+      return compare_entrant_not_started(a, b);
     } else {
       return 1;
     }
-  } else if (a->status == STARTED) {
+  } else if (a->status == FINISHED) {
+    if (b->status == FINISHED) {
+      return compare_entrant_finished(a, b);
+    } else {
+      return -1;
+    }
+  } else { /* a->status = STARTED */
     if (b->status == STARTED) {
-      /* sort by node closest to finish */
-      return 0; /* for now */
+      return compare_entrant_started(a, b);
     } else if (b->status == NOT_STARTED) {
       return -1;
-    } else {
+    } else { /* b->status = FINISHED */
       return 1;
-    }
-  } else {
-    /* a is FINISHED */
-    if (b->status == FINISHED) {
-      /* sort by duration */
-      if (a->duration > b->duration) {
-        return 1;
-      } else {
-        return -1;
-      }
-    } else {
-      return -1;
     }
   }
 }
