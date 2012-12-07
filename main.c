@@ -43,14 +43,14 @@ void display_entrant_stats(Event* event, int entrant_id) {
   for (i = 0; i < Vector_size(event->entrants); i++) {
     Vector_get(event->entrants, i, &entrant);
     if (entrant->id == entrant_id) {
-      printf("\t%d: %s - ", entrant->id, entrant->name);
+      printf("\t%02d: %-30s ", entrant->id, entrant->name);
       if (entrant->status == NOT_STARTED) {
         printf("NOT STARTED");
       } else if (entrant->status == STARTED) {
-        printf("STARTED - Last seen: %d Current time: %d mins",
+        printf("STARTED     Last seen: %02d    Current time: %3d mins",
             entrant->last_seen, entrant->duration);
       } else {
-        printf("FINISHED - Total time: %d mins", entrant->duration);
+        printf("FINISHED    Total time: %02d mins", entrant->duration);
       }
       printf("\n");
       return; /* this is just so we don't print the error message */
