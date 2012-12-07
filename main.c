@@ -33,7 +33,7 @@ Event* generate_data() {
   /* courses */
   printf("Courses file: ");
   filename = readline();
-  event->courses = courses_read(filename);
+  event->courses = courses_read(filename, event->nodes);
   free(filename);
   /* entrants */
   printf("Entrants file: ");

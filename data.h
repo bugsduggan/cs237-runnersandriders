@@ -76,7 +76,7 @@ Vector* tracks_read(char* filename);
 void tracks_dispose(Vector* tracks);
 
 /* Course stuff */
-Vector* courses_read(char* filename);
+Vector* courses_read(char* filename, Vector* nodes); /* requires nodes to link */
 void courses_dispose(Vector* courses);
 
 /* Entrant stuff */

@@ -104,14 +104,16 @@ void course_dispose(void* course) {
   }
 }
 
-Vector* courses_read(char* filename) {
+Vector* courses_read(char* filename, Vector* nodes) {
   Vector* lines = read_file(filename);
   Vector* courses = Vector_new(sizeof(Course*), course_dispose);
   char* line;
   char* token;
+  Node* node;
   int i = 0;
   int j = 0;
-  int n = 0;
+  int k = 0;
+  int node_id;
 
   for (i = 0; i < Vector_size(lines); i++) {
     Course* course = malloc(sizeof(Course));
@@ -123,11 +125,16 @@ Vector* courses_read(char* filename) {
     token = strtok(NULL, " ");
     course->num_nodes = atoi(token);
     /* read nodes */
-    course->nodes = Vector_new(sizeof(int), NULL);
+    course->nodes = Vector_new(sizeof(Node*), node_dispose);
     for (j = 0; j < course->num_nodes; j++) {
       token = strtok(NULL, " ");
-      n = atoi(token);
-      Vector_add(course->nodes, &n);
+      node_id = atoi(token);
+      /* find the node from id */
+      for (k = 0; k < Vector_size(nodes); k++) {
+        Vector_get(nodes, k, &node);
+        if (node->id == node_id) break;
+      }
+      Vector_add(course->nodes, &node);
     }
     Vector_add(courses, &course);
   }
@@ -137,6 +144,18 @@ Vector* courses_read(char* filename) {
 
 void courses_dispose(Vector* courses) {
   Vector_dispose(courses);
+}
+
+int course_num_checkpoints(Course* course) {
+  int result = 0;
+  int i = 0;
+  Node* node;
+
+  for (i = 0; i < Vector_size(course->nodes); i++) {
+    Vector_get(course->nodes, i, &node);
+    if (node->type == CP) result++;
+  }
+  return result;
 }
 
 /*
@@ -190,12 +209,13 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
   Course* course;
   int i = 0;
 
+  /* find the entrant */
   for (i = 0; i < Vector_size(event->entrants); i++) {
     Vector_get(event->entrants, i, &entrant);
     if (entrant->id == entrant_id) break;
   }
 
-  if (entrant->status == NOT_STARTED) entrant->status = STARTED;
+  /* update his/her time */
   entrant->nodes_visited++;
   entrant->last_seen = node_id;
   entrant->duration = time_to_duration(hrs, mins)
@@ -206,10 +226,12 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
     Vector_get(event->courses, i, &course);
     /* find the right course for the entrant */
     if (entrant->course_id == course->id) {
-      if (entrant->nodes_visited == course->num_nodes)
+      if (entrant->nodes_visited == course_num_checkpoints(course))
         entrant->status = FINISHED;
     }
   }
+  /* check if entrant has just started */
+  if (entrant->status == NOT_STARTED) entrant->status = STARTED;
 }
 
 /*
