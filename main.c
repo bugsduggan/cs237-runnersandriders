@@ -103,6 +103,46 @@ void locate_entrant(Event* event) {
   free(line);
 }
 
+int count_by_status(Event* event, entrant_status status) {
+  Entrant* entrant;
+  int ret_val = 0;
+  int i = 0;
+
+  for (i = 0; i < Vector_size(event->entrants); i++) {
+    Vector_get(event->entrants, i, &entrant);
+    if (entrant->status == status) ret_val++;
+  }
+
+  return ret_val;
+}
+
+void display_results(Event* event) {
+  Entrant* entrant;
+  int i = 0;
+
+  if (count_by_status(event, FINISHED) > 0) {
+    printf("\n\tFinished:\n");
+    for (; i < Vector_size(event->entrants); i++) {
+      Vector_get(event->entrants, i, &entrant);
+      printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant_duration(entrant));
+    }
+  }
+  if (count_by_status(event, STARTED) + count_by_status(event, STOPPED) > 0) {
+    printf("\n\tRunning:\n");
+    for (; i < Vector_size(event->entrants); i++) {
+      Vector_get(event->entrants, i, &entrant);
+      printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant_duration(entrant));
+    }
+  }
+  if (count_by_status(event, NOT_STARTED) > 0) {
+    printf("\n\tWaiting to start:\n");
+    for (; i < Vector_size(event->entrants); i++) {
+      Vector_get(event->entrants, i, &entrant);
+      printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
+    }
+  }
+}
+
 int main(int argc, char* argv[]) {
   Event* event = read_data();
   int running = 1;
@@ -116,16 +156,20 @@ int main(int argc, char* argv[]) {
         locate_entrant(event);
         break;
       case 2:
+        printf("\t%d\n", count_by_status(event, NOT_STARTED));
         break;
       case 3:
+        printf("\t%d\n", count_by_status(event, STARTED) + count_by_status(event, STOPPED));
         break;
       case 4:
+        printf("\t%d\n", count_by_status(event, FINISHED));
         break;
       case 5:
         break;
       case 6:
         break;
       case 7:
+        display_results(event);
         break;
       case 8:
         running = 0;
