@@ -54,7 +54,7 @@ Event* read_data() {
 }
 
 void display_event_header(Event* event) {
-  printf("\n");
+  printf("\n\n");
   printf("\t%s\n", event->title);
   printf("\t%s\n", event->date);
   printf("\t%d:%d\n", event->start->hours, event->start->minutes);
