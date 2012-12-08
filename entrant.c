@@ -49,11 +49,11 @@ Vector* entrants_read(FILE* fp) {
     entrant->status = NOT_STARTED;
     entrant->nodes_visited = 0;
     entrant->last_seen = -1;
+    entrant->last_hrs = -1;
+    entrant->last_mins = -1;
     entrant->current_track = NULL;
     entrant->start_hrs = -1;
     entrant->start_mins = -1;
-    entrant->end_hrs = -1;
-    entrant->end_mins = -1;
     entrant->duration = 0;
     Vector_add(entrants, &entrant);
   }
@@ -82,6 +82,8 @@ void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hr
   /* update his/her location */
   entrant->nodes_visited++;
   entrant->last_seen = node_id;
+  entrant->last_hrs = hrs;
+  entrant->last_mins = mins;
 
   /* check if entrant is starting */
   if (entrant->status == NOT_STARTED) {
@@ -96,18 +98,26 @@ void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hr
 
   /* check if entrant has finished */
   if (entrant->nodes_visited == course_num_checkpoints(course)) {
-    entrant->end_hrs = hrs;
-    entrant->end_mins = mins;
     entrant->status = FINISHED;
   }
 }
 
 void entrant_update_time(Entrant* entrant, int hrs, int mins) {
+  int time_since_node = 0; /* how long has it been since we've seen entrant? */
+  int i = 0;
   if (entrant->status == STARTED) {
     /* update duration */
     entrant->duration = time_to_duration(hrs, mins) - 
       time_to_duration(entrant->start_hrs, entrant->start_mins);
     /* update track */
+    time_since_node = time_to_duration(hrs, mins) -
+      time_to_duration(entrant->last_hrs, entrant->last_mins);
+    while (time_since_node > 0) {
+      /* time_since_node -= track->safe_time until < 0 */
+      /* then current_track = track */
+      /* for now though, just set it to zero so we don't loop forever waiting for me to implement this! */
+      time_since_node = 0;
+    }
   }
 }
 
