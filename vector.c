@@ -6,16 +6,17 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 #include "vector.h"
 
+/*
+ * function prototypes
+ */
 static void Vector_grow(Vector* vector) {
-  void* new_base;
-  vector->capacity *= 2;
-  new_base = malloc(vector->elem_size * vector->capacity);
-  memcpy(new_base, vector->base, vector->elem_size * vector->size);
-  free(vector->base);
-  vector->base = new_base;
-}
+
+/*
+ * functions declared in vector.h
+ */
 
 Vector* Vector_new(int elem_size, void (*dispose_fn)(void*)) {
   Vector* vector = malloc(sizeof(Vector));
@@ -100,4 +101,17 @@ void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*)) {
     }
     free(temp);
   }
+}
+
+/*
+ * private functions
+ */
+
+static void Vector_grow(Vector* vector) {
+  void* new_base;
+  vector->capacity *= 2;
+  new_base = malloc(vector->elem_size * vector->capacity);
+  memcpy(new_base, vector->base, vector->elem_size * vector->size);
+  free(vector->base);
+  vector->base = new_base;
 }

@@ -7,8 +7,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "vector.h"
+
 #include "util.h"
+#include "vector.h"
+
+/*
+ * function prototypes
+ */
+
+void string_dispose(void* string);
+
+/*
+ * functions declared in util.h
+ */
 
 /*
  * This function was taken from
@@ -62,11 +73,6 @@ char* readline() {
   return linep;
 }
 
-void string_dispose(void* string) {
-  char* foo = *(char**) string;
-  if (foo) free(foo);
-}
-
 Vector* read_file(FILE* fp) {
   char line[MAX_LINE_LENGTH];
   char* str;
@@ -112,4 +118,13 @@ FILE* get_file(char* prompt) {
 
 int time_to_duration(int hrs, int mins) {
   return (hrs * 60) + mins;
+}
+
+/*
+ * private functions
+ */
+
+void string_dispose(void* string) {
+  char* foo = *(char**) string;
+  if (foo) free(foo);
 }
