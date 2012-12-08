@@ -17,14 +17,3 @@
 /*
  * functions declared in data.h
  */
-
-Course* course_init(char* line) {
-  Course* course = malloc(sizeof(Course));
-
-  course->id = '\0';
-  course->nodes = NULL;
-  course->tracks = NULL;
-  int safe_time = -1;
-
-  return course;
-}

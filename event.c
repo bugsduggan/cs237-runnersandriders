@@ -17,15 +17,3 @@
 /*
  * functions declared in data.h
  */
-
-Event* event_init(char* filename) {
-  Event* event = malloc(sizeof(Event));
-
-  event->title = NULL;
-  event->date = NULL;
-  event->start = NULL;
-  event->courses = NULL;
-  event->entrants = NULL;
-
-  return event;
-}

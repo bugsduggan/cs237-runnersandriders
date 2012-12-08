@@ -5,6 +5,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "vector.h"
 #include "util.h"
@@ -18,11 +19,45 @@
  * functions declared in data.h
  */
 
-Node* node_init(char* line) {
-  Node* node = malloc(sizeof(Node));
+Vector* read_nodes(char* filename) {
+  Vector* lines = read_file(filename);
+  Vector* nodes = Vector_new(sizeof(Node*), NULL);
+  Node* node;
+  char* line;
+  char* token;
+  int i = 0;
 
-  node->id = 0;
-  node->type = CP;
+  for (i = 0; i < Vector_size(lines); i++) {
+    Vector_get(lines, i, &line);
+    node = malloc(sizeof(Node));
 
-  return node;
+    /* id */
+    token = strtok(line, " ");
+    node->id = atoi(token);
+
+    /* type */
+    token = strtok(NULL, " ");
+    node->type = str_to_type(token);
+
+    Vector_add(nodes, &node);
+  }
+
+  Vector_dispose(lines);
+  return nodes;
+}
+
+Node* node_from_id(Vector* nodes, int id) {
+  Node* node;
+  int i = 0;
+
+  for (i = 0; i < Vector_size(nodes); i++) {
+    Vector_get(nodes, i, &node);
+    if (node->id == id) return node;
+  }
+}
+
+node_type str_to_type(char* str) {
+  if (strcmp(str, "CP")) return CP;
+  else if (strcmp(str, "MC")) return MC;
+  else return JN;
 }

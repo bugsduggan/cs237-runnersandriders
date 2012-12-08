@@ -17,18 +17,3 @@
 /*
  * functions declared in data.h
  */
-
-Entrant* entrant_init(char* line) {
-  Entrant* entrant = malloc(sizeof(Entrant));
-
-  entrant->id = 0;
-  entrant->name = NULL;
-  entrant->course = NULL;
-  entrant->start_time = NULL;
-  entrant->last_node = NULL;
-  entrant->last_time = NULL;
-  entrant->curr_track = NULL;
-  entrant->status = NOT_STARTED;
-
-  return entrant;
-}

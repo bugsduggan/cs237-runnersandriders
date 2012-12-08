@@ -19,8 +19,6 @@ typedef struct Event {
   Vector* entrants;
 } Event;
 
-Event* event_init(char* filename);
-
 /*
  * node
  */
@@ -36,7 +34,9 @@ typedef struct Node {
   node_type type;
 } Node;
 
-Node* node_init(char* line);
+Vector* read_nodes(char* filename);
+Node* node_from_id(Vector* nodes, int id);
+node_type str_to_type(char* str);
 
 /*
  * track
@@ -49,7 +49,7 @@ typedef struct Track {
   int safe_time;
 } Track;
 
-Track* track_init(char* line);
+Vector* read_tracks(char* filename, Vector* nodes);
 
 /*
  * course
@@ -61,8 +61,6 @@ typedef struct Course {
   Vector* tracks;
   int safe_time;
 } Course;
-
-Course* course_init(char* line);
 
 /*
  * entrant
@@ -85,7 +83,5 @@ typedef struct Entrant {
   Track* curr_track;
   entrant_status status;
 } Entrant;
-
-Entrant* entrant_init(char* line);
 
 #endif
