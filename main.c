@@ -37,7 +37,7 @@ void print_menu() {
 }
 
 void display_entrant_stats(Entrant* entrant) {
-  printf("\t%02d: %-30s ", entrant->id, entrant->name);
+  printf("\t%02d:  %c  %-50s \n\t\t", entrant->id, entrant->course_id, entrant->name);
   if (entrant->status == NOT_STARTED) {
     printf("NOT STARTED");
   } else if (entrant->status == STARTED) {
