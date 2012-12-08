@@ -76,7 +76,8 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
 }
 
 void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hrs, int mins) {
-  Course* course;
+  Course* course = course_from_id(event->courses, entrant->course_id);
+  Track* track;
 
   /* update his/her location */
   entrant->nodes_visited++;
@@ -86,13 +87,14 @@ void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hr
   if (entrant->status == NOT_STARTED) {
     entrant->start_hrs = hrs;
     entrant->start_mins = mins;
+    Vector_get(course->tracks, 0, &track);
+    entrant->current_track = track->id;
     entrant->status = STARTED;
   }
 
   entrant_update_time(entrant, hrs, mins);
 
   /* check if entrant has finished */
-  course = course_from_id(event->courses, entrant->course_id);
   if (entrant->nodes_visited == course_num_checkpoints(course)) {
     entrant->end_hrs = hrs;
     entrant->end_mins = mins;

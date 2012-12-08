@@ -66,6 +66,7 @@ typedef struct Course {
   char id;
   int num_nodes;
   Vector* nodes;
+  Vector* tracks;
   int safe_time;
 } Course;
 

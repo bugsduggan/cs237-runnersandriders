@@ -17,7 +17,7 @@
  */
 
 void course_dispose(void* course);
-void course_safe_time(Vector* tracks, Course* course);
+void populate_tracks(Vector* tracks, Course* course);
 
 /*
  * functions declared in data.h
@@ -43,7 +43,7 @@ Vector* courses_read(FILE* fp, Vector* nodes, Vector* tracks) {
     token = strtok(NULL, " ");
     course->num_nodes = atoi(token);
     /* read nodes */
-    /* we're relying on nodes_dispose to do the free-ing */
+    /* we're relying on nodes_dispose to free the node pointers */
     course->nodes = Vector_new(sizeof(Node*), NULL);
     for (j = 0; j < course->num_nodes; j++) {
       token = strtok(NULL, " ");
@@ -51,8 +51,11 @@ Vector* courses_read(FILE* fp, Vector* nodes, Vector* tracks) {
       node = node_from_id(nodes, node_id);
       Vector_add(course->nodes, &node);
     }
-    /* calculate the safe completion time */
-    course_safe_time(tracks, course);
+    /* calculate tracks */
+    /* again, rely on track_dispose to free the track pointers */
+    course->tracks = Vector_new(sizeof(Track*), NULL);
+    course->safe_time = 0;
+    populate_tracks(tracks, course);
     Vector_add(courses, &course);
   }
   Vector_dispose(lines);
@@ -93,21 +96,22 @@ void course_dispose(void* course) {
   Course* foo = *(Course**) course;
   if (foo) {
     if (foo->nodes) Vector_dispose(foo->nodes);
+    if (foo->tracks) Vector_dispose(foo->tracks);
     free(foo);
   }
 }
 
-void course_safe_time(Vector* tracks, Course* course) {
+void populate_tracks(Vector* tracks, Course* course) {
   Node* start;
   Node* end;
   Track* track;
   int i = 0;
-  course->safe_time = 0;
 
   for (i = 0; i < Vector_size(course->nodes) - 1; i++) {
     Vector_get(course->nodes, i, &start);
     Vector_get(course->nodes, i + 1, &end);
     track = track_from_nodes(tracks, start, end);
     course->safe_time += track->safe_time;
+    Vector_add(course->tracks, &track);
   }
 }
