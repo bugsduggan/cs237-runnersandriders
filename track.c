@@ -70,3 +70,15 @@ Vector* read_tracks(char* filename, Vector* nodes) {
   Vector_dispose(lines);
   return tracks;
 }
+
+Track* track_from_nodes(Vector* tracks, Node* start, Node* end) {
+  Track* track;
+  int i = 0;
+
+  for (i = 0; i < Vector_size(tracks); i++) {
+    Vector_get(tracks, i, &track);
+    if (track->start == start && track->end == end) return track;
+  }
+
+  return NULL;
+}

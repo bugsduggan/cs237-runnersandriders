@@ -29,11 +29,16 @@ void read_data() {
   char* filename;
   Vector* nodes;
   Vector* tracks;
+  Vector* courses;
 
   filename = get_filename("Please enter nodes file: ");
   nodes = read_nodes(filename);
+
   filename = get_filename("Please enter tracks file: ");
   tracks = read_tracks(filename, nodes);
+
+  filename = get_filename("Please enter courses file: ");
+  courses = read_courses(filename, nodes, tracks);
 }
 
 int main(int argc, char* argv[]) {

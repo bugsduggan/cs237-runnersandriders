@@ -50,6 +50,7 @@ typedef struct Track {
 } Track;
 
 Vector* read_tracks(char* filename, Vector* nodes);
+Track* track_from_nodes(Vector* tracks, Node* start, Node* end);
 
 /*
  * course
@@ -61,6 +62,8 @@ typedef struct Course {
   Vector* tracks;
   int safe_time;
 } Course;
+
+Vector* read_courses(char* filename, Vector* nodes, Vector* tracks);
 
 /*
  * entrant

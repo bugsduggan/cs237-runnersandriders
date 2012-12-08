@@ -54,6 +54,8 @@ Node* node_from_id(Vector* nodes, int id) {
     Vector_get(nodes, i, &node);
     if (node->id == id) return node;
   }
+
+  return NULL;
 }
 
 node_type str_to_type(char* str) {
