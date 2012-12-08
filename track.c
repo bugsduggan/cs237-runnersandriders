@@ -22,41 +22,49 @@
 Vector* read_tracks(char* filename, Vector* nodes) {
   Vector* lines = read_file(filename);
   Vector* tracks = Vector_new(sizeof(Track*), NULL);
-  Track* track;
+  Track* track_for;
+  Track* track_back;
+  Node* start_node;
+  Node* end_node;
   char* line;
   char* token;
   int node_id;
   int i = 0;
 
   /*
-   * It's worth noting that at this point, the start and end nodes
-   * are set fairly arbitrarily. Once the track becomes part of a
-   * course, the nodes should be set in the correct, logical order
+   * Tracks are being added as a pair, one forward and one backward
    */
 
   for (i = 0; i < Vector_size(lines); i++) {
     Vector_get(lines, i, &line);
-    track = malloc(sizeof(Track));
+    track_for = malloc(sizeof(Track));
+    track_back = malloc(sizeof(Track));
 
     /* id */
     token = strtok(line, " ");
-    track->id = atoi(token);
+    track_for->id = atoi(token);
+    track_back->id = atoi(token);
 
-    /* start node */
+    /* nodes */
     token = strtok(NULL, " ");
     node_id = atoi(token);
-    track->start = node_from_id(nodes, node_id);
-
-    /* end node */
+    start_node = node_from_id(nodes, node_id);
     token = strtok(NULL, " ");
     node_id = atoi(token);
-    track->end = node_from_id(nodes, node_id);
+    end_node = node_from_id(nodes, node_id);
+
+    track_for->start = start_node;
+    track_for->end = end_node;
+    track_back->start = end_node;
+    track_back->end = start_node;
 
     /* safe time */
     token = strtok(NULL, " ");
-    track->safe_time = atoi(token);
+    track_for->safe_time = atoi(token);
+    track_back->safe_time = atoi(token);
 
-    Vector_add(tracks, &track);
+    Vector_add(tracks, &track_for);
+    Vector_add(tracks, &track_back);
   }
 
   Vector_dispose(lines);
