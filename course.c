@@ -84,3 +84,33 @@ Course* course_from_id(Vector* courses, char id) {
 
   return NULL;
 }
+
+Track* next_track(Course* course, Track* track) {
+  Track* t;
+  Track* next;
+  int i = 0;
+
+  for (i = 0; i < Vector_size(course->tracks); i++) {
+    Vector_get(course->tracks, i, &t);
+    if (t == track) {
+      Vector_get(course->tracks, i + 1, &next);
+      return next;
+    }
+  }
+
+  return NULL;
+}
+
+int time_to_track(Course* course, Track* track) {
+  Track* t;
+  int ret_val = 0;
+  int i = 0;
+
+  for (i = 0; i < Vector_size(course->tracks); i++) {
+    Vector_get(course->tracks, i, &t);
+    if (t == track) return ret_val;
+    else ret_val += t->safe_time;
+  }
+
+  return ret_val;
+}

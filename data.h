@@ -68,6 +68,8 @@ typedef struct Course {
 
 Vector* read_courses(char* filename, Vector* nodes, Vector* tracks);
 Course* course_from_id(Vector* courses, char id);
+Track* next_track(Course* course, Track* track);
+int time_to_track(Course* course, Track* track);
 
 /*
  * entrant
@@ -84,6 +86,7 @@ typedef struct Entrant {
   int id;
   Course* course;
   char* name;
+  int duration;
   entrant_status status;
   Time* start_time;
   Node* last_node;
@@ -93,9 +96,9 @@ typedef struct Entrant {
 
 Vector* read_entrants(char* filename, Vector* courses);
 Entrant* entrant_from_id(Vector* entrants, int id);
-int entrant_duration(Event* event, Entrant* entrant);
-void entrant_stats(Event* event, Entrant* entrant);
+void entrant_stats(Entrant* entrant);
 void entrant_update_location(Event* event, int entrant_id, int node_id);
 void entrant_update_time(Event* event, Entrant* entrant);
+void entrants_sort(Event* event);
 
 #endif

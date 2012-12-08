@@ -99,7 +99,7 @@ void locate_entrant(Event* event) {
 
   entrant = entrant_from_id(event->entrants, entrant_id);
   if (entrant)
-    entrant_stats(event, entrant);
+    entrant_stats(entrant);
   free(line);
 }
 
@@ -120,18 +120,22 @@ void display_results(Event* event) {
   Entrant* entrant;
   int i = 0;
 
+  entrants_sort(event);
+
   if (count_by_status(event, FINISHED) > 0) {
     printf("\n\tFinished:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
-      printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant_duration(event, entrant));
+      if (entrant->status != FINISHED) break;
+      printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant->duration);
     }
   }
   if (count_by_status(event, STARTED) + count_by_status(event, STOPPED) > 0) {
     printf("\n\tRunning:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
-      printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant_duration(event, entrant));
+      if (entrant->status != STARTED && entrant->status != STOPPED) break;
+      printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant->duration);
     }
   }
   if (count_by_status(event, NOT_STARTED) > 0) {
@@ -171,7 +175,7 @@ void update_manual(Event* event) {
 
   update_time(event, time);
   entrant_update_location(event, entrant_id, node_id);
-  free(time);
+  /*free(time);*/
 }
 
 void update_file(Event* event) {
@@ -204,7 +208,7 @@ void update_file(Event* event) {
 
     update_time(event, time);
     entrant_update_location(event, entrant_id, node_id);
-    free(time);
+    /*free(time);*/
   }
 
   Vector_dispose(lines);

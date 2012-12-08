@@ -124,3 +124,7 @@ Time* timecpy(Time* time) {
   copy->minutes = time->minutes;
   return copy;
 }
+
+int time_to_duration(Time* time) {
+  return time->minutes + (time->hours * 60);
+}

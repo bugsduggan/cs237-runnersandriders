@@ -20,5 +20,6 @@ int valid_filename(char* filename); /* checks if a filename is valid */
 Vector* read_file(char* filename); /* reads a whole file into a vector */
 Time* str_to_time(char* str); /* produces a time from a string (hh:mm) */
 Time* timecpy(Time* time); /* deep copy time */
+int time_to_duration(Time* time); /* turn a time into a duration */
 
 #endif
