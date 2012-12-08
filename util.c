@@ -73,11 +73,13 @@ char* readline() {
   return linep;
 }
 
-Vector* read_file(FILE* fp) {
+Vector* read_file(char* filename) {
   char line[MAX_LINE_LENGTH];
   char* str;
+  FILE* fp
   Vector* lines = Vector_new(sizeof(char**), string_dispose);
 
+  fp = fopen(filename, "r");
   while (fgets(line, MAX_LINE_LENGTH, fp) != NULL) {
     strtok(line, "\n"); /* strip newline */
     str = strdup(line); /* make a new pointer */
@@ -86,38 +88,6 @@ Vector* read_file(FILE* fp) {
   fclose(fp);
 
   return lines;
-}
-
-int prompt() {
-  char* line;
-  int result;
-  printf(">>  ");
-  line = readline();
-  result = atoi(line);
-  free(line);
-  return result;
-}
-
-FILE* get_file(char* prompt) {
-  char* filename;
-  FILE* fp;
-
-  printf("%s", prompt);
-  filename = readline();
-  fp = fopen(filename, "r");
-  while (!fp) {
-    printf("%s does not exist, please enter a valid filename\n", filename);
-    free(filename);
-    printf("%s", prompt);
-    filename = readline();
-    fp = fopen(filename, "r");
-  }
-  free(filename);
-  return fp;
-}
-
-int time_to_duration(int hrs, int mins) {
-  return (hrs * 60) + mins;
 }
 
 /*

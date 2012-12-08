@@ -50,37 +50,11 @@ void Vector_add(Vector* vector, void* elem) {
   }
 }
 
-void Vector_remove(Vector* vector, int index, void* ret_val) {
-  if (vector) {
-    if (index >= 0 && index < vector->size) {
-      memcpy(ret_val, (char*)vector->base + vector->elem_size * index, vector->elem_size);
-      if (index + 1 < vector->size) { /* not last elem */
-        memmove((char*)vector->base + vector->elem_size * index,
-            (char*)vector->base + vector->elem_size * (index + 1),
-            vector->elem_size * (vector->size - index - 1));
-      }
-      vector->size--;
-    }
-  }
-}
-
 void Vector_get(Vector* vector, int index, void* ret_val) {
   if (vector) {
     if (index >= 0 && index < vector->size)
       memcpy(ret_val, (char*)vector->base + vector->elem_size * index, vector->elem_size);
   }
-}
-
-void Vector_get_last(Vector* vector, void* ret_val) {
-  if (vector) {
-    if (vector->size > 0) {
-      memcpy(ret_val, (char*)vector->base + vector->elem_size * (vector->size - 1), vector->elem_size);
-    }
-  }
-}
-
-int Vector_size(Vector* vector) {
-  return vector->size;
 }
 
 void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*)) {
@@ -101,6 +75,10 @@ void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*)) {
     }
     free(temp);
   }
+}
+
+int Vector_size(Vector* vector) {
+  return vector->size;
 }
 
 /*
