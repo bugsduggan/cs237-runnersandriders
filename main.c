@@ -73,6 +73,16 @@ void count_entrants(Event* event, entrant_status status) {
   printf("\n\t%d\n", result);
 }
 
+void update_entrants(Event* event, int hrs, int mins) {
+  int i = 0;
+  Entrant* entrant;
+
+  for (i = 0; i < Vector_size(event->entrants); i++) {
+    Vector_get(event->entrants, i, &entrant);
+    entrant_update_time(entrant, hrs, mins);
+  }
+}
+
 void supply_checkpoint_manual(Event* event) {
   int node_id;
   int entrant_id;
@@ -99,7 +109,9 @@ void supply_checkpoint_manual(Event* event) {
   mins = atoi(token);
   free(line);
 
-  entrant_update_location(event, entrant_id, node_id, hrs, mins);
+  entrant_update_location(event, entrant_from_id(event->entrants, entrant_id),
+      node_id, hrs, mins);
+  update_entrants(event, hrs, mins);
 }
 
 void supply_checkpoint_file(Event* event) {
@@ -130,8 +142,10 @@ void supply_checkpoint_file(Event* event) {
     hrs = atoi(token);
     token = strtok(NULL, ":");
     mins = atoi(token);
-    entrant_update_location(event, entrant_id, node_id, hrs, mins);
+    entrant_update_location(event, entrant_from_id(event->entrants, entrant_id),
+        node_id, hrs, mins);
   }
+  update_entrants(event, hrs, mins);
   Vector_dispose(lines);
 }
 

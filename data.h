@@ -48,6 +48,10 @@ typedef struct Entrant {
   entrant_status status;
   int nodes_visited;
   int last_seen; /* last node visited */
+  int start_hrs;
+  int start_mins;
+  int end_hrs;
+  int end_mins;
   int duration;
 } Entrant;
 
@@ -86,7 +90,8 @@ Course* course_from_id(Vector* courses, char id);
 Vector* entrants_read(FILE* fp);
 void entrants_dispose(Vector* entrants);
 Entrant* entrant_from_id(Vector* entrants, int id);
-void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins);
+void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hrs, int mins);
+void entrant_update_time(Entrant* entrant, int hrs, int mins);
 void entrants_sort(Vector* entrants);
 
 /* Event stuff */

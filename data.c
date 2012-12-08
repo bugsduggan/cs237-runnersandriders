@@ -220,7 +220,11 @@ Vector* entrants_read(FILE* fp) {
     entrant->status = NOT_STARTED;
     entrant->nodes_visited = 0;
     entrant->last_seen = -1;
-    entrant->duration = -1;
+    entrant->start_hrs = -1;
+    entrant->start_mins = -1;
+    entrant->end_hrs = -1;
+    entrant->end_mins = -1;
+    entrant->duration = 0;
     Vector_add(entrants, &entrant);
   }
   Vector_dispose(lines);
@@ -241,31 +245,36 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
   return NULL;
 }
 
-void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins) {
-  Entrant* entrant;
+void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hrs, int mins) {
   Course* course;
-  int i = 0;
 
-  /* find the entrant */
-  entrant = entrant_from_id(event->entrants, entrant_id);
-
-  /* update his/her time */
+  /* update his/her location */
   entrant->nodes_visited++;
   entrant->last_seen = node_id;
-  entrant->duration = time_to_duration(hrs, mins)
-    - time_to_duration(event->start_hrs, event->start_mins);
+
+  /* check if entrant is starting */
+  if (entrant->status == NOT_STARTED) {
+    entrant->start_hrs = hrs;
+    entrant->start_mins = mins;
+    entrant->status = STARTED;
+  }
+
+  entrant_update_time(entrant, hrs, mins);
 
   /* check if entrant has finished */
-  for (i = 0; i < Vector_size(event->courses); i++) {
-    Vector_get(event->courses, i, &course);
-    /* find the right course for the entrant */
-    if (entrant->course_id == course->id) {
-      if (entrant->nodes_visited == course_num_checkpoints(course))
-        entrant->status = FINISHED;
-    }
+  course = course_from_id(event->courses, entrant->course_id);
+  if (entrant->nodes_visited == course_num_checkpoints(course)) {
+    entrant->end_hrs = hrs;
+    entrant->end_mins = mins;
+    entrant->status = FINISHED;
   }
-  /* check if entrant has just started */
-  if (entrant->status == NOT_STARTED) entrant->status = STARTED;
+}
+
+void entrant_update_time(Entrant* entrant, int hrs, int mins) {
+  if (entrant->status == STARTED) {
+    entrant->duration = time_to_duration(hrs, mins) - 
+      time_to_duration(entrant->start_hrs, entrant->start_mins);
+  }
 }
 
 int compare_entrant_not_started(Entrant* a, Entrant* b) {
