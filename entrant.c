@@ -82,11 +82,11 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
   return NULL;
 }
 
-int entrant_duration(Entrant* entrant) {
+int entrant_duration(Event* event, Entrant* entrant) {
   return 0;
 }
 
-void entrant_stats(Entrant* entrant) {
+void entrant_stats(Event* event, Entrant* entrant) {
   printf("\n");
   printf("\t%02d: %-50s\n", entrant->id, entrant->name);
   printf("\t\tCourse: %c\n", entrant->course->id);
@@ -99,10 +99,26 @@ void entrant_stats(Entrant* entrant) {
     printf("\n\t\tAt medical checkpoint: %2d since %02d:%02d\n", entrant->last_node->id,
         entrant->last_time->hours, entrant->last_time->minutes);
   } else if (entrant->status == FINISHED) {
-    printf("\n\t\tFinished. Run time: %3d\n", entrant_duration(entrant));
+    printf("\n\t\tFinished. Run time: %3d\n", entrant_duration(event, entrant));
   }
 }
 
-void entrant_update(Event* event, int entrant_id, int node_id) {
+void entrant_update_location(Event* event, int entrant_id, int node_id) {
+  Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
+  Node* node = node_from_id(entrant->course->nodes, node_id);
 
+  if (entrant->status == NOT_STARTED) {
+    entrant->status = STARTED;
+    entrant->start_time = timecpy(event->time);
+  }
+
+  entrant->last_node = node;
+  entrant->last_time = timecpy(event->time);
+  /* update track */
+
+  /* check for finished */
+}
+
+void entrant_update_time(Event* event, Entrant* entrant) {
+  /* update track */
 }

@@ -20,7 +20,7 @@ typedef struct Event {
 } Event;
 
 Event* read_event(char* filename);
-void update_time(Time* time);
+void update_time(Event* event, Time* time);
 
 /*
  * node
@@ -93,8 +93,9 @@ typedef struct Entrant {
 
 Vector* read_entrants(char* filename, Vector* courses);
 Entrant* entrant_from_id(Vector* entrants, int id);
-int entrant_duration(Entrant* entrant);
-void entrant_stats(Entrant* entrant);
-void entrant_update(Event* event, int entrant_id, int node_id);
+int entrant_duration(Event* event, Entrant* entrant);
+void entrant_stats(Event* event, Entrant* entrant);
+void entrant_update_location(Event* event, int entrant_id, int node_id);
+void entrant_update_time(Event* event, Entrant* entrant);
 
 #endif
