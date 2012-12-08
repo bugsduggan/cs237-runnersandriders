@@ -110,6 +110,7 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
   if (entrant->status == NOT_STARTED) {
     entrant->status = STARTED;
     entrant->start_time = timecpy(event->time);
+    Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
   }
 
   entrant->last_node = node;
