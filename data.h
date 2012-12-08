@@ -93,6 +93,7 @@ typedef struct Entrant {
   entrant_status status;
   int nodes_visited;
   int last_seen;
+  int current_track;
   int start_hrs;
   int start_mins;
   int end_hrs;

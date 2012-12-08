@@ -49,6 +49,7 @@ Vector* entrants_read(FILE* fp) {
     entrant->status = NOT_STARTED;
     entrant->nodes_visited = 0;
     entrant->last_seen = -1;
+    entrant->current_track = -1;
     entrant->start_hrs = -1;
     entrant->start_mins = -1;
     entrant->end_hrs = -1;
@@ -101,8 +102,10 @@ void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hr
 
 void entrant_update_time(Entrant* entrant, int hrs, int mins) {
   if (entrant->status == STARTED) {
+    /* update duration */
     entrant->duration = time_to_duration(hrs, mins) - 
       time_to_duration(entrant->start_hrs, entrant->start_mins);
+    /* update track */
   }
 }
 
