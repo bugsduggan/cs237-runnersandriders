@@ -18,5 +18,6 @@ char* strdup(const char* str); /* returns a pointer to a newly malloc'd string *
 char* readline(); /* reads a line from stdin */
 int valid_filename(char* filename); /* checks if a filename is valid */
 Vector* read_file(char* filename); /* reads a whole file into a vector */
+Time* str_to_time(char* str); /* produces a time from a string (hh:mm) */
 
 #endif

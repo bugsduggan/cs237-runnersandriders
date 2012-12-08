@@ -18,6 +18,8 @@ typedef struct Event {
   Vector* entrants;
 } Event;
 
+Event* read_event(char* filename);
+
 /*
  * node
  */

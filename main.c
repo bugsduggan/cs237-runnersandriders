@@ -25,11 +25,16 @@ char* get_filename(char* prompt) {
   return filename;
 }
 
-void read_data() {
+Event* read_data() {
   char* filename;
+  Event* event;
   Vector* nodes;
   Vector* tracks;
   Vector* courses;
+  Vector* entrants;
+
+  filename = get_filename("Please enter name file: ");
+  event = read_event(filename);
 
   filename = get_filename("Please enter nodes file: ");
   nodes = read_nodes(filename);
@@ -41,7 +46,10 @@ void read_data() {
   courses = read_courses(filename, nodes, tracks);
 
   filename = get_filename("Please enter entrants file: ");
-  courses = read_entrants(filename, courses);
+  entrants = read_entrants(filename, courses);
+
+  event->entrants = entrants;
+  return event;
 }
 
 int main(int argc, char* argv[]) {

@@ -105,3 +105,15 @@ Vector* read_file(char* filename) {
 
   return lines;
 }
+
+Time* str_to_time(char* str) {
+  Time* time = malloc(sizeof(Time));
+  char* token;
+
+  token = strtok(str, ":");
+  time->hours = atoi(token);
+  token = strtok(NULL, "\n");
+  time->minutes = atoi(token);
+
+  return time;
+}
