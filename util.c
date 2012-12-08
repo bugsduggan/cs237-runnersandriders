@@ -12,10 +12,13 @@
 #include "util.h"
 
 /*
- * function prototypes
+ * private functions
  */
 
-void string_dispose(void* string);
+void string_dispose(void* string) {
+  char* foo = *(char**) string;
+  if (foo) free(foo);
+}
 
 /*
  * functions declared in util.h
@@ -76,7 +79,7 @@ char* readline() {
 Vector* read_file(char* filename) {
   char line[MAX_LINE_LENGTH];
   char* str;
-  FILE* fp
+  FILE* fp;
   Vector* lines = Vector_new(sizeof(char**), string_dispose);
 
   fp = fopen(filename, "r");
@@ -88,13 +91,4 @@ Vector* read_file(char* filename) {
   fclose(fp);
 
   return lines;
-}
-
-/*
- * private functions
- */
-
-void string_dispose(void* string) {
-  char* foo = *(char**) string;
-  if (foo) free(foo);
 }

@@ -10,9 +10,17 @@
 #include "vector.h"
 
 /*
- * function prototypes
+ * private functions
  */
-static void Vector_grow(Vector* vector);
+
+static void Vector_grow(Vector* vector) {
+  void* new_base;
+  vector->capacity *= 2;
+  new_base = malloc(vector->elem_size * vector->capacity);
+  memcpy(new_base, vector->base, vector->elem_size * vector->size);
+  free(vector->base);
+  vector->base = new_base;
+}
 
 /*
  * functions declared in vector.h
@@ -79,17 +87,4 @@ void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*)) {
 
 int Vector_size(Vector* vector) {
   return vector->size;
-}
-
-/*
- * private functions
- */
-
-static void Vector_grow(Vector* vector) {
-  void* new_base;
-  vector->capacity *= 2;
-  new_base = malloc(vector->elem_size * vector->capacity);
-  memcpy(new_base, vector->base, vector->elem_size * vector->size);
-  free(vector->base);
-  vector->base = new_base;
 }
