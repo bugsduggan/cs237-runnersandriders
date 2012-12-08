@@ -269,15 +269,37 @@ void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs,
 }
 
 int compare_entrant_not_started(Entrant* a, Entrant* b) {
-  return 0;
+  if (a->id > b->id) {
+    return 1;
+  } else if (a->id < b->id) {
+    return -1;
+  } else {
+    return 0;
+  }
 }
 
 int compare_entrant_started(Entrant* a, Entrant* b) {
-  return 0;
+  /*
+   * this should compare based on which entrant is closest to the finish by looking at nodes
+   * but for now, I'm just going to use duration
+   */
+  if (a->duration > b->duration) {
+    return -1;
+  } else if (a->duration < b->duration) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 int compare_entrant_finished(Entrant* a, Entrant* b) {
-  return 0;
+  if (a->duration > b->duration) {
+    return 1;
+  } else if (a->duration < b->duration) {
+    return -1;
+  } else {
+    return 0;
+  }
 }
 
 /* a < b = -1; a == b = 0; a > b = 1 */
