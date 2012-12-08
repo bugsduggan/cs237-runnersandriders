@@ -70,18 +70,22 @@ typedef struct Event {
 /* Node stuff */
 Vector* nodes_read(FILE* fp); /* populates vector with pointers to nodes */
 void nodes_dispose(Vector* nodes); /* disposes of a vector of nodes */
+Node* node_from_id(Vector* nodes, int id); /* returns the node with the given id (NULL if not found) */
 
 /* Track stuff */
 Vector* tracks_read(FILE* fp);
 void tracks_dispose(Vector* tracks);
+Track* track_from_id(Vector* tracks, int id);
 
 /* Course stuff */
 Vector* courses_read(FILE* fp, Vector* nodes); /* requires nodes to link */
 void courses_dispose(Vector* courses);
+Course* course_from_id(Vector* courses, char id);
 
 /* Entrant stuff */
 Vector* entrants_read(FILE* fp);
 void entrants_dispose(Vector* entrants);
+Entrant* entrant_from_id(Vector* entrants, int id);
 void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins);
 void entrants_sort(Vector* entrants);
 

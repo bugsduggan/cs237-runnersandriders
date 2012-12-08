@@ -85,25 +85,19 @@ int Vector_size(Vector* vector) {
 void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*)) {
   int i = 0;
   int j = 0;
-  void* a = malloc(vector->elem_size);
-  void* b = malloc(vector->elem_size);
   void* temp = malloc(vector->elem_size);
 
   if (vector) {
     for (i = 0; i < vector->size; i++) {
       for (j = 1; j < vector->size - 1; j++) {
         /* a = j-1, b = j */
-        memcpy(a, (char*)vector->base + vector->elem_size * (j-1), vector->elem_size);
-        memcpy(b, (char*)vector->base + vector->elem_size * j, vector->elem_size);
-        if (comp_fn(a, b) == 1) { /* if a > b */
-          memcpy(temp, a, vector->elem_size);
-          memcpy(a, b, vector->elem_size);
-          memcpy(b, temp, vector->elem_size);
+        if (comp_fn((char*)vector->base + vector->elem_size * (j-1), (char*)vector->base + vector->elem_size * j) == 1) { /* if a > b */
+          memcpy(temp, (char*)vector->base + vector->elem_size * (j-1), vector->elem_size);
+          memcpy((char*)vector->base + vector->elem_size * (j-1), (char*)vector->base + vector->elem_size * j,  vector->elem_size);
+          memcpy((char*)vector->base + vector->elem_size * j, temp, vector->elem_size);
         }
       }
     }
-    free(a);
-    free(b);
     free(temp);
   }
 }

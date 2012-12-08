@@ -52,6 +52,16 @@ void nodes_dispose(Vector* nodes) {
   Vector_dispose(nodes);
 }
 
+Node* node_from_id(Vector* nodes, int id) {
+  int i = 0;
+  Node* node;
+  for (i = 0; i < Vector_size(nodes); i++) {
+    Vector_get(nodes, i, &node);
+    if (node->id == id) return node;
+  }
+  return NULL;
+}
+
 /*
  * Track stuff
  */
@@ -93,6 +103,16 @@ void tracks_dispose(Vector* tracks) {
   Vector_dispose(tracks);
 }
 
+Track* track_from_id(Vector* tracks, int id) {
+  int i = 0;
+  Track* track;
+  for (i = 0; i < Vector_size(tracks); i++) {
+    Vector_get(tracks, i, &track);
+    if (track->id == id) return track;
+  }
+  return NULL;
+}
+
 /*
  * Course stuff
  */
@@ -113,7 +133,6 @@ Vector* courses_read(FILE* fp, Vector* nodes) {
   Node* node;
   int i = 0;
   int j = 0;
-  int k = 0;
   int node_id;
 
   for (i = 0; i < Vector_size(lines); i++) {
@@ -131,11 +150,7 @@ Vector* courses_read(FILE* fp, Vector* nodes) {
     for (j = 0; j < course->num_nodes; j++) {
       token = strtok(NULL, " ");
       node_id = atoi(token);
-      /* find the node from id */
-      for (k = 0; k < Vector_size(nodes); k++) {
-        Vector_get(nodes, k, &node);
-        if (node->id == node_id) break;
-      }
+      node = node_from_id(nodes, node_id);
       Vector_add(course->nodes, &node);
     }
     Vector_add(courses, &course);
@@ -146,6 +161,16 @@ Vector* courses_read(FILE* fp, Vector* nodes) {
 
 void courses_dispose(Vector* courses) {
   Vector_dispose(courses);
+}
+
+Course* course_from_id(Vector* courses, char id) {
+  int i = 0;
+  Course* course;
+  for (i = 0; i < Vector_size(courses); i++) {
+    Vector_get(courses, i, &course);
+    if (course->id == id) return course;
+  }
+  return NULL;
 }
 
 int course_num_checkpoints(Course* course) {
@@ -195,7 +220,7 @@ Vector* entrants_read(FILE* fp) {
     entrant->status = NOT_STARTED;
     entrant->nodes_visited = 0;
     entrant->last_seen = -1;
-    entrant->duration = 0;
+    entrant->duration = -1;
     Vector_add(entrants, &entrant);
   }
   Vector_dispose(lines);
@@ -206,16 +231,23 @@ void entrants_dispose(Vector* entrants) {
   Vector_dispose(entrants);
 }
 
+Entrant* entrant_from_id(Vector* entrants, int id) {
+  int i = 0;
+  Entrant* entrant;
+  for (i = 0; i < Vector_size(entrants); i++) {
+    Vector_get(entrants, i, &entrant);
+    if (entrant->id == id) return entrant;
+  }
+  return NULL;
+}
+
 void entrant_update_location(Event* event, int entrant_id, int node_id, int hrs, int mins) {
   Entrant* entrant;
   Course* course;
   int i = 0;
 
   /* find the entrant */
-  for (i = 0; i < Vector_size(event->entrants); i++) {
-    Vector_get(event->entrants, i, &entrant);
-    if (entrant->id == entrant_id) break;
-  }
+  entrant = entrant_from_id(event->entrants, entrant_id);
 
   /* update his/her time */
   entrant->nodes_visited++;

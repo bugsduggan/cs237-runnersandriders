@@ -36,27 +36,17 @@ void print_menu() {
   printf("\n");
 }
 
-void display_entrant_stats(Event* event, int entrant_id) {
-  int i = 0;
-  Entrant* entrant;
-
-  for (i = 0; i < Vector_size(event->entrants); i++) {
-    Vector_get(event->entrants, i, &entrant);
-    if (entrant->id == entrant_id) {
-      printf("\t%02d: %-30s ", entrant->id, entrant->name);
-      if (entrant->status == NOT_STARTED) {
-        printf("NOT STARTED");
-      } else if (entrant->status == STARTED) {
-        printf("STARTED     Last seen: %02d    Current time: %3d mins",
-            entrant->last_seen, entrant->duration);
-      } else {
-        printf("FINISHED    Total time: %02d mins", entrant->duration);
-      }
-      printf("\n");
-      return; /* this is just so we don't print the error message */
-    }
+void display_entrant_stats(Entrant* entrant) {
+  printf("\t%02d: %-30s ", entrant->id, entrant->name);
+  if (entrant->status == NOT_STARTED) {
+    printf("NOT STARTED");
+  } else if (entrant->status == STARTED) {
+    printf("STARTED     Last seen: %02d    Current time: %3d mins",
+        entrant->last_seen, entrant->duration);
+  } else {
+    printf("FINISHED    Total time: %02d mins", entrant->duration);
   }
-  printf("Invalid entrant id\n");
+  printf("\n");
 }
 
 void locate_entrant(Event* event) {
@@ -68,7 +58,7 @@ void locate_entrant(Event* event) {
   entrant_id = atoi(line);
   free(line);
   printf("\n");
-  display_entrant_stats(event, entrant_id);
+  display_entrant_stats(entrant_from_id(event->entrants, entrant_id));
 }
 
 void count_entrants(Event* event, entrant_status status) {
@@ -147,11 +137,13 @@ void supply_checkpoint_file(Event* event) {
 
 void display_results(Event* event) {
   int i = 0;
+  Entrant* entrant;
 
   entrants_sort(event->entrants);
   printf("\n");
   for (i = 0; i < Vector_size(event->entrants); i++) {
-    display_entrant_stats(event, i + 1);
+    Vector_get(event->entrants, i, &entrant);
+    display_entrant_stats(entrant);
   }
 }
 
