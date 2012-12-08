@@ -72,3 +72,15 @@ Vector* read_courses(char* filename, Vector* nodes, Vector* tracks) {
   Vector_dispose(lines);
   return courses;
 }
+
+Course* course_from_id(Vector* courses, char id) {
+  Course* course;
+  int i = 0;
+
+  for (i = 0; i < Vector_size(courses); i++) {
+    Vector_get(courses, i, &course);
+    if (course->id == id) return course;
+  }
+
+  return NULL;
+}

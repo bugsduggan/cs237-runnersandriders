@@ -39,6 +39,9 @@ void read_data() {
 
   filename = get_filename("Please enter courses file: ");
   courses = read_courses(filename, nodes, tracks);
+
+  filename = get_filename("Please enter entrants file: ");
+  courses = read_entrants(filename, courses);
 }
 
 int main(int argc, char* argv[]) {

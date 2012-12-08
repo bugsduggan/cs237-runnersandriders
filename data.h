@@ -15,7 +15,6 @@ typedef struct Event {
   char* title;
   char* date;
   Time* start;
-  Vector* courses;
   Vector* entrants;
 } Event;
 
@@ -64,6 +63,7 @@ typedef struct Course {
 } Course;
 
 Vector* read_courses(char* filename, Vector* nodes, Vector* tracks);
+Course* course_from_id(Vector* courses, char id);
 
 /*
  * entrant
@@ -78,13 +78,15 @@ typedef enum {
 
 typedef struct Entrant {
   int id;
-  char* name;
   Course* course;
+  char* name;
+  entrant_status status;
   Time* start_time;
   Node* last_node;
   Time* last_time;
   Track* curr_track;
-  entrant_status status;
 } Entrant;
+
+Vector* read_entrants(char* filename, Vector* courses);
 
 #endif
