@@ -289,8 +289,8 @@ int compare_entrant_not_started(Entrant* a, Entrant* b) {
 
 int compare_entrant_started(Entrant* a, Entrant* b) {
   /*
-   * this should compare based on which entrant is closest to the finish by looking at nodes
-   * but for now, I'm just going to use duration
+   * this should compare based on which entrant is closest to the expected course
+   * duration but for now, I'm just going to use duration
    */
   if (a->duration > b->duration) {
     return -1;
@@ -321,7 +321,7 @@ int compare_entrant(void* v1, void* v2) {
    * shortest duration first
    *
    * Then started entrants
-   * nodes closest to the finish at the top
+   * closest to the finish at the top
    *
    * Then not started
    * sorted by id
