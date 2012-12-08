@@ -61,7 +61,7 @@ void display_event_header(Event* event) {
   printf("\n");
 }
 
-int display_menu() {
+int display_menu(Event* event) {
   char* line;
   char* token;
   int input;
@@ -78,7 +78,7 @@ int display_menu() {
   printf("\t8. Exit the program\n");
   printf("\n");
 
-  printf(">>  ");
+  printf("%02d:%02d  >>  ", event->time->hours, event->time->minutes);
   line = readline();
   token = strtok(line, "\n");
   input = atoi(token);
@@ -221,7 +221,7 @@ int main(int argc, char* argv[]) {
 
   display_event_header(event);
   while (running) {
-    input = display_menu();
+    input = display_menu(event);
     switch (input) {
       case 1:
         locate_entrant(event);
