@@ -113,6 +113,19 @@ Track* track_from_id(Vector* tracks, int id) {
   return NULL;
 }
 
+Track* track_from_nodes(Vector* tracks, Node* start, Node* end) {
+  Track* track;
+  int i = 0;
+  for (i = 0; i < Vector_size(tracks); i++) {
+    Vector_get(tracks, i, &track);
+    if (track->start_node == start->id && track->end_node == end->id)
+      return track;
+    if (track->start_node == end->id && track->end_node == start->id)
+      return track;
+  }
+  return NULL;
+}
+
 /*
  * Course stuff
  */
@@ -125,7 +138,22 @@ void course_dispose(void* course) {
   }
 }
 
-Vector* courses_read(FILE* fp, Vector* nodes) {
+void course_safe_time(Vector* tracks, Course* course) {
+  Node* start;
+  Node* end;
+  Track* track;
+  int i = 0;
+  course->safe_time = 0;
+
+  for (i = 0; i < Vector_size(course->nodes) - 1; i++) {
+    Vector_get(course->nodes, i, &start);
+    Vector_get(course->nodes, i + 1, &end);
+    track = track_from_nodes(tracks, start, end);
+    course->safe_time += track->safe_time;
+  }
+}
+
+Vector* courses_read(FILE* fp, Vector* nodes, Vector* tracks) {
   Vector* lines = read_file(fp);
   Vector* courses = Vector_new(sizeof(Course*), course_dispose);
   char* line;
@@ -153,6 +181,8 @@ Vector* courses_read(FILE* fp, Vector* nodes) {
       node = node_from_id(nodes, node_id);
       Vector_add(course->nodes, &node);
     }
+    /* calculate the safe completion time */
+    course_safe_time(tracks, course);
     Vector_add(courses, &course);
   }
   Vector_dispose(lines);

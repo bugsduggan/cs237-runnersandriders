@@ -16,7 +16,7 @@ Event* generate_data() {
   event = event_read(get_file("Event file: "));
   event->nodes = nodes_read(get_file("Nodes file: "));
   event->tracks = tracks_read(get_file("Tracks file: "));
-  event->courses = courses_read(get_file("Courses file: "), event->nodes);
+  event->courses = courses_read(get_file("Courses file: "), event->nodes, event->tracks);
   event->entrants = entrants_read(get_file("Entrants file: "));
   return event;
 }

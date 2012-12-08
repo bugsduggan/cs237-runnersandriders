@@ -32,6 +32,7 @@ typedef struct Course {
   char id;
   int num_nodes;
   Vector* nodes;
+  int safe_time;
 } Course;
 
 /* Entrant stuff */
@@ -80,9 +81,10 @@ Node* node_from_id(Vector* nodes, int id); /* returns the node with the given id
 Vector* tracks_read(FILE* fp);
 void tracks_dispose(Vector* tracks);
 Track* track_from_id(Vector* tracks, int id);
+Track* track_from_nodes(Vector* tracks, Node* start, Node* end);
 
 /* Course stuff */
-Vector* courses_read(FILE* fp, Vector* nodes); /* requires nodes to link */
+Vector* courses_read(FILE* fp, Vector* nodes, Vector* tracks); /* requires nodes and tracks to link */
 void courses_dispose(Vector* courses);
 Course* course_from_id(Vector* courses, char id);
 
