@@ -89,7 +89,7 @@ void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*)) {
 
   if (vector) {
     for (i = 0; i < vector->size; i++) {
-      for (j = 1; j < vector->size - 1; j++) {
+      for (j = 1; j < vector->size; j++) {
         /* a = j-1, b = j */
         if (comp_fn((char*)vector->base + vector->elem_size * (j-1), (char*)vector->base + vector->elem_size * j) == 1) { /* if a > b */
           memcpy(temp, (char*)vector->base + vector->elem_size * (j-1), vector->elem_size);
