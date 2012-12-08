@@ -76,6 +76,19 @@ char* readline() {
   return linep;
 }
 
+int valid_filename(char* filename) {
+  FILE* fp;
+  int ret_val = 0;
+
+  fp = fopen(filename, "r");
+  if (fp) {
+    ret_val = 1;
+    fclose(fp);
+  }
+
+  return ret_val;
+}
+
 Vector* read_file(char* filename) {
   char line[MAX_LINE_LENGTH];
   char* str;
