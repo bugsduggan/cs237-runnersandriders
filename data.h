@@ -90,5 +90,8 @@ typedef struct Entrant {
 } Entrant;
 
 Vector* read_entrants(char* filename, Vector* courses);
+Entrant* entrant_from_id(Vector* entrants, int id);
+int entrant_duration(Entrant* entrant);
+void entrant_stats(Entrant* entrant);
 
 #endif

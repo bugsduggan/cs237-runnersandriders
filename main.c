@@ -87,6 +87,22 @@ int display_menu() {
   return input;
 }
 
+void locate_entrant(Event* event) {
+  Entrant* entrant;
+  int entrant_id;
+  char* line;
+
+  printf("Enter entrant id: ");
+  line = readline();
+  strtok(line, "\n");
+  entrant_id = atoi(line);
+
+  entrant = entrant_from_id(event->entrants, entrant_id);
+  if (entrant)
+    entrant_stats(entrant);
+  free(line);
+}
+
 int main(int argc, char* argv[]) {
   Event* event = read_data();
   int running = 1;
@@ -97,6 +113,7 @@ int main(int argc, char* argv[]) {
     input = display_menu();
     switch (input) {
       case 1:
+        locate_entrant(event);
         break;
       case 2:
         break;
