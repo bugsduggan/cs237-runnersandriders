@@ -36,6 +36,12 @@ Event* read_event(char* filename) {
   Vector_get(lines, 2, &line);
   event->start = str_to_time(line);
 
+  event->time = timecpy(event->start);
+
   Vector_dispose(lines);
   return event;
+}
+
+void update_time(Time* time) {
+
 }

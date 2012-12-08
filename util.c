@@ -117,3 +117,10 @@ Time* str_to_time(char* str) {
 
   return time;
 }
+
+Time* timecpy(Time* time) {
+  Time* copy = malloc(sizeof(Time));
+  copy->hours = time->hours;
+  copy->minutes = time->minutes;
+  return copy;
+}

@@ -143,6 +143,72 @@ void display_results(Event* event) {
   }
 }
 
+void update_manual(Event* event) {
+  char* line;
+  int node_id;
+  int entrant_id;
+  Time* time;
+
+  /* type */
+
+  /* node id */
+  printf("Enter node id: ");
+  line = readline();
+  node_id = atoi(line);
+  free(line);
+
+  /* entrant id */
+  printf("Enter entrant id: ");
+  line = readline();
+  entrant_id = atoi(line);
+  free(line);
+
+  /* time */
+  printf("Enter time (hh:mm): ");
+  line = readline();
+  time = str_to_time(line);
+  free(line);
+
+  update_time(time);
+  entrant_update(event, entrant_id, node_id);
+  free(time);
+}
+
+void update_file(Event* event) {
+  char* filename = get_filename("Enter checkpoint file: ");
+  Vector* lines = read_file(filename);
+  char* line;
+  char* token;
+  int node_id;
+  int entrant_id;
+  Time* time;
+  int i = 0;
+
+  for (i = 0; i < Vector_size(lines); i++) {
+    Vector_get(lines, i, &line);
+
+    /* type */
+    token = strtok(line, " ");
+
+    /* node id */
+    token = strtok(NULL, " ");
+    node_id = atoi(token);
+
+    /* entrant id */
+    token = strtok(NULL, " ");
+    entrant_id = atoi(token);
+
+    /* time */
+    token = strtok(NULL, "\n");
+    time = str_to_time(token);
+
+    update_time(time);
+    entrant_update(event, entrant_id, node_id);
+  }
+
+  Vector_dispose(lines);
+}
+
 int main(int argc, char* argv[]) {
   Event* event = read_data();
   int running = 1;
@@ -165,8 +231,10 @@ int main(int argc, char* argv[]) {
         printf("\t%d\n", count_by_status(event, FINISHED));
         break;
       case 5:
+        update_manual(event);
         break;
       case 6:
+        update_file(event);
         break;
       case 7:
         display_results(event);

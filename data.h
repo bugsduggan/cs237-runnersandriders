@@ -16,9 +16,11 @@ typedef struct Event {
   char* date;
   Time* start;
   Vector* entrants;
+  Time* time;
 } Event;
 
 Event* read_event(char* filename);
+void update_time(Time* time);
 
 /*
  * node
@@ -93,5 +95,6 @@ Vector* read_entrants(char* filename, Vector* courses);
 Entrant* entrant_from_id(Vector* entrants, int id);
 int entrant_duration(Entrant* entrant);
 void entrant_stats(Entrant* entrant);
+void entrant_update(Event* event, int entrant_id, int node_id);
 
 #endif

@@ -102,3 +102,7 @@ void entrant_stats(Entrant* entrant) {
     printf("\n\t\tFinished. Run time: %3d\n", entrant_duration(entrant));
   }
 }
+
+void entrant_update(Event* event, int entrant_id, int node_id) {
+
+}
