@@ -175,7 +175,7 @@ void update_manual(Event* event) {
 
   update_time(event, time);
   entrant_update_location(event, entrant_id, node_id);
-  /*free(time);*/
+  free(time);
 }
 
 void update_file(Event* event) {
@@ -208,7 +208,7 @@ void update_file(Event* event) {
 
     update_time(event, time);
     entrant_update_location(event, entrant_id, node_id);
-    /*free(time);*/
+    free(time);
   }
 
   Vector_dispose(lines);
