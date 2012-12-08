@@ -171,9 +171,12 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
 void entrant_update_time(Event* event, Entrant* entrant) {
   int time_since_seen;
   if (entrant->status != NOT_STARTED) {
+    entrant->duration = time_to_duration(event->time) -
+      time_to_duration(entrant->start_time);
     time_since_seen = time_to_duration(event->time) -
       time_to_duration(entrant->last_time);
-    if (entrant->curr_track->safe_time > time_since_seen &&
+    if (time_since_seen > 0 && /* so we don't update twice at checkpoints */
+        entrant->curr_track->safe_time > time_since_seen && /* safe_time > time_since_seen */
         entrant->curr_track->end->type == JN) /* only guess if the next node is a JN */
       entrant->curr_track = next_track(entrant->course, entrant->curr_track);
   }
