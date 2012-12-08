@@ -49,7 +49,7 @@ Vector* entrants_read(FILE* fp) {
     entrant->status = NOT_STARTED;
     entrant->nodes_visited = 0;
     entrant->last_seen = -1;
-    entrant->current_track = -1;
+    entrant->current_track = NULL;
     entrant->start_hrs = -1;
     entrant->start_mins = -1;
     entrant->end_hrs = -1;
@@ -88,7 +88,7 @@ void entrant_update_location(Event* event, Entrant* entrant, int node_id, int hr
     entrant->start_hrs = hrs;
     entrant->start_mins = mins;
     Vector_get(course->tracks, 0, &track);
-    entrant->current_track = track->id;
+    entrant->current_track = track;
     entrant->status = STARTED;
   }
 

@@ -43,7 +43,7 @@ void display_entrant_stats(Entrant* entrant) {
     printf("NOT STARTED");
   } else if (entrant->status == STARTED) {
     printf("STARTED     Last node: %02d    On track: %02d    Time: %3d mins",
-        entrant->last_seen, entrant->current_track, entrant->duration);
+        entrant->last_seen, entrant->current_track->id, entrant->duration);
   } else {
     printf("FINISHED    Total time: %02d mins", entrant->duration);
   }
