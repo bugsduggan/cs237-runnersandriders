@@ -12,7 +12,7 @@
 /*
  * function prototypes
  */
-static void Vector_grow(Vector* vector) {
+static void Vector_grow(Vector* vector);
 
 /*
  * functions declared in vector.h

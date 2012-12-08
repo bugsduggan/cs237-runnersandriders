@@ -8,20 +8,16 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "event.h"
 #include "vector.h"
 #include "util.h"
-#include "node.h"
-#include "track.h"
-#include "course.h"
-#include "entrant.h"
+#include "data.h"
 
 /*
  * function prototypes
  */
 
 /*
- * functions declared in event.h
+ * functions declared in data.h
  */
 
 Event* event_read(FILE* fp) {

@@ -8,11 +8,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "course.h"
 #include "vector.h"
 #include "util.h"
-#include "node.h"
-#include "track.h"
+#include "data.h"
 
 /*
  * function prototypes
@@ -22,7 +20,7 @@ void course_dispose(void* course);
 void course_safe_time(Vector* tracks, Course* course);
 
 /*
- * functions declared in course.h
+ * functions declared in data.h
  */
 
 Vector* courses_read(FILE* fp, Vector* nodes, Vector* tracks) {

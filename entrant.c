@@ -8,11 +8,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "entrant.h"
 #include "vector.h"
 #include "util.h"
-#include "course.h"
-#include "event.h"
+#include "data.h"
 
 /*
  * function prototypes
@@ -25,7 +23,7 @@ int compare_entrant_started(Entrant* a, Entrant* b);
 int compare_entrant_finished(Entrant* a, Entrant* b);
 
 /*
- * functions declared in entrant.h
+ * functions declared in data.h
  */
 
 Vector* entrants_read(FILE* fp) {

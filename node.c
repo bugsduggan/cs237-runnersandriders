@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "node.h"
 #include "vector.h"
 #include "util.h"
+#include "data.h"
 
 /*
  * function prototypes
@@ -19,7 +19,7 @@
 void node_dispose(void* node);
 
 /*
- * functions declared in node.h
+ * functions declared in data.h
  */
 
 Vector* nodes_read(FILE* fp) {

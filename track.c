@@ -8,10 +8,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "track.h"
 #include "vector.h"
 #include "util.h"
-#include "node.h"
+#include "data.h"
 
 /*
  * function prototypes
@@ -20,7 +19,7 @@
 void track_dispose(void* track);
 
 /*
- * functions declared in track.h
+ * functions declared in data.h
  */
 
 Vector* tracks_read(FILE* fp) {

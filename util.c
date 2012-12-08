@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "util.h"
 #include "vector.h"
+#include "util.h"
 
 /*
  * function prototypes
