@@ -156,14 +156,15 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
   if (entrant->status == NOT_STARTED) {
     entrant->status = STARTED;
     entrant->start_time = timecpy(event->time);
-    Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
   }
 
   entrant->duration = time_to_duration(event->time) -
     time_to_duration(entrant->start_time);
   entrant->last_node = node;
   entrant->last_time = timecpy(event->time);
-  entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+  if (entrant->curr_track)
+    entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+  else Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
 
   if (entrant->curr_track == NULL) entrant->status = FINISHED;
 }
@@ -176,7 +177,7 @@ void entrant_update_time(Event* event, Entrant* entrant) {
     time_since_seen = time_to_duration(event->time) -
       time_to_duration(entrant->last_time);
     if (time_since_seen > 0 && /* so we don't update twice at checkpoints */
-        entrant->curr_track->safe_time > time_since_seen && /* safe_time > time_since_seen */
+        entrant->curr_track->safe_time < time_since_seen && /* safe_time > time_since_seen */
         entrant->curr_track->end->type == JN) /* only guess if the next node is a JN */
       entrant->curr_track = next_track(entrant->course, entrant->curr_track);
   }
