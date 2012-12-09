@@ -175,6 +175,7 @@ void update_manual(Event* event) {
 
   update_time(event, time);
   entrant_update_location(event, entrant_id, node_id);
+  entrant_stats(entrant_from_id(event->entrants, entrant_id));
   free(time);
 }
 
@@ -211,6 +212,7 @@ void update_file(Event* event) {
     free(time);
   }
 
+  display_results(event);
   Vector_dispose(lines);
 }
 
