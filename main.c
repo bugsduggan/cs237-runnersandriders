@@ -133,7 +133,7 @@ void display_results(Event* event) {
     printf("\n\tRunning:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
-      if (entrant->status != NOT_STARTED) break;
+      if (entrant->status != STARTED || entrant->status != STOPPED) break;
       printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant->duration);
     }
   }
@@ -208,7 +208,6 @@ void update_file(Event* event) {
 
     update_time(event, time);
     entrant_update_location(event, entrant_id, node_id);
-    free(time);
   }
 
   display_results(event);
