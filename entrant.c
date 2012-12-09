@@ -136,12 +136,12 @@ void entrant_stats(Entrant* entrant) {
   printf("\t\tCourse: %c\n", entrant->course->id);
   printf("\t\tStatus: %s\n", status_to_str(entrant->status));
   if (entrant->status == STARTED) {
-    printf("\n\t\tLast seen at node: %2d @ %02d:%02d\n", entrant->last_node->id,
-        entrant->last_time->hours, entrant->last_time->minutes);
+    printf("\n\t\tLast seen at node: %2d @ %02d:%02d\n", entrant->last_cp_node->id,
+        entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
     printf("\t\tEstimated location: track %2d\n", entrant->curr_track->id);
   } else if (entrant->status == STOPPED) {
-    printf("\n\t\tAt medical checkpoint: %2d since %02d:%02d\n", entrant->last_node->id,
-        entrant->last_time->hours, entrant->last_time->minutes);
+    printf("\n\t\tAt medical checkpoint: %2d since %02d:%02d\n", entrant->last_cp_node->id,
+        entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
   } else if (entrant->status == FINISHED) {
     printf("\n\t\tFinished. Run time: %3d\n", entrant->duration);
   }
@@ -179,7 +179,7 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
 
 void entrant_update_time(Event* event, Entrant* entrant) {
   int last_seen;
-  if (entrant->status == NOT_STARTED) {
+  if (entrant->status == STARTED || entrant->status == STOPPED) {
     last_seen = time_to_duration(event->time) -
       time_to_duration(entrant->last_time);
     if (entrant->curr_track->end->type == JN && /* next junction is not timed */
