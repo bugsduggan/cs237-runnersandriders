@@ -121,7 +121,6 @@ void display_results(Event* event) {
   int i = 0;
 
   entrants_sort(event);
-
   if (count_by_status(event, FINISHED) > 0) {
     printf("\n\tFinished:\n");
     for (; i < Vector_size(event->entrants); i++) {
@@ -209,7 +208,6 @@ void update_file(Event* event) {
 
     update_time(event, time);
     entrant_update_location(event, entrant_id, node_id);
-    free(time);
   }
 
   display_results(event);

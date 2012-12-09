@@ -105,6 +105,8 @@ Vector* read_entrants(char* filename, Vector* courses) {
     entrant->duration = 0;
     entrant->status = NOT_STARTED;
     entrant->start_time = NULL;
+    entrant->last_cp_node = NULL;
+    entrant->last_cp_time = NULL;
     entrant->last_node = NULL;
     entrant->last_time = NULL;
     entrant->curr_track = NULL;
@@ -134,16 +136,12 @@ void entrant_stats(Entrant* entrant) {
   printf("\t\tCourse: %c\n", entrant->course->id);
   printf("\t\tStatus: %s\n", status_to_str(entrant->status));
   if (entrant->status == STARTED) {
-    printf("\n\t\tLast seen at node: %2d @ %02d:%02d\n", entrant->last_node->id,
-        entrant->last_time->hours, entrant->last_time->minutes);
-    printf("\t\tRunning since %02d:%02d - %3d\n", entrant->start_time->hours,
-        entrant->start_time->minutes, entrant->duration);
+    printf("\n\t\tLast seen at node: %2d @ %02d:%02d\n", entrant->last_cp_node->id,
+      entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
     printf("\t\tEstimated location: track %2d\n", entrant->curr_track->id);
   } else if (entrant->status == STOPPED) {
-    printf("\n\t\tAt medical checkpoint: %2d since %02d:%02d\n", entrant->last_node->id,
-        entrant->last_time->hours, entrant->last_time->minutes);
-    printf("\t\tRunning since %02d:%02d - %3d\n", entrant->start_time->hours,
-        entrant->start_time->minutes, entrant->duration);
+    printf("\n\t\tAt medical checkpoint: %2d since %02d:%02d\n", entrant->last_cp_node->id,
+        entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
   } else if (entrant->status == FINISHED) {
     printf("\n\t\tFinished. Run time: %3d\n", entrant->duration);
   }
@@ -158,31 +156,46 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
     entrant->start_time = timecpy(event->time);
   }
 
+  entrant->last_cp_node = node;
+  if (entrant->last_cp_time) free(entrant->last_cp_time);
+  entrant->last_cp_time = timecpy(event->time);
+
+  entrant->last_node = entrant->last_cp_node;
+  if (entrant->last_time) free(entrant->last_time);
+  entrant->last_time = timecpy(entrant->last_cp_time);
+
   entrant->duration = time_to_duration(event->time) -
     time_to_duration(entrant->start_time);
-  entrant->last_node = node;
-  free(entrant->last_time);
-  entrant->last_time = timecpy(event->time);
-  if (entrant->curr_track)
-    entrant->curr_track = next_track(entrant->course, entrant->curr_track);
-  /* if just started, init track to the first track of the course */
-  else Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
 
-  if (entrant->curr_track == NULL) entrant->status = FINISHED;
+  if (entrant->curr_track) {
+    /* update the track with the next one */
+    entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+  } else {
+    /* entrant must have just started, curr_track = tracks[0] */
+    Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
+  }
+
+  if (entrant->curr_track == NULL) {
+    entrant->status = FINISHED;
+  }
 }
 
 void entrant_update_time(Event* event, Entrant* entrant) {
-  int time_since_seen;
-  if (entrant->status != NOT_STARTED) {
-    /* update the entrant's duration */
-    entrant->duration = time_to_duration(event->time) - 
+  int last_seen;
+  if (entrant->status == STARTED || entrant->status == STOPPED) {
+    /* update duration */
+    entrant->duration = time_to_duration(event->time) -
       time_to_duration(entrant->start_time);
-    /* how long has it been since we saw them? */
-    time_since_seen = time_to_duration(event->time) -
+    /* check where entrant is */
+    last_seen = time_to_duration(event->time) -
       time_to_duration(entrant->last_time);
-    if (time_since_seen > entrant->curr_track->safe_time && /* track time > time since seen */
-        entrant->curr_track->end->type == JN) /* only jump ahead for junctions */
+    if (entrant->curr_track->end->type == JN && /* next junction is not timed */
+        last_seen > entrant->curr_track->safe_time) { /* entrant has probably finished this track */
       entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+      entrant->last_node = entrant->curr_track->start;
+      if (entrant->last_time) free(entrant->last_time);
+      entrant->last_time = timecpy(event->time);
+    }
   }
 }
 
