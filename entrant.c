@@ -105,6 +105,8 @@ Vector* read_entrants(char* filename, Vector* courses) {
     entrant->status = NOT_STARTED;
     entrant->duration = 0;
     entrant->start_time = NULL;
+    entrant->last_cp_node = NULL;
+    entrant->last_cp_time = NULL;
     entrant->last_node = NULL;
     entrant->last_time = NULL;
     entrant->curr_track = NULL;
@@ -146,12 +148,47 @@ void entrant_stats(Entrant* entrant) {
 }
 
 void entrant_update_location(Event* event, int entrant_id, int node_id) {
+  Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
+  Node* node = node_from_id(entrant->course->nodes, node_id);
 
+  if (entrant->status == NOT_STARTED) {
+    entrant->status = STARTED;
+    entrant->start_time = timecpy(event->time);
+  }
+
+  entrant->last_cp_node = node;
+  if (entrant->last_cp_time) free(entrant->last_cp_time);
+  entrant->last_cp_time = timecpy(event->time);
+
+  entrant->last_node = entrant->last_cp_node;
+  if (entrant->last_time) free(entrant->last_time);
+  entrant->last_time = entrant->last_cp_time;
+
+  if (entrant->curr_track) {
+    /* update the track with the next one */
+    entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+  } else {
+    /* entrant must have just started, curr_track = tracks[0] */
+    Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
+  }
+
+  if (entrant->curr_track == NULL) {
+    entrant->status = FINISHED;
+  }
 }
 
 void entrant_update_time(Event* event, Entrant* entrant) {
+  int last_seen;
   if (entrant->status == NOT_STARTED) {
-
+    last_seen = time_to_duration(event->time) -
+      time_to_duration(entrant->last_time);
+    if (entrant->curr_track->end->type == JN && /* next junction is not timed */
+        last_seen > entrant->curr_track->safe_time) { /* entrant has probably finished this track */
+      entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+      entrant->last_node = entrant->curr_track->start;
+      if (entrant->last_time) free(entrant->last_time);
+      entrant->last_time = timecpy(event->time);
+    }
   }
 }
 

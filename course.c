@@ -84,3 +84,20 @@ Course* course_from_id(Vector* courses, char id) {
 
   return NULL;
 }
+
+Track* next_track(Course* course, Track* current) {
+  Track* track;
+  Track* next;
+  int i = 0;
+
+  /* start one beyond the start of the vector so we don't overrun */
+  for (i = 1; i < Vector_size(course->tracks); i++) {
+    Vector_get(course->tracks, i - 1, &track);
+    if (track->id == current->id) {
+      Vector_get(course->tracks, i, &next);
+      return next;
+    }
+  }
+
+  return NULL;
+}

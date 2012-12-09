@@ -68,6 +68,7 @@ typedef struct Course {
 
 Vector* read_courses(char* filename, Vector* nodes, Vector* tracks);
 Course* course_from_id(Vector* courses, char id);
+Track* next_track(Course* course, Track* current);
 
 /*
  * entrant
@@ -87,8 +88,13 @@ typedef struct Entrant {
   entrant_status status;
   int duration;
   Time* start_time;
+  /* the last timed point */
+  Node* last_cp_node;
+  Time* last_cp_time;
+  /* the assumed location */
   Node* last_node;
   Time* last_time;
+  /* the assumed track */
   Track* curr_track;
 } Entrant;
 
