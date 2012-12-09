@@ -94,7 +94,7 @@ Track* next_track(Course* course, Track* current) {
   /* start one beyond the start of the vector so we don't overrun */
   for (i = 1; i < Vector_size(course->tracks); i++) {
     Vector_get(course->tracks, i - 1, &track);
-    if (track->id == current->id) {
+    if (track == current) {
       Vector_get(course->tracks, i, &next);
       return next;
     }
