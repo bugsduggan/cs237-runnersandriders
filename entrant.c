@@ -165,6 +165,7 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
   entrant->last_time = timecpy(event->time);
   if (entrant->curr_track)
     entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+  /* if just started, init track to the first track of the course */
   else Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
 
   if (entrant->curr_track == NULL) entrant->status = FINISHED;
@@ -179,7 +180,8 @@ void entrant_update_time(Event* event, Entrant* entrant) {
     /* how long has it been since we saw them? */
     time_since_seen = time_to_duration(event->time) -
       time_to_duration(entrant->last_time);
-    if (time_since_seen > entrant->curr_track->safe_time)
+    if (time_since_seen > entrant->curr_track->safe_time && /* track time > time since seen */
+        entrant->curr_track->end->type == JN) /* only jump ahead for junctions */
       entrant->curr_track = next_track(entrant->course, entrant->curr_track);
   }
 }

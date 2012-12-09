@@ -59,7 +59,7 @@ Node* node_from_id(Vector* nodes, int id) {
 }
 
 node_type str_to_type(char* str) {
-  if (strcmp(str, "CP")) return CP;
-  else if (strcmp(str, "MC")) return MC;
+  if (strcmp(str, "CP") == 0) return CP;
+  else if (strcmp(str, "MC") == 0) return MC;
   else return JN;
 }
