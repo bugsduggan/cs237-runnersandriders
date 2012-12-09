@@ -42,6 +42,13 @@ Event* read_event(char* filename) {
   return event;
 }
 
-void update_time(Time* time) {
+void update_time(Event* event, Time* time) {
+  Entrant* entrant;
+  int i = 0;
 
+  event->time = timecpy(time);
+  for (i = 0; i < Vector_size(event->entrants); i++) {
+    Vector_get(event->entrants, i, &entrant);
+    entrant_update_time(event, entrant);
+  }
 }

@@ -28,6 +28,51 @@ char* status_to_str(entrant_status status) {
   }
 }
 
+int compare_entrants(void* vp1, void* vp2) {
+  /*
+   * a < b  -  -1
+   * a = b  -  0
+   * a > b  -  1
+   */
+  Entrant* a = *(Entrant**)vp1;
+  Entrant* b = *(Entrant**)vp2;
+
+  if (a->status == NOT_STARTED) {
+    if (b->status == NOT_STARTED) {
+      /* neither have started, compare by id */
+      if (a->id < b->id) return -1;
+      else if (a->id > b->id) return 1;
+      else return 0;
+    } else {
+      /* b has at least started */
+      return 1;
+    }
+  } else if (a->status == FINISHED) {
+    if (b->status == FINISHED) {
+      /* both have finished, compare by duration */
+      if (a->duration < b->duration) return -1;
+      else if (a->duration > b->duration) return 1;
+      else return 0;
+    } else {
+      /* b is still out there somewhere */
+      return -1;
+    }
+  } else { /* a is out on the course somewhere */
+    if (b->status == NOT_STARTED) {
+      return -1;
+    } else if (b->status == FINISHED) {
+      return 1;
+    } else {
+      /* both out on the course */
+      /* what I'd like to do is work out who is closer to finishing by what track they're on */
+      /* but for now, whoever's been going the longest can be nearest the top */
+      if (a->duration < b->duration) return 1;
+      else if (a->duration > b->duration) return -1;
+      else return 0;
+    }
+  }
+}
+
 /*
  * functions declared in data.h
  */
@@ -58,6 +103,7 @@ Vector* read_entrants(char* filename, Vector* courses) {
 
     /* other data */
     entrant->status = NOT_STARTED;
+    entrant->duration = 0;
     entrant->start_time = NULL;
     entrant->last_node = NULL;
     entrant->last_time = NULL;
@@ -82,10 +128,6 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
   return NULL;
 }
 
-int entrant_duration(Entrant* entrant) {
-  return 0;
-}
-
 void entrant_stats(Entrant* entrant) {
   printf("\n");
   printf("\t%02d: %-50s\n", entrant->id, entrant->name);
@@ -99,10 +141,20 @@ void entrant_stats(Entrant* entrant) {
     printf("\n\t\tAt medical checkpoint: %2d since %02d:%02d\n", entrant->last_node->id,
         entrant->last_time->hours, entrant->last_time->minutes);
   } else if (entrant->status == FINISHED) {
-    printf("\n\t\tFinished. Run time: %3d\n", entrant_duration(entrant));
+    printf("\n\t\tFinished. Run time: %3d\n", entrant->duration);
   }
 }
 
-void entrant_update(Event* event, int entrant_id, int node_id) {
+void entrant_update_location(Event* event, int entrant_id, int node_id) {
 
+}
+
+void entrant_update_time(Event* event, Entrant* entrant) {
+  if (entrant->status == NOT_STARTED) {
+
+  }
+}
+
+void entrants_sort(Event* event) {
+  Vector_sort(event->entrants, compare_entrants);
 }
