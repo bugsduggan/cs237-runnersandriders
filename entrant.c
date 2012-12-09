@@ -130,20 +130,23 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
   return NULL;
 }
 
-void entrant_stats(Entrant* entrant) {
+void entrant_stats(Entrant* entrant, Time* curr_time) {
   printf("\n");
-  printf("\t%02d: %-50s\n", entrant->id, entrant->name);
-  printf("\t\tCourse: %c\n", entrant->course->id);
-  printf("\t\tStatus: %s\n", status_to_str(entrant->status));
-  if (entrant->status == STARTED) {
-    printf("\n\t\tLast seen at node: %2d @ %02d:%02d\n", entrant->last_cp_node->id,
-      entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
-    printf("\t\tEstimated location: track %2d\n", entrant->curr_track->id);
-  } else if (entrant->status == STOPPED) {
-    printf("\n\t\tAt medical checkpoint: %2d since %02d:%02d\n", entrant->last_cp_node->id,
-        entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+  printf("\t%2d: %-50s\n", entrant->id, entrant->name);
+  printf("\t\tRunning course:     %c\n", entrant->course->id);
+  if (entrant->status == NOT_STARTED) {
+    printf("\t\tWaiting to start\n");
+  } else if (entrant->status == STARTED) {
+    printf("\t\tStarted at:         %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
+    printf("\t\tEstimated location: Track %d\n", entrant->curr_track->id);
+    printf("\t\tLast checkpoint:    Node %d at %02d:%02d (%d mins ago)\n",
+        entrant->last_cp_node->id, entrant->last_cp_time->hours,
+        entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
+    printf("\t\tRun time:           %d mins\n", entrant->duration);
   } else if (entrant->status == FINISHED) {
-    printf("\n\t\tFinished. Run time: %3d\n", entrant->duration);
+    printf("\t\tStarted at:         %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
+    printf("\t\tFinished at:        %02d:%02d\n", entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+    printf("\t\tTotal time:         %d mins\n", entrant->duration);
   }
 }
 
