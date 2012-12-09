@@ -46,6 +46,7 @@ void update_time(Event* event, Time* time) {
   Entrant* entrant;
   int i = 0;
 
+  free(event->time);
   event->time = timecpy(time);
 
   /* now update the entrants */
