@@ -162,7 +162,10 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
 
   entrant->last_node = entrant->last_cp_node;
   if (entrant->last_time) free(entrant->last_time);
-  entrant->last_time = entrant->last_cp_time;
+  entrant->last_time = timecpy(entrant->last_cp_time);
+
+  entrant->duration = time_to_duration(event->time) -
+    time_to_duration(entrant->start_time);
 
   if (entrant->curr_track) {
     /* update the track with the next one */
@@ -180,6 +183,10 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
 void entrant_update_time(Event* event, Entrant* entrant) {
   int last_seen;
   if (entrant->status == STARTED || entrant->status == STOPPED) {
+    /* update duration */
+    entrant->duration = time_to_duration(event->time) -
+      time_to_duration(entrant->start_time);
+    /* check where entrant is */
     last_seen = time_to_duration(event->time) -
       time_to_duration(entrant->last_time);
     if (entrant->curr_track->end->type == JN && /* next junction is not timed */

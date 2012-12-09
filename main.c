@@ -133,7 +133,7 @@ void display_results(Event* event) {
     printf("\n\tRunning:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
-      if (entrant->status != STARTED || entrant->status != STOPPED) break;
+      if (entrant->status != STARTED && entrant->status != STOPPED) break;
       printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant->duration);
     }
   }
