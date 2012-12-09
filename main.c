@@ -125,6 +125,7 @@ void display_results(Event* event) {
     printf("\n\tFinished:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
+      if (entrant->status != FINISHED) break;
       printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant->duration);
     }
   }
@@ -132,6 +133,7 @@ void display_results(Event* event) {
     printf("\n\tRunning:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
+      if (entrant->status != NOT_STARTED) break;
       printf("\t\t%2d: %-50s %3d\n", entrant->id, entrant->name, entrant->duration);
     }
   }
