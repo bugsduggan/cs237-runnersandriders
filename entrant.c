@@ -169,10 +169,7 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
 
   if (entrant->curr_track) {
     /* update the track with the next one */
-    /* the while loop forces us to find the track coming from this node */
-    /* otherwise 'early' entrants' track could fall behind their actual location */
-    while (entrant->curr_track->start != node)
-      entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+    entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
   } else {
     /* entrant must have just started, curr_track = tracks[0] */
     Vector_get(entrant->course->tracks, 0, &entrant->curr_track);

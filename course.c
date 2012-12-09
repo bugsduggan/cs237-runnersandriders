@@ -102,3 +102,12 @@ Track* next_track(Course* course, Track* current) {
 
   return NULL;
 }
+
+/*
+ * finds the next track starting with node beyond current */
+Track* next_track_from_node(Course* course, Track* current, Node* node) {
+  Track* next = next_track(course, current);
+  while (next && next->start != node) /* while this isn't the track we're searching for */
+    next = next_track(course, next);
+  return next;
+}
