@@ -20,7 +20,8 @@ typedef struct Event {
 } Event;
 
 Event* read_event(char* filename);
-void update_time(Event* event, Time* time);
+/* will not update entrant_id, that's handled by entrant_update_location */
+void update_time(Event* event, Time* time, int entrant_id);
 
 /*
  * node
@@ -98,6 +99,7 @@ typedef struct Entrant {
   Node* last_node;
   Time* last_time;
   /* the assumed track */
+  Time* curr_time;
   Track* curr_track;
 } Entrant;
 

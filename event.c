@@ -42,7 +42,7 @@ Event* read_event(char* filename) {
   return event;
 }
 
-void update_time(Event* event, Time* time) {
+void update_time(Event* event, Time* time, int entrant_id) {
   Entrant* entrant;
   int i = 0;
 
@@ -52,6 +52,7 @@ void update_time(Event* event, Time* time) {
   /* now update the entrants */
   for (i = 0; i < Vector_size(event->entrants); i++) {
     Vector_get(event->entrants, i, &entrant);
-    entrant_update_time(event, entrant);
+    if (entrant->id != entrant_id)
+      entrant_update_time(event, entrant);
   }
 }

@@ -238,7 +238,7 @@ void update_manual(Event* event) {
   time = str_to_time(line);
   free(line);
 
-  update_time(event, time);
+  update_time(event, time, entrant_id);
   entrant_update_location(event, type, entrant_id, node_id);
   entrant_stats(entrant_from_id(event->entrants, entrant_id), event->time);
   free(time);
@@ -274,7 +274,7 @@ void update_file(Event* event) {
     token = strtok(NULL, "\n");
     time = str_to_time(token);
 
-    update_time(event, time);
+    update_time(event, time, entrant_id);
     entrant_update_location(event, type, entrant_id, node_id);
   }
 

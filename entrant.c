@@ -78,6 +78,16 @@ int compare_entrants(void* vp1, void* vp2) {
   }
 }
 
+void update_nodes(Entrant* entrant, Node* node, Time* time) {
+  entrant->last_cp_node = node;
+  if (entrant->last_cp_time) free(entrant->last_cp_time);
+  entrant->last_cp_time = timecpy(time);
+
+  entrant->last_node = node;
+  if (entrant->last_time) free(entrant->last_time);
+  entrant->last_time = timecpy(time);
+}
+
 /*
  * functions declared in data.h
  */
@@ -114,6 +124,7 @@ Vector* read_entrants(char* filename, Vector* courses) {
     entrant->last_cp_time = NULL;
     entrant->last_node = NULL;
     entrant->last_time = NULL;
+    entrant->curr_time = NULL;
     entrant->curr_track = NULL;
 
     Vector_add(entrants, &entrant);
@@ -172,11 +183,91 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
   Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
   Node* node = node_from_id(entrant->course->nodes, node_id);
 
+  /* The entrant will not have had entrant_update_time called on it */
+
+  if (type == 't' || type == 'T') {
+    /* check if not started and init */
+    if (entrant->status == NOT_STARTED) {
+      entrant->status = STARTED;
+      entrant->start_time = timecpy(event->time);
+      entrant->curr_time = timecpy(event->time);
+    }
+
+    update_nodes(entrant, node, event->time);
+
+    /* update duration and current time */
+    entrant->duration += time_to_duration(event->time) -
+      time_to_duration(entrant->curr_time);
+    if (entrant->curr_time) free(entrant->curr_time);
+    entrant->curr_time = timecpy(event->time);
+
+    /* update current track */
+    if (entrant->curr_track)
+      entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
+    else
+      /* _might_ not be inited (on starting) so init to tracks[0] */
+      Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
+
+    /* check if finished */
+    if (entrant->curr_track == NULL)
+      entrant->status = FINISHED;
+  } else if (type == 'i' || type == 'I') {
+    update_nodes(entrant, node, event->time);
+
+    /* update duration and current time */
+    entrant->duration += time_to_duration(event->time) -
+      time_to_duration(entrant->curr_time);
+    if (entrant->curr_time) free(entrant->curr_time);
+    entrant->curr_time = timecpy(event->time);
+
+    entrant->status = DISQUAL_INCORR;
+  } else if (type == 'a' || type == 'A') {
+    update_nodes(entrant, node, event->time);
+
+    entrant->duration += time_to_duration(event->time) -
+      time_to_duration(entrant->curr_time);
+
+    entrant->status = STOPPED;
+  } else if (type == 'd' || type == 'D') {
+    update_nodes(entrant, node, event->time);
+
+    /* set current time */
+    if (entrant->curr_time) free(entrant->curr_time);
+    entrant->curr_time = timecpy(event->time);
+
+    /* update next track and status */
+    entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
+    entrant->status = STARTED;
+  } else { /* type == 'e' */
+    entrant->status = DISQUAL_SAFETY;
+  }
 }
 
-/* TODO */
 void entrant_update_time(Event* event, Entrant* entrant) {
+  int time_since_seen; /* time since last node */
+  int time_delta; /* time since this function was last called */
+  if (entrant->status == STARTED) {
+    /* if they've started, they'd better not have null values */
 
+    /* calc some useful values */
+    time_since_seen = time_to_duration(event->time) -
+      time_to_duration(entrant->last_time);
+    time_delta = time_to_duration(event->time) -
+      time_to_duration(entrant->curr_time);
+
+    /* update duration and curr_time */
+    entrant->duration += time_delta;
+    if (entrant->curr_time) free(entrant->curr_time);
+    entrant->curr_time = timecpy(event->time);
+
+    if (entrant->curr_track->end->type == JN && /* next junction is not timed */
+        time_since_seen > entrant->curr_track->safe_time) { /* entrant has probably finished this track */
+      entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+      entrant->last_node = entrant->curr_track->start;
+      if (entrant->last_time) free(entrant->last_time);
+      entrant->last_time = timecpy(event->time);
+    }
+  }
 }
 
 void entrants_sort(Event* event) {
