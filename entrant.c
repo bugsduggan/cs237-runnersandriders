@@ -248,8 +248,6 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
     entrant->curr_time = timecpy(event->time);
 
     entrant->status = DISQUAL_INCORR;
-    if (entrant->course == NULL) printf("course is null\n");
-    if (entrant->last_cp_node == NULL) printf("last node is null\n");
 
   /********************************
    * A type
