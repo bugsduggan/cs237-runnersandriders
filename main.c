@@ -144,12 +144,24 @@ void display_results(Event* event) {
     printf("\n\tWaiting to start:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
+      if (entrant->status != NOT_STARTED) break;
       printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
       printf("\t\t\tCourse: %c\n", entrant->course->id);
     }
   }
+  if (count_by_status(event, DISQUAL_SAFETY) + count_by_status(event, DISQUAL_INCORR) > 0) {
+    printf("\n\tDisqualified:\n");
+    for (; i < Vector_size(event->entrants); i++) {
+      Vector_get(event->entrants, i, &entrant);
+      printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
+      printf("\t\t\tCourse: %c ", entrant->course->id);
+      if (entrant->status == DISQUAL_SAFETY) printf("Disqualified for safety\n");
+      else printf("Disqualified for incorrect route\n");
+    }
+  }
 }
 
+/* TODO */
 void update_manual(Event* event) {
   char* line;
   int node_id;
@@ -182,6 +194,7 @@ void update_manual(Event* event) {
   free(time);
 }
 
+/* TODO */
 void update_file(Event* event) {
   char* filename = get_filename("Enter checkpoint file: ");
   Vector* lines = read_file(filename);

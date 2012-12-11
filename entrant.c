@@ -23,11 +23,16 @@ char* status_to_str(entrant_status status) {
     return "Started";
   } else if (status == STOPPED) {
     return "At medical checkpoint";
+  } else if (status == DISQUAL_SAFETY) {
+    return "Disqualified for safety";
+  } else if (status == DISQUAL_INCORR) {
+    return "Disqualified for incorrect route";
   } else {
     return "Finished";
   }
 }
 
+/* TODO */
 int compare_entrants(void* vp1, void* vp2) {
   /*
    * a < b  -  -1
@@ -143,6 +148,12 @@ void entrant_stats(Entrant* entrant, Time* curr_time) {
         entrant->last_cp_node->id, entrant->last_cp_time->hours,
         entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
     printf("\t\tRun time:           %d mins\n", entrant->duration);
+  } else if (entrant->status == STOPPED) {
+    /* TODO */
+  } else if (entrant->status == DISQUAL_SAFETY) {
+    /* TODO */
+  } else if (entrant->status == DISQUAL_INCORR) {
+    /* TODO */
   } else if (entrant->status == FINISHED) {
     printf("\t\tStarted at:         %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
     printf("\t\tFinished at:        %02d:%02d\n", entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
@@ -150,6 +161,7 @@ void entrant_stats(Entrant* entrant, Time* curr_time) {
   }
 }
 
+/* TODO */
 void entrant_update_location(Event* event, int entrant_id, int node_id) {
   Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
   Node* node = node_from_id(entrant->course->nodes, node_id);
@@ -183,6 +195,7 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
   }
 }
 
+/* TODO */
 void entrant_update_time(Event* event, Entrant* entrant) {
   int last_seen;
   if (entrant->status == STARTED || entrant->status == STOPPED) {

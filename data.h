@@ -78,7 +78,9 @@ Track* next_track_from_node(Course* course, Track* current, Node* node);
 typedef enum {
   NOT_STARTED,
   STARTED,
-  STOPPED,
+  STOPPED, /* at a medical checkpoint */
+  DISQUAL_SAFETY, /* disqualified for safety */
+  DISQUAL_INCORR, /* disqualified for getting lost */
   FINISHED
 } entrant_status;
 
