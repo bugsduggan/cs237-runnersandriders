@@ -72,10 +72,12 @@ int display_menu(Event* event) {
   printf("\t 2. Show how many entrants have not yet started\n");
   printf("\t 3. Show how many entrants are currently on the course\n");
   printf("\t 4. Show how many entrants have finished\n");
-  printf("\t 5. Supply checkpoint times manually\n");
-  printf("\t 6. Supply checkpoint times from a file\n");
-  printf("\t 7. Display results list\n");
-  printf("\t 8. Exit the program\n");
+  printf("\t 5. List entrants excluded for safety\n");
+  printf("\t 6. List entrants excluded for incorrect route\n");
+  printf("\t 7. Supply checkpoint times manually\n");
+  printf("\t 8. Supply checkpoint times from a file\n");
+  printf("\t 9. Display results list\n");
+  printf("\t10. Exit the program\n");
   printf("\n");
 
   printf("%02d:%02d  >>  ", event->time->hours, event->time->minutes);
@@ -114,6 +116,40 @@ int count_by_status(Event* event, entrant_status status) {
   }
 
   return ret_val;
+}
+
+void list_excluded_safety(Event* event) {
+  Entrant* entrant;
+  int i = 0;
+  if (count_by_status(event, DISQUAL_SAFETY) == 0) {
+    printf("\tNo entrants disqualified for safety reasons\n");
+  } else {
+    for (i = 0; i < Vector_size(event->entrants); i++) {
+      Vector_get(event->entrants, i, &entrant);
+      if (entrant->status == DISQUAL_SAFETY) {
+        printf("\t%2d: %-50s\n", entrant->id, entrant->name);
+        printf("\t\tCourse: %c Last node: %2d\n", entrant->course->id,
+            entrant->last_cp_node->id);
+      }
+    }
+  }
+}
+
+void list_excluded_incorrect(Event* event) {
+  Entrant* entrant;
+  int i = 0;
+  if (count_by_status(event, DISQUAL_INCORR) == 0) {
+    printf("\tNo entrants disqualified for incorrect route\n");
+  } else {
+    for (i = 0; i < Vector_size(event->entrants); i++) {
+      Vector_get(event->entrants, i, &entrant);
+      if (entrant->status == DISQUAL_INCORR) {
+        printf("\t%2d: %-50s\n", entrant->id, entrant->name);
+        printf("\t\tCourse: %c Last node: %2d\n", entrant->course->id,
+            entrant->last_cp_node->id);
+      }
+    }
+  }
 }
 
 void display_results(Event* event) {
@@ -268,15 +304,21 @@ int main(int argc, char* argv[]) {
         printf("\t%d\n", count_by_status(event, FINISHED));
         break;
       case 5:
-        update_manual(event);
+        list_excluded_safety(event);
         break;
       case 6:
-        update_file(event);
+        list_excluded_incorrect(event);
         break;
       case 7:
-        display_results(event);
+        update_manual(event);
         break;
       case 8:
+        update_file(event);
+        break;
+      case 9:
+        display_results(event);
+        break;
+      case 10:
         running = 0;
         break;
       default:
