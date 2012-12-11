@@ -161,7 +161,6 @@ void display_results(Event* event) {
   }
 }
 
-/* TODO */
 void update_manual(Event* event) {
   char* line;
   char type;
@@ -209,7 +208,6 @@ void update_manual(Event* event) {
   free(time);
 }
 
-/* TODO */
 void update_file(Event* event) {
   char* filename = get_filename("Enter checkpoint file: ");
   Vector* lines = read_file(filename);
