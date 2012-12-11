@@ -130,11 +130,11 @@ void display_results(Event* event) {
       printf("\t\t\tCourse: %c Total time: %3d mins\n", entrant->course->id, entrant->duration);
     }
   }
-  if (count_by_status(event, STARTED) + count_by_status(event, STOPPED) > 0) {
+  if (count_by_status(event, STARTED) > 0) {
     printf("\n\tRunning:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
-      if (entrant->status != STARTED && entrant->status != STOPPED) break;
+      if (entrant->status != STARTED) break;
       printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
       printf("\t\t\tCourse: %c Track: %2d Run time: %3d mins\n", entrant->course->id,
           entrant->curr_track->id, entrant->duration);
@@ -234,7 +234,7 @@ int main(int argc, char* argv[]) {
         printf("\t%d\n", count_by_status(event, NOT_STARTED));
         break;
       case 3:
-        printf("\t%d\n", count_by_status(event, STARTED) + count_by_status(event, STOPPED));
+        printf("\t%d\n", count_by_status(event, STARTED));
         break;
       case 4:
         printf("\t%d\n", count_by_status(event, FINISHED));

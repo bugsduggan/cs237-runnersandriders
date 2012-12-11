@@ -21,8 +21,6 @@ char* status_to_str(entrant_status status) {
     return "Waiting to start";
   } else if (status == STARTED) {
     return "Started";
-  } else if (status == STOPPED) {
-    return "At medical checkpoint";
   } else {
     return "Finished";
   }
@@ -185,7 +183,7 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
 
 void entrant_update_time(Event* event, Entrant* entrant) {
   int last_seen;
-  if (entrant->status == STARTED || entrant->status == STOPPED) {
+  if (entrant->status == STARTED) {
     /* update duration */
     entrant->duration = time_to_duration(event->time) -
       time_to_duration(entrant->start_time);
