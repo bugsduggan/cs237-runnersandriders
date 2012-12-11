@@ -100,8 +100,7 @@ void locate_entrant(Event* event) {
   entrant_id = atoi(line);
 
   entrant = entrant_from_id(event->entrants, entrant_id);
-  if (entrant)
-    entrant_stats(entrant, event->time);
+  entrant_stats(entrant, event->time);
   free(line);
 }
 
