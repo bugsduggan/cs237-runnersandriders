@@ -108,6 +108,7 @@ Vector* read_entrants(char* filename, Vector* courses) {
 
     /* other data */
     entrant->duration = 0;
+    entrant->stop_duration = 0;
     entrant->status = NOT_STARTED;
     entrant->start_time = NULL;
     entrant->last_cp_node = NULL;
@@ -138,31 +139,37 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
 void entrant_stats(Entrant* entrant, Time* curr_time) {
   printf("\n");
   printf("\t%2d: %-50s\n", entrant->id, entrant->name);
-  printf("\t\tRunning course:     %c\n", entrant->course->id);
+  printf("\t\tRunning course:         %c\n", entrant->course->id);
   if (entrant->status == NOT_STARTED) {
     printf("\t\tWaiting to start\n");
-  } else if (entrant->status == STARTED) {
-    printf("\t\tStarted at:         %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
-    printf("\t\tEstimated location: Track %d\n", entrant->curr_track->id);
-    printf("\t\tLast checkpoint:    Node %d at %02d:%02d (%d mins ago)\n",
-        entrant->last_cp_node->id, entrant->last_cp_time->hours,
-        entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
-    printf("\t\tRun time:           %d mins\n", entrant->duration);
-  } else if (entrant->status == STOPPED) {
-    /* TODO */
-  } else if (entrant->status == DISQUAL_SAFETY) {
-    /* TODO */
-  } else if (entrant->status == DISQUAL_INCORR) {
-    /* TODO */
-  } else if (entrant->status == FINISHED) {
-    printf("\t\tStarted at:         %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
-    printf("\t\tFinished at:        %02d:%02d\n", entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
-    printf("\t\tTotal time:         %d mins\n", entrant->duration);
+  } else {
+      printf("\t\tStarted at:             %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
+    if (entrant->status == STARTED) {
+      printf("\t\tEstimated location:     Track %d\n", entrant->curr_track->id);
+      printf("\t\tLast checkpoint:        Node %d at %02d:%02d (%d mins ago)\n",
+          entrant->last_cp_node->id, entrant->last_cp_time->hours,
+          entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
+      printf("\t\tRun time:               %d mins\n", entrant->duration);
+    } else if (entrant->status == STOPPED) {
+      printf("\t\tAt medical checkpoint:  Node %d since %02d:%02d (%d mins ago)\n",
+          entrant->last_cp_node->id, entrant->last_cp_time->hours,
+          entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
+      printf("\t\tRun time:               %d mins\n", entrant->duration);
+    } else if (entrant->status == DISQUAL_SAFETY) {
+      printf("\t\tExcluded for safety at: Node %d at %02d:%02d\n", entrant->last_cp_node->id,
+          entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+    } else if (entrant->status == DISQUAL_INCORR) {
+      printf("\t\tDisqualified at:        Node %d at %02d:%02d\n", entrant->last_cp_node->id,
+          entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+    } else if (entrant->status == FINISHED) {
+      printf("\t\tFinished at:            %02d:%02d\n", entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+      printf("\t\tTotal time:             %d mins\n", entrant->duration);
+    }
   }
 }
 
 /* TODO */
-void entrant_update_location(Event* event, int entrant_id, int node_id) {
+void entrant_update_location(Event* event, char type, int entrant_id, int node_id) {
   Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
   Node* node = node_from_id(entrant->course->nodes, node_id);
 
@@ -195,7 +202,6 @@ void entrant_update_location(Event* event, int entrant_id, int node_id) {
   }
 }
 
-/* TODO */
 void entrant_update_time(Event* event, Entrant* entrant) {
   int last_seen;
   if (entrant->status == STARTED || entrant->status == STOPPED) {

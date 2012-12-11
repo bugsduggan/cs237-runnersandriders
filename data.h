@@ -89,6 +89,7 @@ typedef struct Entrant {
   Course* course;
   char* name;
   int duration;
+  int stop_duration;
   entrant_status status;
   Time* start_time;
   /* the last timed point */
@@ -104,7 +105,7 @@ typedef struct Entrant {
 Vector* read_entrants(char* filename, Vector* courses);
 Entrant* entrant_from_id(Vector* entrants, int id);
 void entrant_stats(Entrant* entrant, Time* curr_time);
-void entrant_update_location(Event* event, int entrant_id, int node_id);
+void entrant_update_location(Event* event, char type, int entrant_id, int node_id);
 void entrant_update_time(Event* event, Entrant* entrant);
 void entrants_sort(Event* event);
 
