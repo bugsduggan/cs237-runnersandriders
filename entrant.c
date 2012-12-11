@@ -32,7 +32,6 @@ char* status_to_str(entrant_status status) {
   }
 }
 
-/* TODO */
 int compare_entrants(void* vp1, void* vp2) {
   /*
    * a < b  -  -1
@@ -42,38 +41,45 @@ int compare_entrants(void* vp1, void* vp2) {
   Entrant* a = *(Entrant**)vp1;
   Entrant* b = *(Entrant**)vp2;
 
-  if (a->status == NOT_STARTED) {
-    if (b->status == NOT_STARTED) {
-      /* neither have started, compare by id */
-      if (a->id < b->id) return -1;
-      else if (a->id > b->id) return 1;
-      else return 0;
-    } else {
-      /* b has at least started */
-      return 1;
-    }
-  } else if (a->status == FINISHED) {
+  /*
+   * Put finished at the top
+   * ascending by duration
+   *
+   * Then started/stopped
+   * descending by duration
+   *
+   * The disqualified
+   * descending by duration
+   *
+   * Then not started
+   * ascending by id
+   */
+
+  if (a->status == FINISHED) {
     if (b->status == FINISHED) {
-      /* both have finished, compare by duration */
       if (a->duration < b->duration) return -1;
       else if (a->duration > b->duration) return 1;
       else return 0;
-    } else {
-      /* b is still out there somewhere */
-      return -1;
-    }
-  } else { /* a is out on the course somewhere */
-    if (b->status == NOT_STARTED) {
-      return -1;
-    } else if (b->status == FINISHED) {
-      return 1;
-    } else {
-      /* both out on the course */
-      /* what I'd like to do is work out who is closer to finishing by what track they're on */
-      /* but for now, whoever's been going the longest can be nearest the top */
+    } else return -1; /* b is not finished */
+  } else if (a->status == STARTED || a->status == STOPPED) {
+    if (b->status == FINISHED) return 1;
+    else if (b->status == STARTED || b->status == STOPPED) {
       if (a->duration < b->duration) return 1;
       else if (a->duration > b->duration) return -1;
       else return 0;
+    } else return -1; /* b is either not started or is disqualified */
+  } else if (a->status == DISQUAL_SAFETY || a->status == DISQUAL_INCORR) {
+    if (b->status == FINISHED || b->status == STARTED || b->status == STOPPED) return 1;
+    else if (b->status == DISQUAL_SAFETY || b->status == DISQUAL_INCORR) {
+      if (a->duration < b->duration) return 1;
+      else if (a->duration > b->duration) return -1;
+      else return 0;
+    } else return -1; /* b has not even started */
+  } else { /* a has not started */
+    if (b->status != NOT_STARTED) return 1;
+    else {
+      if (a->id < b->id) return -1;
+      else return 1; /* ids will not be equal */
     }
   }
 }
@@ -178,7 +184,6 @@ void entrant_stats(Entrant* entrant, Time* curr_time) {
   }
 }
 
-/* TODO */
 void entrant_update_location(Event* event, char type, int entrant_id, int node_id) {
   Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
   Node* node = node_from_id(entrant->course->nodes, node_id);
