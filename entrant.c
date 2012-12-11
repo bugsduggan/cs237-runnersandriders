@@ -160,23 +160,38 @@ void entrant_stats(Entrant* entrant, Time* curr_time) {
     printf("\t\tWaiting to start\n");
   } else {
       printf("\t\tStarted at:             %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
+    /*
+     * started
+     */
     if (entrant->status == STARTED) {
       printf("\t\tEstimated location:     Track %d\n", entrant->curr_track->id);
       printf("\t\tLast checkpoint:        Node %d at %02d:%02d (%d mins ago)\n",
           entrant->last_cp_node->id, entrant->last_cp_time->hours,
           entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
       printf("\t\tRun time:               %d mins\n", entrant->duration);
+    /*
+     * stopped
+     */
     } else if (entrant->status == STOPPED) {
       printf("\t\tAt medical checkpoint:  Node %d since %02d:%02d (%d mins ago)\n",
           entrant->last_cp_node->id, entrant->last_cp_time->hours,
           entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
       printf("\t\tRun time:               %d mins\n", entrant->duration);
+    /*
+     * disqualified - safety
+     */
     } else if (entrant->status == DISQUAL_SAFETY) {
       printf("\t\tExcluded for safety at: Node %d at %02d:%02d\n", entrant->last_cp_node->id,
           entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+    /*
+     * disqualified - bad route
+     */
     } else if (entrant->status == DISQUAL_INCORR) {
       printf("\t\tDisqualified at:        Node %d at %02d:%02d\n", entrant->last_cp_node->id,
           entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+    /*
+     * finished
+     */
     } else if (entrant->status == FINISHED) {
       printf("\t\tFinished at:            %02d:%02d\n", entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
       printf("\t\tTotal time:             %d mins\n", entrant->duration);
@@ -190,6 +205,9 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
 
   /* The entrant will not have had entrant_update_time called on it */
 
+  /********************************
+   * T type
+   ********************************/
   if (type == 't' || type == 'T') {
     /* check if not started and init */
     if (entrant->status == NOT_STARTED) {
@@ -216,6 +234,10 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
     /* check if finished */
     if (entrant->curr_track == NULL)
       entrant->status = FINISHED;
+
+  /********************************
+   * I type
+   ********************************/
   } else if (type == 'i' || type == 'I') {
     update_nodes(entrant, node, event->time);
 
@@ -226,6 +248,12 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
     entrant->curr_time = timecpy(event->time);
 
     entrant->status = DISQUAL_INCORR;
+    if (entrant->course == NULL) printf("course is null\n");
+    if (entrant->last_cp_node == NULL) printf("last node is null\n");
+
+  /********************************
+   * A type
+   ********************************/
   } else if (type == 'a' || type == 'A') {
     update_nodes(entrant, node, event->time);
 
@@ -233,6 +261,10 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
       time_to_duration(entrant->curr_time);
 
     entrant->status = STOPPED;
+
+  /********************************
+   * D type
+   ********************************/
   } else if (type == 'd' || type == 'D') {
     update_nodes(entrant, node, event->time);
 
@@ -243,6 +275,10 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
     /* update next track and status */
     entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
     entrant->status = STARTED;
+
+  /*******************************
+   * E type
+   *******************************/
   } else { /* type == 'e' */
     entrant->status = DISQUAL_SAFETY;
   }
