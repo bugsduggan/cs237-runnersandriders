@@ -164,11 +164,26 @@ void display_results(Event* event) {
 /* TODO */
 void update_manual(Event* event) {
   char* line;
+  char type;
   int node_id;
   int entrant_id;
   Time* time;
 
   /* type */
+  printf("Enter update type (T/I/A/D/E): ");
+  line = readline();
+  type = line[0];
+  while (type != 't' && type != 'T' &&
+      type != 'i' && type != 'I' &&
+      type != 'a' && type != 'A' &&
+      type != 'd' && type != 'D' &&
+      type != 'e' && type != 'E') {
+    printf("Invalid type. Please enter one of T/I/A/D/E: ");
+    free(line);
+    line = readline();
+    type = line[0];
+  }
+  free(line);
 
   /* node id */
   printf("Enter node id: ");
@@ -189,7 +204,7 @@ void update_manual(Event* event) {
   free(line);
 
   update_time(event, time);
-  entrant_update_location(event, entrant_id, node_id);
+  entrant_update_location(event, type, entrant_id, node_id);
   entrant_stats(entrant_from_id(event->entrants, entrant_id), event->time);
   free(time);
 }
@@ -200,6 +215,7 @@ void update_file(Event* event) {
   Vector* lines = read_file(filename);
   char* line;
   char* token;
+  char type;
   int node_id;
   int entrant_id;
   Time* time;
@@ -210,6 +226,7 @@ void update_file(Event* event) {
 
     /* type */
     token = strtok(line, " ");
+    type = token[0];
 
     /* node id */
     token = strtok(NULL, " ");
@@ -224,7 +241,7 @@ void update_file(Event* event) {
     time = str_to_time(token);
 
     update_time(event, time);
-    entrant_update_location(event, entrant_id, node_id);
+    entrant_update_location(event, type, entrant_id, node_id);
   }
 
   display_results(event);
