@@ -162,7 +162,7 @@ void display_results(Event* event) {
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
       if (entrant->status != FINISHED) break;
-      printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
+      printf("\t\t%3d: %-50s\n", entrant->id, entrant->name);
       printf("\t\t\tCourse: %c Total time: %3d mins\n", entrant->course->id, entrant->duration);
     }
   }
@@ -171,28 +171,28 @@ void display_results(Event* event) {
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
       if (entrant->status != STARTED && entrant->status != STOPPED) break;
-      printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
+      printf("\t\t%3d: %-50s\n", entrant->id, entrant->name);
       printf("\t\t\tCourse: %c Track: %2d Run time: %3d mins\n", entrant->course->id,
           entrant->curr_track->id, entrant->duration);
-    }
-  }
-  if (count_by_status(event, NOT_STARTED) > 0) {
-    printf("\n\tWaiting to start:\n");
-    for (; i < Vector_size(event->entrants); i++) {
-      Vector_get(event->entrants, i, &entrant);
-      if (entrant->status != NOT_STARTED) break;
-      printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
-      printf("\t\t\tCourse: %c\n", entrant->course->id);
     }
   }
   if (count_by_status(event, DISQUAL_SAFETY) + count_by_status(event, DISQUAL_INCORR) > 0) {
     printf("\n\tDisqualified:\n");
     for (; i < Vector_size(event->entrants); i++) {
       Vector_get(event->entrants, i, &entrant);
-      printf("\t\t%2d: %-50s\n", entrant->id, entrant->name);
+      if (entrant->status != DISQUAL_SAFETY && entrant->status != DISQUAL_INCORR) break;
+      printf("\t\t%3d: %-50s\n", entrant->id, entrant->name);
       printf("\t\t\tCourse: %c ", entrant->course->id);
       if (entrant->status == DISQUAL_SAFETY) printf("Disqualified for safety\n");
       else printf("Disqualified for incorrect route\n");
+    }
+  }
+  if (count_by_status(event, NOT_STARTED) > 0) {
+    printf("\n\tWaiting to start:\n");
+    for (; i < Vector_size(event->entrants); i++) {
+      Vector_get(event->entrants, i, &entrant);
+      printf("\t\t%3d: %-50s\n", entrant->id, entrant->name);
+      printf("\t\t\tCourse: %c\n", entrant->course->id);
     }
   }
 }
