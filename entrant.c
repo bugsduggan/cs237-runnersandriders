@@ -201,7 +201,7 @@ void entrant_stats(Entrant* entrant, Time* curr_time) {
 
 void entrant_update_location(Event* event, char type, int entrant_id, int node_id) {
   Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
-  Node* node = node_from_id(entrant->course->nodes, node_id);
+  Node* node = node_from_id(event->nodes, node_id);
 
   /* The entrant will not have had entrant_update_time called on it */
 

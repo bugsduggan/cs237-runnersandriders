@@ -49,6 +49,7 @@ Event* read_data() {
   filename = get_filename("Please enter entrants file: ");
   entrants = read_entrants(filename, courses);
 
+  event->nodes = nodes;
   event->entrants = entrants;
   return event;
 }

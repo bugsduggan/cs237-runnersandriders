@@ -15,6 +15,7 @@ typedef struct Event {
   char* title;
   char* date;
   Time* start;
+  Vector* nodes;
   Vector* entrants;
   Time* time;
 } Event;
