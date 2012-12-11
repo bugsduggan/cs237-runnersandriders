@@ -78,6 +78,17 @@ int compare_entrants(void* vp1, void* vp2) {
   }
 }
 
+void update_nodes(Entrant* entrant, Node* node, Time* time) {
+  /* update last_cp */
+  entrant->last_cp_node = node;
+  if (entrant->last_cp_time) free(entrant->last_cp_time);
+  entrant->last_cp_time = timecpy(time);
+  /* update last */
+  entrant->last_node = node;
+  if (entrant->last_time) free(entrant->last_time);
+  entrant->last_time = timecpy(time);
+}
+
 /*
  * functions declared in data.h
  */
@@ -108,7 +119,6 @@ Vector* read_entrants(char* filename, Vector* courses) {
 
     /* other data */
     entrant->duration = 0;
-    entrant->stop_duration = 0;
     entrant->status = NOT_STARTED;
     entrant->start_time = NULL;
     entrant->last_cp_node = NULL;
@@ -168,40 +178,55 @@ void entrant_stats(Entrant* entrant, Time* curr_time) {
   }
 }
 
-/* TODO */
 void entrant_update_location(Event* event, char type, int entrant_id, int node_id) {
   Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
   Node* node = node_from_id(entrant->course->nodes, node_id);
 
-  if (entrant->status == NOT_STARTED) {
-    entrant->status = STARTED;
-    entrant->start_time = timecpy(event->time);
-  }
+  if (type == 't' || type == 'T') {
+    /* if they've not started, change status and set time */
+    if (entrant-> status == NOT_STARTED) {
+      entrant->status = STARTED;
+      entrant->start_time = timecpy(event->time);
+    }
 
-  entrant->last_cp_node = node;
-  if (entrant->last_cp_time) free(entrant->last_cp_time);
-  entrant->last_cp_time = timecpy(event->time);
+    /* update nodes */
+    update_nodes(entrant, node, event->time);
 
-  entrant->last_node = entrant->last_cp_node;
-  if (entrant->last_time) free(entrant->last_time);
-  entrant->last_time = timecpy(entrant->last_cp_time);
+    entrant->duration += time_to_duration(event->time) -
+      time_to_duration(entrant->last_time);
 
-  entrant->duration = time_to_duration(event->time) -
-    time_to_duration(entrant->start_time);
+    /* update current track */
+    if (entrant->curr_track)
+      entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
+    else
+      Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
 
-  if (entrant->curr_track) {
-    /* update the track with the next one */
+    /* check if finished */
+    if (entrant->curr_track == NULL)
+      entrant->status = FINISHED;
+
+  } else if (type == 'i' || type == 'I') {
+    /* update node and status */
+    update_nodes(entrant, node, event->time);
+    entrant->status = DISQUAL_INCORR;
+  } else if (type == 'a' || type == 'A') {
+    /* update node, duration and status */
+    update_nodes(entrant, node, event->time);
+
+    entrant->duration += time_to_duration(event->time) -
+      time_to_duration(entrant->last_time);
+
+    entrant->status = STOPPED;
+  } else if (type == 'd' || type == 'D') {
+    /* update the track and status */
     entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
-  } else {
-    /* entrant must have just started, curr_track = tracks[0] */
-    Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
-  }
-
-  if (entrant->curr_track == NULL) {
-    entrant->status = FINISHED;
+    entrant->status = STARTED;
+  } else { /* type == E */
+    entrant->status = DISQUAL_SAFETY;
   }
 }
 
+/* TODO */
 void entrant_update_time(Event* event, Entrant* entrant) {
   int last_seen;
   if (entrant->status == STARTED || entrant->status == STOPPED) {

@@ -89,7 +89,6 @@ typedef struct Entrant {
   Course* course;
   char* name;
   int duration;
-  int stop_duration;
   entrant_status status;
   Time* start_time;
   /* the last timed point */
