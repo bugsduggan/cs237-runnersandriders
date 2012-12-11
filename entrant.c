@@ -154,7 +154,7 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
 
 void entrant_stats(Entrant* entrant, Time* curr_time) {
   printf("\n");
-  printf("\t%2d: %-50s\n", entrant->id, entrant->name);
+  printf("\t%3d: %-50s\n", entrant->id, entrant->name);
   printf("\t\tRunning course:         %c\n", entrant->course->id);
   if (entrant->status == NOT_STARTED) {
     printf("\t\tWaiting to start\n");
