@@ -157,6 +157,9 @@ void list_excluded_safety(Event* event) {
             entrant->last_cp_node->id);
       }
     }
+    /* print total */
+    printf("\n\tTotal disqualified for safety reasons: %d\n",
+      count_by_status(event, DISQUAL_SAFETY));
   }
 }
 
@@ -179,6 +182,9 @@ void list_excluded_incorrect(Event* event) {
             entrant->last_cp_node->id);
       }
     }
+    /* print total */
+    printf("\n\tTotal disqualified for incorrect route: %d\n",
+      count_by_status(event, DISQUAL_INCORR));
   }
 }
 
