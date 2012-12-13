@@ -15,7 +15,11 @@
  * private functions
  */
 
+/* this gets passed into the vectors that are used to read file data
+ * it means we can call Vector_dispose once we've read the data in */
 void string_dispose(void* string) {
+  /* this is a bit of a funky cast, we're casting it to a char** (which it is)
+   * and then dereferencing that to produce our char* foo */
   char* foo = *(char**) string;
   if (foo) free(foo);
 }
@@ -27,7 +31,7 @@ void string_dispose(void* string) {
 /*
  * This function was taken from
  * http://cboard.cprogramming.com/c-programming/95462-compiler-error-warning-implicit-declaration-function-strdup.html
- * as it's not part of the c89 standard 
+ * as it's not part of the c89 standard but it is really *really* useful
  */
 char* strdup(const char* str) {
   int n = strlen(str) + 1;
@@ -41,7 +45,8 @@ char* strdup(const char* str) {
 /*
  * The following function was taken from
  * http://stackoverflow.com/questions/314401/how-to-read-a-line-from-the-console-in-c
- * I just couldn't get scanf to play nicely and this seems to be more robust code
+ * I could have used scanf, but I think just reading in a whole line each time and
+ * then parsing it makes everything easier to read in the rest of the source
  */
 char* readline() {
   char* line = malloc(100), *linep = line;
@@ -76,6 +81,7 @@ char* readline() {
   return linep;
 }
 
+/* check that a filename is valid (1 = true, 0 = false) */
 int valid_filename(char* filename) {
   FILE* fp;
   int ret_val = 0;
@@ -89,6 +95,7 @@ int valid_filename(char* filename) {
   return ret_val;
 }
 
+/* this reads a whole file into a vector */
 Vector* read_file(char* filename) {
   char line[MAX_LINE_LENGTH];
   char* str;
@@ -97,8 +104,8 @@ Vector* read_file(char* filename) {
 
   fp = fopen(filename, "r");
   while (fgets(line, MAX_LINE_LENGTH, fp) != NULL) {
-    strtok(line, "\n"); /* strip newline */
-    str = strdup(line); /* make a new pointer */
+    strtok(line, "\n");      /* strip newline */
+    str = strdup(line);      /* make a new pointer */
     Vector_add(lines, &str); /* pass it to the vector */
   }
   fclose(fp);
@@ -106,6 +113,7 @@ Vector* read_file(char* filename) {
   return lines;
 }
 
+/* turn a string (hh:mm) into a struct Time */
 Time* str_to_time(char* str) {
   Time* time = malloc(sizeof(Time));
   char* token;
@@ -118,6 +126,7 @@ Time* str_to_time(char* str) {
   return time;
 }
 
+/* return a new copy of a struct Time */
 Time* timecpy(Time* time) {
   Time* copy = malloc(sizeof(Time));
   copy->hours = time->hours;
@@ -125,6 +134,7 @@ Time* timecpy(Time* time) {
   return copy;
 }
 
+/* return a duration from a time */
 int time_to_duration(Time* time) {
   return time->minutes + (time->hours * 60);
 }
