@@ -1,4 +1,4 @@
-CFLAGS=-Wall -g -std=c89
+CFLAGS=-g -std=c89
 
 main: node.o track.o course.o entrant.o event.o vector.o util.o
 
