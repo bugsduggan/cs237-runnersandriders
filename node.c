@@ -12,13 +12,10 @@
 #include "data.h"
 
 /*
- * private functions
- */
-
-/*
  * functions declared in data.h
  */
 
+/* read nodes from the file */
 Vector* read_nodes(char* filename) {
   Vector* lines = read_file(filename);
   Vector* nodes = Vector_new(sizeof(Node*), NULL);
@@ -46,6 +43,7 @@ Vector* read_nodes(char* filename) {
   return nodes;
 }
 
+/* find a node from id */
 Node* node_from_id(Vector* nodes, int id) {
   Node* node;
   int i = 0;
@@ -58,6 +56,7 @@ Node* node_from_id(Vector* nodes, int id) {
   return NULL;
 }
 
+/* get a node type from a string */
 node_type str_to_type(char* str) {
   if (strcmp(str, "CP") == 0) return CP;
   else if (strcmp(str, "MC") == 0) return MC;

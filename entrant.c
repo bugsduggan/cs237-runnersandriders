@@ -16,6 +16,7 @@
  * private functions
  */
 
+/* turn a status into a string */
 char* status_to_str(entrant_status status) {
   if (status == NOT_STARTED) {
     return "Waiting to start";
@@ -32,6 +33,7 @@ char* status_to_str(entrant_status status) {
   }
 }
 
+/* compares entrants (used by the vector to sort entrants) */
 int compare_entrants(void* vp1, void* vp2) {
   /*
    * a < b  -  -1
@@ -61,6 +63,7 @@ int compare_entrants(void* vp1, void* vp2) {
       else if (a->duration > b->duration) return 1;
       else return 0;
     } else return -1; /* b is not finished */
+
   } else if (a->status == STARTED || a->status == STOPPED) {
     if (b->status == FINISHED) return 1;
     else if (b->status == STARTED || b->status == STOPPED) {
@@ -68,6 +71,7 @@ int compare_entrants(void* vp1, void* vp2) {
       else if (a->duration > b->duration) return -1;
       else return 0;
     } else return -1; /* b is either not started or is disqualified */
+
   } else if (a->status == DISQUAL_SAFETY || a->status == DISQUAL_INCORR) {
     if (b->status == FINISHED || b->status == STARTED || b->status == STOPPED) return 1;
     else if (b->status == DISQUAL_SAFETY || b->status == DISQUAL_INCORR) {
@@ -75,6 +79,7 @@ int compare_entrants(void* vp1, void* vp2) {
       else if (a->duration > b->duration) return -1;
       else return 0;
     } else return -1; /* b has not even started */
+
   } else { /* a has not started */
     if (b->status != NOT_STARTED) return 1;
     else {
@@ -84,6 +89,8 @@ int compare_entrants(void* vp1, void* vp2) {
   }
 }
 
+/* update the last_cp_node and time (and current node and time)
+ * of the entrant */
 void update_nodes(Entrant* entrant, Node* node, Time* time) {
   entrant->last_cp_node = node;
   if (entrant->last_cp_time) free(entrant->last_cp_time);
@@ -98,6 +105,7 @@ void update_nodes(Entrant* entrant, Node* node, Time* time) {
  * functions declared in data.h
  */
 
+/* read entrants from the file */
 Vector* read_entrants(char* filename, Vector* courses) {
   Vector* lines = read_file(filename);
   Vector* entrants = Vector_new(sizeof(Entrant*), NULL);
@@ -122,7 +130,8 @@ Vector* read_entrants(char* filename, Vector* courses) {
     token = strtok(NULL, "\n"); /* read to end of line */
     entrant->name = strdup(token);
 
-    /* other data */
+    /* other data 
+     * these all get updated as the entrant starts in entrant_update_location */
     entrant->duration = 0;
     entrant->status = NOT_STARTED;
     entrant->start_time = NULL;
@@ -140,6 +149,7 @@ Vector* read_entrants(char* filename, Vector* courses) {
   return entrants;
 }
 
+/* find an entrant by id */
 Entrant* entrant_from_id(Vector* entrants, int id) {
   Entrant* entrant;
   int i = 0;
@@ -152,22 +162,29 @@ Entrant* entrant_from_id(Vector* entrants, int id) {
   return NULL;
 }
 
+/* print out the entrants stats */
 void entrant_stats(Entrant* entrant, Time* curr_time) {
+  /* generic data for all entrants */
   printf("\n");
   printf("\t%3d: %-50s\n", entrant->id, entrant->name);
   printf("\t\tRunning course:         %c\n", entrant->course->id);
+
   if (entrant->status == NOT_STARTED) {
     printf("\t\tWaiting to start\n");
   } else {
-      printf("\t\tStarted at:             %02d:%02d\n", entrant->start_time->hours, entrant->start_time->minutes);
+      printf("\t\tStarted at:             %02d:%02d\n",
+          entrant->start_time->hours,
+          entrant->start_time->minutes);
     /*
      * started
      */
     if (entrant->status == STARTED) {
       printf("\t\tEstimated location:     Track %d\n", entrant->curr_track->id);
       printf("\t\tLast checkpoint:        Node %d at %02d:%02d (%d mins ago)\n",
-          entrant->last_cp_node->id, entrant->last_cp_time->hours,
-          entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
+          entrant->last_cp_node->id,
+          entrant->last_cp_time->hours,
+          entrant->last_cp_time->minutes,
+          (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
       printf("\t\tRun time:               %d mins\n", entrant->duration);
     /*
      * stopped
@@ -175,35 +192,43 @@ void entrant_stats(Entrant* entrant, Time* curr_time) {
     } else if (entrant->status == STOPPED) {
       printf("\t\tAt medical checkpoint:  Node %d since %02d:%02d (%d mins ago)\n",
           entrant->last_cp_node->id, entrant->last_cp_time->hours,
-          entrant->last_cp_time->minutes, (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
+          entrant->last_cp_time->minutes,
+          (time_to_duration(curr_time) - time_to_duration(entrant->last_cp_time)));
       printf("\t\tRun time:               %d mins\n", entrant->duration);
     /*
      * disqualified - safety
      */
     } else if (entrant->status == DISQUAL_SAFETY) {
-      printf("\t\tExcluded for safety at: Node %d at %02d:%02d\n", entrant->last_cp_node->id,
-          entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+      printf("\t\tExcluded for safety at: Node %d at %02d:%02d\n",
+          entrant->last_cp_node->id,
+          entrant->last_cp_time->hours,
+          entrant->last_cp_time->minutes);
     /*
      * disqualified - bad route
      */
     } else if (entrant->status == DISQUAL_INCORR) {
-      printf("\t\tDisqualified at:        Node %d at %02d:%02d\n", entrant->last_cp_node->id,
-          entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+      printf("\t\tDisqualified at:        Node %d at %02d:%02d\n",
+          entrant->last_cp_node->id,
+          entrant->last_cp_time->hours,
+          entrant->last_cp_time->minutes);
     /*
      * finished
      */
     } else if (entrant->status == FINISHED) {
-      printf("\t\tFinished at:            %02d:%02d\n", entrant->last_cp_time->hours, entrant->last_cp_time->minutes);
+      printf("\t\tFinished at:            %02d:%02d\n",
+          entrant->last_cp_time->hours,
+          entrant->last_cp_time->minutes);
       printf("\t\tTotal time:             %d mins\n", entrant->duration);
     }
   }
 }
 
+/* update the entrant's location */
 void entrant_update_location(Event* event, char type, int entrant_id, int node_id) {
   Entrant* entrant = entrant_from_id(event->entrants, entrant_id);
   Node* node = node_from_id(event->nodes, node_id);
 
-  /* The entrant will not have had entrant_update_time called on it */
+  /* This entrant will not have had entrant_update_time called on it */
 
   /********************************
    * T type
@@ -226,7 +251,8 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
 
     /* update current track */
     if (entrant->curr_track)
-      entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
+      entrant->curr_track =
+        next_track_from_node(entrant->course, entrant->curr_track, node);
     else
       /* _might_ not be inited (on starting) so init to tracks[0] */
       Vector_get(entrant->course->tracks, 0, &entrant->curr_track);
@@ -271,7 +297,8 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
     entrant->curr_time = timecpy(event->time);
 
     /* update next track and status */
-    entrant->curr_track = next_track_from_node(entrant->course, entrant->curr_track, node);
+    entrant->curr_track =
+      next_track_from_node(entrant->course, entrant->curr_track, node);
     entrant->status = STARTED;
 
   /*******************************
@@ -282,9 +309,11 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
   }
 }
 
+/* update the entrant's time and estimated location */
 void entrant_update_time(Event* event, Entrant* entrant) {
   int time_since_seen; /* time since last node */
   int time_delta; /* time since this function was last called */
+
   if (entrant->status == STARTED) {
     /* if they've started, they'd better not have null values */
 
@@ -300,8 +329,10 @@ void entrant_update_time(Event* event, Entrant* entrant) {
     entrant->curr_time = timecpy(event->time);
 
     if (entrant->curr_track->end->type == JN && /* next junction is not timed */
-        time_since_seen > entrant->curr_track->safe_time) { /* entrant has probably finished this track */
+        time_since_seen > entrant->curr_track->safe_time) { /* entrant has finished this track */
+      /* find next track */
       entrant->curr_track = next_track(entrant->course, entrant->curr_track);
+      /* update last node & time */
       entrant->last_node = entrant->curr_track->start;
       if (entrant->last_time) free(entrant->last_time);
       entrant->last_time = timecpy(event->time);
@@ -309,6 +340,7 @@ void entrant_update_time(Event* event, Entrant* entrant) {
   }
 }
 
+/* sort the entrants */
 void entrants_sort(Event* event) {
   Vector_sort(event->entrants, compare_entrants);
 }

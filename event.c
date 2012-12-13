@@ -12,13 +12,11 @@
 #include "data.h"
 
 /*
- * private functions
- */
-
-/*
  * functions declared in data.h
  */
 
+/* read an event from file
+ * doesn't initialise everything! */
 Event* read_event(char* filename) {
   Vector* lines = read_file(filename);
   Event* event = malloc(sizeof(Event));
@@ -42,6 +40,9 @@ Event* read_event(char* filename) {
   return event;
 }
 
+/* update the time in event and the entrants
+ * does not update the entrant identified by entrant_id,
+ * this will be done by a subsequent call to entrant_update_location */
 void update_time(Event* event, Time* time, int entrant_id) {
   Entrant* entrant;
   int i = 0;

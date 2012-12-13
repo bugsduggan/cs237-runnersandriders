@@ -12,13 +12,10 @@
 #include "data.h"
 
 /*
- * private functions
- */
-
-/*
  * functions declared in data.h
  */
 
+/* read tracks from the file */
 Vector* read_tracks(char* filename, Vector* nodes) {
   Vector* lines = read_file(filename);
   Vector* tracks = Vector_new(sizeof(Track*), NULL);
@@ -49,6 +46,7 @@ Vector* read_tracks(char* filename, Vector* nodes) {
     token = strtok(NULL, " ");
     node_id = atoi(token);
     start_node = node_from_id(nodes, node_id);
+
     token = strtok(NULL, " ");
     node_id = atoi(token);
     end_node = node_from_id(nodes, node_id);
@@ -71,6 +69,7 @@ Vector* read_tracks(char* filename, Vector* nodes) {
   return tracks;
 }
 
+/* find a track from start node to end node */
 Track* track_from_nodes(Vector* tracks, Node* start, Node* end) {
   Track* track;
   int i = 0;

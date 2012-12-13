@@ -12,13 +12,10 @@
 #include "data.h"
 
 /*
- * private functions
- */
-
-/*
  * functions declared in data.h
  */
 
+/* read in the courses from the file */
 Vector* read_courses(char* filename, Vector* nodes, Vector* tracks) {
   Vector* lines = read_file(filename);
   Vector* courses = Vector_new(sizeof(Course*), NULL);
@@ -45,6 +42,7 @@ Vector* read_courses(char* filename, Vector* nodes, Vector* tracks) {
     course->nodes = Vector_new(sizeof(Node*), NULL);
     token = strtok(NULL, " ");
     num_nodes = atoi(token);
+
     for (j = 0; j < num_nodes; j++) {
       token = strtok(NULL, " ");
       node_id = atoi(token);
@@ -73,6 +71,7 @@ Vector* read_courses(char* filename, Vector* nodes, Vector* tracks) {
   return courses;
 }
 
+/* find a course by id */
 Course* course_from_id(Vector* courses, char id) {
   Course* course;
   int i = 0;
@@ -85,7 +84,7 @@ Course* course_from_id(Vector* courses, char id) {
   return NULL;
 }
 
-
+/* find the next track in the course */
 Track* next_track(Course* course, Track* current) {
   Track* track;
   Track* next;
@@ -103,8 +102,7 @@ Track* next_track(Course* course, Track* current) {
   return NULL;
 }
 
-/*
- * finds the next track starting with node beyond current */
+/* finds the next track after current starting with node */
 Track* next_track_from_node(Course* course, Track* current, Node* node) {
   Track* next = next_track(course, current);
   while (next && next->start != node) /* while this isn't the track we're searching for */
