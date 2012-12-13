@@ -18,11 +18,11 @@
 char* get_filename(char* prompt) {
   char* filename;
 
-  printf(prompt);
+  printf("%s", prompt);
   filename = readline();
   while (!valid_filename(filename)) {
     printf("Could not open %s\n", filename);
-    printf(prompt);
+    printf("%s", prompt);
     free(filename);
     filename = readline();
   }

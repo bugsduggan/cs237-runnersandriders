@@ -18,8 +18,8 @@
 /* this gets passed into the vectors that are used to read file data
  * it means we can call Vector_dispose once we've read the data in */
 void string_dispose(void* string) {
-  /* this is a bit of a funky cast, we're casting it to a char** (which it is)
-   * and then dereferencing that to produce our char* foo */
+  /* this is a bit of a funky cast, we're casting it to a char** (which it is) */
+  /* and then dereferencing that to produce our char* foo */
   char* foo = *(char**) string;
   if (foo) free(foo);
 }
