@@ -1,11 +1,16 @@
-/*
- * data
+/* 
+ * File:   data.h
+ * Author: thl5
  *
- * Tom Leaman (thl5@aber.ac.uk)
+ * Created on 14 December 2012, 10:14
  */
 
-#ifndef DATA_THL5_H
-#define DATA_THL5_H
+#ifndef DATA_H
+#define	DATA_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
 
 /*
  * event
@@ -116,4 +121,9 @@ void entrant_update_location(Event* event, char type, int entrant_id, int node_i
 void entrant_update_time(Event* event, Entrant* entrant);
 void entrants_sort(Event* event);
 
+#ifdef	__cplusplus
+}
 #endif
+
+#endif	/* DATA_H */
+

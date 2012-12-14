@@ -1,9 +1,3 @@
-/*
- * course
- *
- * Tom Leaman (thl5@aber.ac.uk)
- */
-
 #include <stdlib.h>
 #include <string.h>
 
@@ -109,3 +103,4 @@ Track* next_track_from_node(Course* course, Track* current, Node* node) {
     next = next_track(course, next);
   return next;
 }
+

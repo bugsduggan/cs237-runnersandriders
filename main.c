@@ -1,7 +1,8 @@
-/*
- * main
+/* 
+ * File:   main.c
+ * Author: thl5
  *
- * Tom Leaman (thl5@aber.ac.uk)
+ * Created on 14 December 2012, 10:04
  */
 
 #include <stdlib.h>
@@ -344,7 +345,7 @@ void update_file(Event* event) {
 /*
  * the main method (including program loop)
  */
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
   Event* event = read_data();
   int running = 1;
   int input;
@@ -389,5 +390,6 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  return EXIT_SUCCESS;
+  return (EXIT_SUCCESS);
 }
+

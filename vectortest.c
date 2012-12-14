@@ -1,3 +1,10 @@
+/* 
+ * File:   vectortest.c
+ * Author: thl5
+ *
+ * Created on 14 December 2012, 10:10
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -73,10 +80,14 @@ void test_complex() {
   Vector_dispose(vector);
 }
 
-int main(int argc, char* argv[]) {
+/*
+ *
+ * Uncomment this and comment main to run
+int main(int argc, char** argv) {
   printf("\n\nTesting simple\n\n");
   test_simple();
   printf("\n\nTesting complex\n\n");
   test_complex();
-  return EXIT_SUCCESS;
+  return (EXIT_SUCCESS);
 }
+*/

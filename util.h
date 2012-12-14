@@ -1,11 +1,16 @@
-/*
- * util
+/* 
+ * File:   util.h
+ * Author: thl5
  *
- * Tom Leaman (thl5@aber.ac.uk)
+ * Created on 14 December 2012, 10:08
  */
 
-#ifndef UTIL_THL5_H
-#define UTIL_THL5_H
+#ifndef UTIL_H
+#define	UTIL_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
 
 #define MAX_LINE_LENGTH 80
 
@@ -24,4 +29,9 @@ Time* str_to_time(char* str);       /* produces a time from a string (hh:mm) */
 Time* timecpy(Time* time);          /* deep copy a time struct */
 int time_to_duration(Time* time);   /* turn hh:mm into mm */
 
+#ifdef	__cplusplus
+}
 #endif
+
+#endif	/* UTIL_H */
+

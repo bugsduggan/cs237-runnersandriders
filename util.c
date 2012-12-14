@@ -1,9 +1,3 @@
-/*
- * util
- *
- * Tom Leaman (thl5@aber.ac.uk)
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

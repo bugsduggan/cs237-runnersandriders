@@ -1,9 +1,3 @@
-/*
- * track.c
- *
- * Tom Leaman (thl5@aber.ac.uk)
- */
-
 #include <stdlib.h>
 #include <string.h>
 
@@ -81,3 +75,4 @@ Track* track_from_nodes(Vector* tracks, Node* start, Node* end) {
 
   return NULL;
 }
+

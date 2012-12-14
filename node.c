@@ -1,9 +1,3 @@
-/*
- * node
- *
- * Tom Leaman (thl5@aber.ac.uk)
- */
-
 #include <stdlib.h>
 #include <string.h>
 

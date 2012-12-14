@@ -1,11 +1,16 @@
-/*
- * vector
+/* 
+ * File:   vector.h
+ * Author: thl5
  *
- * Tom Leaman (thl5@aber.ac.uk)
+ * Created on 14 December 2012, 10:04
  */
 
-#ifndef VECTOR_THL_H
-#define VECTOR_THL_H
+#ifndef VECTOR_H
+#define	VECTOR_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
 
 #define MIN_CAPACITY 4
 
@@ -38,4 +43,9 @@ void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*));
 /* the size of the vector */
 int Vector_size(Vector* vector);
 
+#ifdef	__cplusplus
+}
 #endif
+
+#endif	/* VECTOR_H */
+
