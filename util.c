@@ -30,7 +30,8 @@ void string_dispose(void* string) {
 
 /*
  * This function was taken from
- * http://cboard.cprogramming.com/c-programming/95462-compiler-error-warning-implicit-declaration-function-strdup.html
+ * http://cboard.cprogramming.com/c-programming/
+ * 95462-compiler-error-warning-implicit-declaration-function-strdup.html
  * as it's not part of the c89 standard but it is really *really* useful
  */
 char* strdup(const char* str) {

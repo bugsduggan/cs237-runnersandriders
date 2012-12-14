@@ -107,7 +107,8 @@ void Vector_sort(Vector* vector, int (*comp_fn)(void*, void*)) {
           /* temp = a */
           memcpy(temp, (char*)vector->base + vector->elem_size * (j-1), vector->elem_size);
           /* a = b */
-          memcpy((char*)vector->base + vector->elem_size * (j-1), (char*)vector->base + vector->elem_size * j,  vector->elem_size);
+          memcpy((char*)vector->base + vector->elem_size * (j-1),
+              (char*)vector->base + vector->elem_size * j,  vector->elem_size);
           /* b = temp */
           memcpy((char*)vector->base + vector->elem_size * j, temp, vector->elem_size);
         }
