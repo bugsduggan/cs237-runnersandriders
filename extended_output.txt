@@ -1,0 +1,1423 @@
+Please enter name file: extended_data/name.txt
+Please enter nodes file: extended_data/nodes.txt
+Please enter tracks file: extended_data/trakc.   cks.txt
+Please enter courses file: extended_data/courses.txt
+Please enter entrants file: extended_data/entrant. s.txt
+
+
+	Endurance Horse Race - The Main Event
+	27th June 2012
+	7:30
+
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+07:30  >>  8
+Enter checkpoint file: extended_data/cp_times_1.txt
+
+	Running:
+		  1: Ace Abbey                                         
+			Course: E Track:  1 Run time: 118 mins
+		  3: Ace Fudge                                         
+			Course: A Track: 18 Run time: 112 mins
+		  4: Amber Abbey                                       
+			Course: C Track: 13 Run time: 111 mins
+		  5: Amber Fudge                                       
+			Course: E Track: 13 Run time: 108 mins
+		  6: April Abbey                                       
+			Course: D Track:  2 Run time: 105 mins
+		  7: April Fudge                                       
+			Course: B Track: 17 Run time: 102 mins
+		  8: Ash Abbey                                         
+			Course: F Track: 13 Run time:  99 mins
+		  9: Ash Fudge                                         
+			Course: D Track:  2 Run time:  96 mins
+		 10: Asti Abbey                                        
+			Course: A Track: 15 Run time:  93 mins
+		 11: Asti Fudge                                        
+			Course: A Track: 15 Run time:  90 mins
+		 12: Autumn Abbey                                      
+			Course: C Track: 15 Run time:  87 mins
+		 13: Autumn Fudge                                      
+			Course: B Track: 15 Run time:  84 mins
+		 14: Barfields Marco Abbey                             
+			Course: A Track:  8 Run time:  81 mins
+		 16: Barfields Marco Fudge                             
+			Course: F Track: 13 Run time:  78 mins
+		 17: Basil Abbey                                       
+			Course: B Track:  8 Run time:  75 mins
+		 18: Basil Fudge                                       
+			Course: A Track:  7 Run time:  72 mins
+		 19: Beatrice Abbey                                    
+			Course: C Track:  7 Run time:  68 mins
+		 20: Beatrice Fudge                                    
+			Course: A Track:  5 Run time:  65 mins
+		 22: Beau Abbey                                        
+			Course: D Track:  5 Run time:  62 mins
+		 23: Beau Fudge                                        
+			Course: C Track:  5 Run time:  59 mins
+		 24: Bella Abbey                                       
+			Course: B Track:  4 Run time:  56 mins
+		 26: Bella Fudge                                       
+			Course: F Track: 12 Run time:  53 mins
+		 27: Black Jack Abbey                                  
+			Course: F Track: 12 Run time:  50 mins
+		 28: Black Jack Fudge                                  
+			Course: A Track:  4 Run time:  47 mins
+		 30: Blue Abbey                                        
+			Course: B Track:  4 Run time:  43 mins
+		 31: Blue Fudge                                        
+			Course: B Track:  3 Run time:  40 mins
+		 32: Bobby Abbey                                       
+			Course: A Track:  4 Run time:  37 mins
+		 34: Bobby Fudge                                       
+			Course: E Track: 11 Run time:  34 mins
+		 35: Bubbles Abbey                                     
+			Course: C Track:  2 Run time:  31 mins
+		 36: Bubbles Fudge                                     
+			Course: D Track:  2 Run time:  28 mins
+		 38: Captain Abbey                                     
+			Course: A Track:  2 Run time:  25 mins
+		 39: Captain Fudge                                     
+			Course: B Track:  2 Run time:  22 mins
+		 40: Chalkie Abbey                                     
+			Course: D Track:  1 Run time:  19 mins
+		 41: Chalkie Fudge                                     
+			Course: F Track:  1 Run time:  16 mins
+		 42: Copper Abbey                                      
+			Course: E Track:  1 Run time:  13 mins
+		 44: Copper Fudge                                      
+			Course: B Track:  1 Run time:  10 mins
+		 45: Diamond Abbey                                     
+			Course: C Track:  1 Run time:   7 mins
+		 46: Diamond Fudge                                     
+			Course: B Track:  1 Run time:   3 mins
+
+	Waiting to start:
+		 47: Dinky Abbey                                       
+			Course: E
+		 48: Dinky Fudge                                       
+			Course: F
+		 49: Ebony Abbey                                       
+			Course: B
+		 50: Ebony Fudge                                       
+			Course: C
+		 51: Ginger Abbey                                      
+			Course: C
+		 52: Ginger Fudge                                      
+			Course: F
+		 53: Goldie Abbey                                      
+			Course: A
+		 55: Goldie Fudge                                      
+			Course: E
+		 56: Honey Abbey                                       
+			Course: F
+		 57: Honey Fudge                                       
+			Course: C
+		 58: Izzy Abbey                                        
+			Course: A
+		 59: Izzy Fudge                                        
+			Course: A
+		 60: Jasmine Abbey                                     
+			Course: A
+		 61: Jasmine Fudge                                     
+			Course: F
+		 62: Lady Abbey                                        
+			Course: D
+		 64: Lady Fudge                                        
+			Course: B
+		 65: Lady Tara Abbey                                   
+			Course: C
+		 66: Lady Tara Fudge                                   
+			Course: B
+		 67: Lemon Abbey                                       
+			Course: B
+		 68: Lemon Fudge                                       
+			Course: E
+		 69: Lord Abbey                                        
+			Course: F
+		 70: Lord Fudge                                        
+			Course: E
+		 71: Lucky Abbey                                       
+			Course: A
+		 74: Lucky Fudge                                       
+			Course: E
+		 76: Lord Abbey                                        
+			Course: D
+		 77: Lord Fudge                                        
+			Course: B
+		 78: Maddy Abbey                                       
+			Course: F
+		 79: Maddy Fudge                                       
+			Course: A
+		 80: Magic Abbey                                       
+			Course: D
+		 81: Magic Fudge                                       
+			Course: D
+		 83: Major Abbey                                       
+			Course: A
+		 85: Major Fudge                                       
+			Course: A
+		 86: Mattie Abbey                                      
+			Course: B
+		 87: Mattie Fudge                                      
+			Course: A
+		 89: Prince Abbey                                      
+			Course: B
+		 90: Prince Fudge                                      
+			Course: A
+		 91: Princess Abbey                                    
+			Course: B
+		 92: Princess Fudge                                    
+			Course: B
+		 93: Rosie Abbey                                       
+			Course: D
+		 94: Rosie Fudge                                       
+			Course: B
+		 95: Ruby Abbey                                        
+			Course: F
+		 97: Ruby Fudge                                        
+			Course: C
+		 98: Sapphire Abbey                                    
+			Course: C
+		100: Sapphire Fudge                                    
+			Course: F
+		101: Scarlet Abbey                                     
+			Course: C
+		102: Scarlet Fudge                                     
+			Course: F
+		103: sienna Abbey                                      
+			Course: D
+		106: sienna Fudge                                      
+			Course: B
+		107: Silver Abbey                                      
+			Course: F
+		108: Silver Fudge                                      
+			Course: A
+		109: Smokey Abbey                                      
+			Course: A
+		110: Smokey Fudge                                      
+			Course: D
+		111: Snowy Abbey                                       
+			Course: E
+		113: Snowy Fudge                                       
+			Course: C
+		114: sonic Abbey                                       
+			Course: A
+		115: sonic Fudge                                       
+			Course: D
+		117: Summer Abbey                                      
+			Course: A
+		118: Summer Fudge                                      
+			Course: E
+		121: Tango Abbey                                       
+			Course: B
+		122: Tango Fudge                                       
+			Course: A
+		123: Topaz Abbey                                       
+			Course: B
+		124: Topaz Fudge                                       
+			Course: F
+		126: Zizou Abbey                                       
+			Course: D
+		127: Zizou Fudge                                       
+			Course: F
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+09:28  >>  1
+Enter entrant id: 3
+
+	  3: Ace Fudge                                         
+		Running course:         A
+		Started at:             07:33
+		Estimated location:     Track 18
+		Last checkpoint:        Node 14 at 09:25 (3 mins ago)
+		Run time:               112 mins
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+09:28  >>  2
+	64
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+09:28  >>  3
+	38
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+09:28  >>  4
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+09:28  >>  5
+	No entrants disqualified for safety reasons
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+09:28  >>  6
+	No entrants disqualified for incorrect route
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+09:28  >>  8
+Enter checkpoint file: extended_data/cp_times_2.txt
+
+	Finished:
+		 26: Bella Fudge                                       
+			Course: F Total time: 109 mins
+		 16: Barfields Marco Fudge                             
+			Course: F Total time: 115 mins
+		  8: Ash Abbey                                         
+			Course: F Total time: 116 mins
+		  9: Ash Fudge                                         
+			Course: D Total time: 118 mins
+		  6: April Abbey                                       
+			Course: D Total time: 123 mins
+		  1: Ace Abbey                                         
+			Course: E Total time: 124 mins
+		  5: Amber Fudge                                       
+			Course: E Total time: 131 mins
+		  4: Amber Abbey                                       
+			Course: C Total time: 157 mins
+
+	Running:
+		  3: Ace Fudge                                         
+			Course: A Track: 18 Run time: 166 mins
+		  7: April Fudge                                       
+			Course: B Track:  1 Run time: 154 mins
+		 10: Asti Abbey                                        
+			Course: A Track: 22 Run time: 146 mins
+		 11: Asti Fudge                                        
+			Course: A Track: 22 Run time: 143 mins
+		 12: Autumn Abbey                                      
+			Course: C Track:  1 Run time: 143 mins
+		 13: Autumn Fudge                                      
+			Course: B Track: 13 Run time: 137 mins
+		 14: Barfields Marco Abbey                             
+			Course: A Track: 20 Run time: 134 mins
+		 17: Basil Abbey                                       
+			Course: B Track: 13 Run time: 128 mins
+		 18: Basil Fudge                                       
+			Course: A Track: 18 Run time: 125 mins
+		 19: Beatrice Abbey                                    
+			Course: C Track: 13 Run time: 124 mins
+		 20: Beatrice Fudge                                    
+			Course: A Track: 18 Run time: 118 mins
+		 22: Beau Abbey                                        
+			Course: D Track:  1 Run time: 118 mins
+		 24: Bella Abbey                                       
+			Course: B Track: 17 Run time: 110 mins
+		 27: Black Jack Abbey                                  
+			Course: F Track:  1 Run time: 106 mins
+		 28: Black Jack Fudge                                  
+			Course: A Track: 17 Run time: 102 mins
+		 30: Blue Abbey                                        
+			Course: B Track: 17 Run time:  98 mins
+		 31: Blue Fudge                                        
+			Course: B Track: 15 Run time:  96 mins
+		 32: Bobby Abbey                                       
+			Course: A Track: 15 Run time:  93 mins
+		 34: Bobby Fudge                                       
+			Course: E Track: 13 Run time:  90 mins
+		 35: Bubbles Abbey                                     
+			Course: C Track: 15 Run time:  87 mins
+		 38: Captain Abbey                                     
+			Course: A Track:  8 Run time:  81 mins
+		 39: Captain Fudge                                     
+			Course: B Track:  8 Run time:  78 mins
+		 40: Chalkie Abbey                                     
+			Course: D Track:  6 Run time:  75 mins
+		 41: Chalkie Fudge                                     
+			Course: F Track: 14 Run time:  72 mins
+		 42: Copper Abbey                                      
+			Course: E Track: 15 Run time:  69 mins
+		 44: Copper Fudge                                      
+			Course: B Track:  7 Run time:  66 mins
+		 45: Diamond Abbey                                     
+			Course: C Track:  7 Run time:  63 mins
+		 46: Diamond Fudge                                     
+			Course: B Track:  3 Run time:  59 mins
+		 47: Dinky Abbey                                       
+			Course: E Track:  9 Run time:  56 mins
+		 48: Dinky Fudge                                       
+			Course: F Track: 12 Run time:  53 mins
+		 49: Ebony Abbey                                       
+			Course: B Track:  4 Run time:  50 mins
+		 50: Ebony Fudge                                       
+			Course: C Track:  4 Run time:  47 mins
+		 51: Ginger Abbey                                      
+			Course: C Track:  4 Run time:  44 mins
+		 52: Ginger Fudge                                      
+			Course: F Track: 11 Run time:  41 mins
+		 53: Goldie Abbey                                      
+			Course: A Track:  4 Run time:  38 mins
+		 55: Goldie Fudge                                      
+			Course: E Track: 11 Run time:  35 mins
+		 56: Honey Abbey                                       
+			Course: F Track: 11 Run time:  32 mins
+		 57: Honey Fudge                                       
+			Course: C Track:  2 Run time:  28 mins
+		 58: Izzy Abbey                                        
+			Course: A Track:  2 Run time:  24 mins
+		 59: Izzy Fudge                                        
+			Course: A Track:  2 Run time:  21 mins
+		 60: Jasmine Abbey                                     
+			Course: A Track:  1 Run time:  18 mins
+		 61: Jasmine Fudge                                     
+			Course: F Track:  1 Run time:  15 mins
+		 62: Lady Abbey                                        
+			Course: D Track:  1 Run time:  12 mins
+		 64: Lady Fudge                                        
+			Course: B Track:  1 Run time:   8 mins
+		 65: Lady Tara Abbey                                   
+			Course: C Track:  1 Run time:   5 mins
+		 66: Lady Tara Fudge                                   
+			Course: B Track:  1 Run time:   1 mins
+
+	Disqualified:
+		 23: Beau Fudge                                        
+			Course: C Disqualified for incorrect route
+		 36: Bubbles Fudge                                     
+			Course: D Disqualified for incorrect route
+
+	Waiting to start:
+		 67: Lemon Abbey                                       
+			Course: B
+		 68: Lemon Fudge                                       
+			Course: E
+		 69: Lord Abbey                                        
+			Course: F
+		 70: Lord Fudge                                        
+			Course: E
+		 71: Lucky Abbey                                       
+			Course: A
+		 74: Lucky Fudge                                       
+			Course: E
+		 76: Lord Abbey                                        
+			Course: D
+		 77: Lord Fudge                                        
+			Course: B
+		 78: Maddy Abbey                                       
+			Course: F
+		 79: Maddy Fudge                                       
+			Course: A
+		 80: Magic Abbey                                       
+			Course: D
+		 81: Magic Fudge                                       
+			Course: D
+		 83: Major Abbey                                       
+			Course: A
+		 85: Major Fudge                                       
+			Course: A
+		 86: Mattie Abbey                                      
+			Course: B
+		 87: Mattie Fudge                                      
+			Course: A
+		 89: Prince Abbey                                      
+			Course: B
+		 90: Prince Fudge                                      
+			Course: A
+		 91: Princess Abbey                                    
+			Course: B
+		 92: Princess Fudge                                    
+			Course: B
+		 93: Rosie Abbey                                       
+			Course: D
+		 94: Rosie Fudge                                       
+			Course: B
+		 95: Ruby Abbey                                        
+			Course: F
+		 97: Ruby Fudge                                        
+			Course: C
+		 98: Sapphire Abbey                                    
+			Course: C
+		100: Sapphire Fudge                                    
+			Course: F
+		101: Scarlet Abbey                                     
+			Course: C
+		102: Scarlet Fudge                                     
+			Course: F
+		103: sienna Abbey                                      
+			Course: D
+		106: sienna Fudge                                      
+			Course: B
+		107: Silver Abbey                                      
+			Course: F
+		108: Silver Fudge                                      
+			Course: A
+		109: Smokey Abbey                                      
+			Course: A
+		110: Smokey Fudge                                      
+			Course: D
+		111: Snowy Abbey                                       
+			Course: E
+		113: Snowy Fudge                                       
+			Course: C
+		114: sonic Abbey                                       
+			Course: A
+		115: sonic Fudge                                       
+			Course: D
+		117: Summer Abbey                                      
+			Course: A
+		118: Summer Fudge                                      
+			Course: E
+		121: Tango Abbey                                       
+			Course: B
+		122: Tango Fudge                                       
+			Course: A
+		123: Topaz Abbey                                       
+			Course: B
+		124: Topaz Fudge                                       
+			Course: F
+		126: Zizou Abbey                                       
+			Course: D
+		127: Zizou Fudge                                       
+			Course: F
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+10:24  >>  8
+Enter checkpoint file: extende_ d_data/cp_times_3.txt
+
+	Finished:
+		 26: Bella Fudge                                       
+			Course: F Total time: 109 mins
+		 27: Black Jack Abbey                                  
+			Course: F Total time: 109 mins
+		 48: Dinky Fudge                                       
+			Course: F Total time: 114 mins
+		 16: Barfields Marco Fudge                             
+			Course: F Total time: 115 mins
+		  8: Ash Abbey                                         
+			Course: F Total time: 116 mins
+		  9: Ash Fudge                                         
+			Course: D Total time: 118 mins
+		 22: Beau Abbey                                        
+			Course: D Total time: 122 mins
+		  6: April Abbey                                       
+			Course: D Total time: 123 mins
+		 34: Bobby Fudge                                       
+			Course: E Total time: 123 mins
+		 40: Chalkie Abbey                                     
+			Course: D Total time: 123 mins
+		  1: Ace Abbey                                         
+			Course: E Total time: 124 mins
+		 42: Copper Abbey                                      
+			Course: E Total time: 125 mins
+		 47: Dinky Abbey                                       
+			Course: E Total time: 130 mins
+		  5: Amber Fudge                                       
+			Course: E Total time: 131 mins
+		 19: Beatrice Abbey                                    
+			Course: C Total time: 147 mins
+		 12: Autumn Abbey                                      
+			Course: C Total time: 150 mins
+		 35: Bubbles Abbey                                     
+			Course: C Total time: 152 mins
+		  4: Amber Abbey                                       
+			Course: C Total time: 157 mins
+		 30: Blue Abbey                                        
+			Course: B Total time: 163 mins
+		 31: Blue Fudge                                        
+			Course: B Total time: 164 mins
+		  7: April Fudge                                       
+			Course: B Total time: 166 mins
+		 17: Basil Abbey                                       
+			Course: B Total time: 169 mins
+		 13: Autumn Fudge                                      
+			Course: B Total time: 173 mins
+		 24: Bella Abbey                                       
+			Course: B Total time: 174 mins
+		  3: Ace Fudge                                         
+			Course: A Total time: 232 mins
+
+	Running:
+		 10: Asti Abbey                                        
+			Course: A Track:  1 Run time: 218 mins
+		 11: Asti Fudge                                        
+			Course: A Track:  1 Run time: 215 mins
+		 14: Barfields Marco Abbey                             
+			Course: A Track: 13 Run time: 207 mins
+		 18: Basil Fudge                                       
+			Course: A Track: 13 Run time: 198 mins
+		 20: Beatrice Fudge                                    
+			Course: A Track: 13 Run time: 190 mins
+		 28: Black Jack Fudge                                  
+			Course: A Track: 20 Run time: 176 mins
+		 32: Bobby Abbey                                       
+			Course: A Track: 17 Run time: 162 mins
+		 38: Captain Abbey                                     
+			Course: A Track: 22 Run time: 153 mins
+		 39: Captain Fudge                                     
+			Course: B Track: 13 Run time: 151 mins
+		 44: Copper Fudge                                      
+			Course: B Track: 14 Run time: 139 mins
+		 45: Diamond Abbey                                     
+			Course: C Track:  1 Run time: 138 mins
+		 49: Ebony Abbey                                       
+			Course: B Track: 17 Run time: 122 mins
+		 50: Ebony Fudge                                       
+			Course: C Track: 13 Run time: 122 mins
+		 51: Ginger Abbey                                      
+			Course: C Track: 13 Run time: 119 mins
+		 52: Ginger Fudge                                      
+			Course: F Track:  1 Run time: 116 mins
+		 53: Goldie Abbey                                      
+			Course: A Track: 18 Run time: 111 mins
+		 55: Goldie Fudge                                      
+			Course: E Track: 13 Run time: 110 mins
+		 56: Honey Abbey                                       
+			Course: F Track:  1 Run time: 107 mins
+		 57: Honey Fudge                                       
+			Course: C Track: 16 Run time: 103 mins
+		 58: Izzy Abbey                                        
+			Course: A Track: 15 Run time:  99 mins
+		 60: Jasmine Abbey                                     
+			Course: A Track: 15 Run time:  93 mins
+		 61: Jasmine Fudge                                     
+			Course: F Track: 13 Run time:  90 mins
+		 62: Lady Abbey                                        
+			Course: D Track: 11 Run time:  87 mins
+		 64: Lady Fudge                                        
+			Course: B Track:  8 Run time:  83 mins
+		 65: Lady Tara Abbey                                   
+			Course: C Track:  8 Run time:  80 mins
+		 66: Lady Tara Fudge                                   
+			Course: B Track:  8 Run time:  76 mins
+		 67: Lemon Abbey                                       
+			Course: B Track:  8 Run time:  73 mins
+		 68: Lemon Fudge                                       
+			Course: E Track: 15 Run time:  70 mins
+		 69: Lord Abbey                                        
+			Course: F Track: 13 Run time:  67 mins
+		 70: Lord Fudge                                        
+			Course: E Track:  9 Run time:  64 mins
+		 71: Lucky Abbey                                       
+			Course: A Track:  5 Run time:  60 mins
+		 74: Lucky Fudge                                       
+			Course: E Track:  9 Run time:  57 mins
+		 76: Lord Abbey                                        
+			Course: D Track:  5 Run time:  54 mins
+		 77: Lord Fudge                                        
+			Course: B Track:  4 Run time:  50 mins
+		 78: Maddy Abbey                                       
+			Course: F Track: 12 Run time:  46 mins
+		 79: Maddy Fudge                                       
+			Course: A Track:  4 Run time:  43 mins
+		 80: Magic Abbey                                       
+			Course: D Track:  3 Run time:  39 mins
+		 81: Magic Fudge                                       
+			Course: D Track:  3 Run time:  35 mins
+		 83: Major Abbey                                       
+			Course: A Track:  3 Run time:  32 mins
+		 85: Major Fudge                                       
+			Course: A Track:  2 Run time:  28 mins
+		 86: Mattie Abbey                                      
+			Course: B Track:  2 Run time:  25 mins
+		 87: Mattie Fudge                                      
+			Course: A Track:  2 Run time:  22 mins
+		 89: Prince Abbey                                      
+			Course: B Track:  1 Run time:  18 mins
+		 90: Prince Fudge                                      
+			Course: A Track:  1 Run time:  15 mins
+		 91: Princess Abbey                                    
+			Course: B Track:  1 Run time:  11 mins
+		 92: Princess Fudge                                    
+			Course: B Track:  1 Run time:   8 mins
+		 93: Rosie Abbey                                       
+			Course: D Track:  1 Run time:   5 mins
+		 94: Rosie Fudge                                       
+			Course: B Track:  1 Run time:   2 mins
+
+	Disqualified:
+		 41: Chalkie Fudge                                     
+			Course: F Disqualified for incorrect route
+		 46: Diamond Fudge                                     
+			Course: B Disqualified for incorrect route
+		 23: Beau Fudge                                        
+			Course: C Disqualified for incorrect route
+		 59: Izzy Fudge                                        
+			Course: A Disqualified for incorrect route
+		 36: Bubbles Fudge                                     
+			Course: D Disqualified for incorrect route
+
+	Waiting to start:
+		 95: Ruby Abbey                                        
+			Course: F
+		 97: Ruby Fudge                                        
+			Course: C
+		 98: Sapphire Abbey                                    
+			Course: C
+		100: Sapphire Fudge                                    
+			Course: F
+		101: Scarlet Abbey                                     
+			Course: C
+		102: Scarlet Fudge                                     
+			Course: F
+		103: sienna Abbey                                      
+			Course: D
+		106: sienna Fudge                                      
+			Course: B
+		107: Silver Abbey                                      
+			Course: F
+		108: Silver Fudge                                      
+			Course: A
+		109: Smokey Abbey                                      
+			Course: A
+		110: Smokey Fudge                                      
+			Course: D
+		111: Snowy Abbey                                       
+			Course: E
+		113: Snowy Fudge                                       
+			Course: C
+		114: sonic Abbey                                       
+			Course: A
+		115: sonic Fudge                                       
+			Course: D
+		117: Summer Abbey                                      
+			Course: A
+		118: Summer Fudge                                      
+			Course: E
+		121: Tango Abbey                                       
+			Course: B
+		122: Tango Fudge                                       
+			Course: A
+		123: Topaz Abbey                                       
+			Course: B
+		124: Topaz Fudge                                       
+			Course: F
+		126: Zizou Abbey                                       
+			Course: D
+		127: Zizou Fudge                                       
+			Course: F
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+11:39  >>  8
+Enter checkpoint file: extended_data/cp_times_4.txt
+
+	Finished:
+		 26: Bella Fudge                                       
+			Course: F Total time: 109 mins
+		 27: Black Jack Abbey                                  
+			Course: F Total time: 109 mins
+		 48: Dinky Fudge                                       
+			Course: F Total time: 114 mins
+		 56: Honey Abbey                                       
+			Course: F Total time: 114 mins
+		 69: Lord Abbey                                        
+			Course: F Total time: 114 mins
+		 16: Barfields Marco Fudge                             
+			Course: F Total time: 115 mins
+		 61: Jasmine Fudge                                     
+			Course: F Total time: 115 mins
+		  8: Ash Abbey                                         
+			Course: F Total time: 116 mins
+		  9: Ash Fudge                                         
+			Course: D Total time: 118 mins
+		 52: Ginger Fudge                                      
+			Course: F Total time: 118 mins
+		 22: Beau Abbey                                        
+			Course: D Total time: 122 mins
+		  6: April Abbey                                       
+			Course: D Total time: 123 mins
+		 34: Bobby Fudge                                       
+			Course: E Total time: 123 mins
+		 40: Chalkie Abbey                                     
+			Course: D Total time: 123 mins
+		 76: Lord Abbey                                        
+			Course: D Total time: 123 mins
+		  1: Ace Abbey                                         
+			Course: E Total time: 124 mins
+		 42: Copper Abbey                                      
+			Course: E Total time: 125 mins
+		 47: Dinky Abbey                                       
+			Course: E Total time: 130 mins
+		  5: Amber Fudge                                       
+			Course: E Total time: 131 mins
+		 55: Goldie Fudge                                      
+			Course: E Total time: 132 mins
+		 74: Lucky Fudge                                       
+			Course: E Total time: 132 mins
+		 70: Lord Fudge                                        
+			Course: E Total time: 134 mins
+		 19: Beatrice Abbey                                    
+			Course: C Total time: 147 mins
+		 45: Diamond Abbey                                     
+			Course: C Total time: 149 mins
+		 65: Lady Tara Abbey                                   
+			Course: C Total time: 149 mins
+		 12: Autumn Abbey                                      
+			Course: C Total time: 150 mins
+		 35: Bubbles Abbey                                     
+			Course: C Total time: 152 mins
+		 51: Ginger Abbey                                      
+			Course: C Total time: 152 mins
+		 50: Ebony Fudge                                       
+			Course: C Total time: 155 mins
+		 57: Honey Fudge                                       
+			Course: C Total time: 156 mins
+		  4: Amber Abbey                                       
+			Course: C Total time: 157 mins
+		 30: Blue Abbey                                        
+			Course: B Total time: 163 mins
+		 31: Blue Fudge                                        
+			Course: B Total time: 164 mins
+		  7: April Fudge                                       
+			Course: B Total time: 166 mins
+		 17: Basil Abbey                                       
+			Course: B Total time: 169 mins
+		 39: Captain Fudge                                     
+			Course: B Total time: 171 mins
+		 13: Autumn Fudge                                      
+			Course: B Total time: 173 mins
+		 24: Bella Abbey                                       
+			Course: B Total time: 174 mins
+		 49: Ebony Abbey                                       
+			Course: B Total time: 184 mins
+		 10: Asti Abbey                                        
+			Course: A Total time: 229 mins
+		 14: Barfields Marco Abbey                             
+			Course: A Total time: 229 mins
+		 18: Basil Fudge                                       
+			Course: A Total time: 230 mins
+		 20: Beatrice Fudge                                    
+			Course: A Total time: 230 mins
+		 11: Asti Fudge                                        
+			Course: A Total time: 231 mins
+		  3: Ace Fudge                                         
+			Course: A Total time: 232 mins
+		 32: Bobby Abbey                                       
+			Course: A Total time: 232 mins
+
+	Running:
+		 38: Captain Abbey                                     
+			Course: A Track:  1 Run time: 225 mins
+		 53: Goldie Abbey                                      
+			Course: A Track: 18 Run time: 187 mins
+		 58: Izzy Abbey                                        
+			Course: A Track: 17 Run time: 169 mins
+		 62: Lady Abbey                                        
+			Course: D Track:  1 Run time: 163 mins
+		 60: Jasmine Abbey                                     
+			Course: A Track: 17 Run time: 162 mins
+		 64: Lady Fudge                                        
+			Course: B Track: 13 Run time: 157 mins
+		 66: Lady Tara Fudge                                   
+			Course: B Track: 13 Run time: 149 mins
+		 67: Lemon Abbey                                       
+			Course: B Track: 13 Run time: 145 mins
+		 71: Lucky Abbey                                       
+			Course: A Track: 21 Run time: 133 mins
+		 77: Lord Fudge                                        
+			Course: B Track: 17 Run time: 123 mins
+		 79: Maddy Fudge                                       
+			Course: A Track: 18 Run time: 116 mins
+		 80: Magic Abbey                                       
+			Course: D Track:  1 Run time: 115 mins
+		 81: Magic Fudge                                       
+			Course: D Track:  1 Run time: 111 mins
+		 83: Major Abbey                                       
+			Course: A Track: 17 Run time: 108 mins
+		 85: Major Fudge                                       
+			Course: A Track: 17 Run time: 104 mins
+		 86: Mattie Abbey                                      
+			Course: B Track: 17 Run time: 101 mins
+		 87: Mattie Fudge                                      
+			Course: A Track: 15 Run time:  98 mins
+		 89: Prince Abbey                                      
+			Course: B Track: 15 Run time:  94 mins
+		 90: Prince Fudge                                      
+			Course: A Track: 15 Run time:  91 mins
+		 91: Princess Abbey                                    
+			Course: B Track:  8 Run time:  87 mins
+		 92: Princess Fudge                                    
+			Course: B Track:  8 Run time:  84 mins
+		 93: Rosie Abbey                                       
+			Course: D Track: 11 Run time:  81 mins
+		 94: Rosie Fudge                                       
+			Course: B Track:  8 Run time:  78 mins
+		 95: Ruby Abbey                                        
+			Course: F Track: 13 Run time:  75 mins
+		 97: Ruby Fudge                                        
+			Course: C Track:  7 Run time:  72 mins
+		 98: Sapphire Abbey                                    
+			Course: C Track:  8 Run time:  69 mins
+		100: Sapphire Fudge                                    
+			Course: F Track: 12 Run time:  66 mins
+		101: Scarlet Abbey                                     
+			Course: C Track:  5 Run time:  63 mins
+		102: Scarlet Fudge                                     
+			Course: F Track: 12 Run time:  60 mins
+		103: sienna Abbey                                      
+			Course: D Track:  5 Run time:  56 mins
+		106: sienna Fudge                                      
+			Course: B Track:  5 Run time:  53 mins
+		107: Silver Abbey                                      
+			Course: F Track: 12 Run time:  50 mins
+		108: Silver Fudge                                      
+			Course: A Track:  4 Run time:  47 mins
+		109: Smokey Abbey                                      
+			Course: A Track:  4 Run time:  44 mins
+		110: Smokey Fudge                                      
+			Course: D Track:  4 Run time:  41 mins
+		111: Snowy Abbey                                       
+			Course: E Track: 11 Run time:  38 mins
+		113: Snowy Fudge                                       
+			Course: C Track:  3 Run time:  35 mins
+		114: sonic Abbey                                       
+			Course: A Track:  3 Run time:  32 mins
+		115: sonic Fudge                                       
+			Course: D Track:  2 Run time:  29 mins
+		117: Summer Abbey                                      
+			Course: A Track:  2 Run time:  25 mins
+		118: Summer Fudge                                      
+			Course: E Track:  2 Run time:  22 mins
+		121: Tango Abbey                                       
+			Course: B Track:  1 Run time:  19 mins
+		122: Tango Fudge                                       
+			Course: A Track:  1 Run time:  16 mins
+		123: Topaz Abbey                                       
+			Course: B Track:  1 Run time:  13 mins
+		124: Topaz Fudge                                       
+			Course: F Track:  1 Run time:  10 mins
+		126: Zizou Abbey                                       
+			Course: D Track:  1 Run time:   6 mins
+		127: Zizou Fudge                                       
+			Course: F Track:  1 Run time:   3 mins
+
+	Disqualified:
+		 28: Black Jack Fudge                                  
+			Course: A Disqualified for incorrect route
+		 44: Copper Fudge                                      
+			Course: B Disqualified for incorrect route
+		 68: Lemon Fudge                                       
+			Course: E Disqualified for incorrect route
+		 78: Maddy Abbey                                       
+			Course: F Disqualified for incorrect route
+		 41: Chalkie Fudge                                     
+			Course: F Disqualified for incorrect route
+		 46: Diamond Fudge                                     
+			Course: B Disqualified for incorrect route
+		 23: Beau Fudge                                        
+			Course: C Disqualified for incorrect route
+		 59: Izzy Fudge                                        
+			Course: A Disqualified for incorrect route
+		 36: Bubbles Fudge                                     
+			Course: D Disqualified for incorrect route
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+12:55  >>  2
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+12:55  >>  3
+	47
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+12:55  >>  8
+Enter checkpoint file: extended_datapc  /cp_times_5.txt
+
+	Finished:
+		 26: Bella Fudge                                       
+			Course: F Total time: 109 mins
+		 27: Black Jack Abbey                                  
+			Course: F Total time: 109 mins
+		124: Topaz Fudge                                       
+			Course: F Total time: 113 mins
+		 48: Dinky Fudge                                       
+			Course: F Total time: 114 mins
+		 56: Honey Abbey                                       
+			Course: F Total time: 114 mins
+		 69: Lord Abbey                                        
+			Course: F Total time: 114 mins
+		 16: Barfields Marco Fudge                             
+			Course: F Total time: 115 mins
+		 61: Jasmine Fudge                                     
+			Course: F Total time: 115 mins
+		127: Zizou Fudge                                       
+			Course: F Total time: 115 mins
+		  8: Ash Abbey                                         
+			Course: F Total time: 116 mins
+		102: Scarlet Fudge                                     
+			Course: F Total time: 116 mins
+		107: Silver Abbey                                      
+			Course: F Total time: 116 mins
+		100: Sapphire Fudge                                    
+			Course: F Total time: 117 mins
+		  9: Ash Fudge                                         
+			Course: D Total time: 118 mins
+		 52: Ginger Fudge                                      
+			Course: F Total time: 118 mins
+		 93: Rosie Abbey                                       
+			Course: D Total time: 119 mins
+		 95: Ruby Abbey                                        
+			Course: F Total time: 119 mins
+		 22: Beau Abbey                                        
+			Course: D Total time: 122 mins
+		 81: Magic Fudge                                       
+			Course: D Total time: 122 mins
+		103: sienna Abbey                                      
+			Course: D Total time: 122 mins
+		  6: April Abbey                                       
+			Course: D Total time: 123 mins
+		 34: Bobby Fudge                                       
+			Course: E Total time: 123 mins
+		 40: Chalkie Abbey                                     
+			Course: D Total time: 123 mins
+		 76: Lord Abbey                                        
+			Course: D Total time: 123 mins
+		110: Smokey Fudge                                      
+			Course: D Total time: 123 mins
+		115: sonic Fudge                                       
+			Course: D Total time: 123 mins
+		126: Zizou Abbey                                       
+			Course: D Total time: 123 mins
+		  1: Ace Abbey                                         
+			Course: E Total time: 124 mins
+		 80: Magic Abbey                                       
+			Course: D Total time: 124 mins
+		 42: Copper Abbey                                      
+			Course: E Total time: 125 mins
+		 47: Dinky Abbey                                       
+			Course: E Total time: 130 mins
+		118: Summer Fudge                                      
+			Course: E Total time: 130 mins
+		  5: Amber Fudge                                       
+			Course: E Total time: 131 mins
+		 55: Goldie Fudge                                      
+			Course: E Total time: 132 mins
+		 74: Lucky Fudge                                       
+			Course: E Total time: 132 mins
+		 70: Lord Fudge                                        
+			Course: E Total time: 134 mins
+		 19: Beatrice Abbey                                    
+			Course: C Total time: 147 mins
+		113: Snowy Fudge                                       
+			Course: C Total time: 148 mins
+		 45: Diamond Abbey                                     
+			Course: C Total time: 149 mins
+		 65: Lady Tara Abbey                                   
+			Course: C Total time: 149 mins
+		 12: Autumn Abbey                                      
+			Course: C Total time: 150 mins
+		 98: Sapphire Abbey                                    
+			Course: C Total time: 150 mins
+		 35: Bubbles Abbey                                     
+			Course: C Total time: 152 mins
+		 51: Ginger Abbey                                      
+			Course: C Total time: 152 mins
+		 50: Ebony Fudge                                       
+			Course: C Total time: 155 mins
+		101: Scarlet Abbey                                     
+			Course: C Total time: 155 mins
+		 57: Honey Fudge                                       
+			Course: C Total time: 156 mins
+		 97: Ruby Fudge                                        
+			Course: C Total time: 156 mins
+		  4: Amber Abbey                                       
+			Course: C Total time: 157 mins
+		 30: Blue Abbey                                        
+			Course: B Total time: 163 mins
+		 31: Blue Fudge                                        
+			Course: B Total time: 164 mins
+		 94: Rosie Fudge                                       
+			Course: B Total time: 165 mins
+		  7: April Fudge                                       
+			Course: B Total time: 166 mins
+		 17: Basil Abbey                                       
+			Course: B Total time: 169 mins
+		 66: Lady Tara Fudge                                   
+			Course: B Total time: 170 mins
+		 39: Captain Fudge                                     
+			Course: B Total time: 171 mins
+		 86: Mattie Abbey                                      
+			Course: B Total time: 172 mins
+		 13: Autumn Fudge                                      
+			Course: B Total time: 173 mins
+		 24: Bella Abbey                                       
+			Course: B Total time: 174 mins
+		123: Topaz Abbey                                       
+			Course: B Total time: 174 mins
+		 77: Lord Fudge                                        
+			Course: B Total time: 176 mins
+		121: Tango Abbey                                       
+			Course: B Total time: 177 mins
+		 64: Lady Fudge                                        
+			Course: B Total time: 179 mins
+		 89: Prince Abbey                                      
+			Course: B Total time: 179 mins
+		 91: Princess Abbey                                    
+			Course: B Total time: 181 mins
+		 67: Lemon Abbey                                       
+			Course: B Total time: 182 mins
+		 92: Princess Fudge                                    
+			Course: B Total time: 182 mins
+		 49: Ebony Abbey                                       
+			Course: B Total time: 184 mins
+		 83: Major Abbey                                       
+			Course: A Total time: 223 mins
+		108: Silver Fudge                                      
+			Course: A Total time: 223 mins
+		114: sonic Abbey                                       
+			Course: A Total time: 227 mins
+		 10: Asti Abbey                                        
+			Course: A Total time: 229 mins
+		 14: Barfields Marco Abbey                             
+			Course: A Total time: 229 mins
+		 18: Basil Fudge                                       
+			Course: A Total time: 230 mins
+		 20: Beatrice Fudge                                    
+			Course: A Total time: 230 mins
+		 60: Jasmine Abbey                                     
+			Course: A Total time: 230 mins
+		 11: Asti Fudge                                        
+			Course: A Total time: 231 mins
+		  3: Ace Fudge                                         
+			Course: A Total time: 232 mins
+		 32: Bobby Abbey                                       
+			Course: A Total time: 232 mins
+		 38: Captain Abbey                                     
+			Course: A Total time: 232 mins
+		 87: Mattie Fudge                                      
+			Course: A Total time: 232 mins
+		 58: Izzy Abbey                                        
+			Course: A Total time: 233 mins
+		 79: Maddy Fudge                                       
+			Course: A Total time: 234 mins
+		109: Smokey Abbey                                      
+			Course: A Total time: 235 mins
+		117: Summer Abbey                                      
+			Course: A Total time: 238 mins
+		 90: Prince Fudge                                      
+			Course: A Total time: 240 mins
+		122: Tango Fudge                                       
+			Course: A Total time: 242 mins
+
+	Disqualified:
+		 71: Lucky Abbey                                       
+			Course: A Disqualified for incorrect route
+		 85: Major Fudge                                       
+			Course: A Disqualified for incorrect route
+		 53: Goldie Abbey                                      
+			Course: A Disqualified for incorrect route
+		 28: Black Jack Fudge                                  
+			Course: A Disqualified for incorrect route
+		106: sienna Fudge                                      
+			Course: B Disqualified for incorrect route
+		 62: Lady Abbey                                        
+			Course: D Disqualified for incorrect route
+		 44: Copper Fudge                                      
+			Course: B Disqualified for incorrect route
+		 68: Lemon Fudge                                       
+			Course: E Disqualified for incorrect route
+		 78: Maddy Abbey                                       
+			Course: F Disqualified for incorrect route
+		 41: Chalkie Fudge                                     
+			Course: F Disqualified for incorrect route
+		 46: Diamond Fudge                                     
+			Course: B Disqualified for incorrect route
+		 23: Beau Fudge                                        
+			Course: C Disqualified for incorrect route
+		111: Snowy Abbey                                       
+			Course: E Disqualified for incorrect route
+		 59: Izzy Fudge                                        
+			Course: A Disqualified for incorrect route
+		 36: Bubbles Fudge                                     
+			Course: D Disqualified for incorrect route
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+16:48  >>  1
+Enter entrant id: 71
+
+	 71: Lucky Abbey                                       
+		Running course:         A
+		Started at:             10:39
+		Disqualified at:        Node 9 at 13:56
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+16:48  >>  2
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+16:48  >>  3
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+16:48  >>  4
+	87
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+16:48  >>  5
+	No entrants disqualified for safety reasons
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+16:48  >>  6
+	71: Lucky Abbey                                       
+		Course: A Last node:  9
+	85: Major Fudge                                       
+		Course: A Last node:  7
+	53: Goldie Abbey                                      
+		Course: A Last node: 17
+	28: Black Jack Fudge                                  
+		Course: A Last node: 13
+	106: sienna Fudge                                      
+		Course: B Last node: 13
+	62: Lady Abbey                                        
+		Course: D Last node: 17
+	44: Copper Fudge                                      
+		Course: B Last node:  5
+	68: Lemon Fudge                                       
+		Course: E Last node: 14
+	78: Maddy Abbey                                       
+		Course: F Last node: 17
+	41: Chalkie Fudge                                     
+		Course: F Last node:  7
+	46: Diamond Fudge                                     
+		Course: B Last node: 13
+	23: Beau Fudge                                        
+		Course: C Last node:  9
+	111: Snowy Abbey                                       
+		Course: E Last node:  4
+	59: Izzy Fudge                                        
+		Course: A Last node:  7
+	36: Bubbles Fudge                                     
+		Course: D Last node: 17
+
+	Total disqualified for incorrect route: 15
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. List entrants excluded for safety
+	 6. List entrants excluded for incorrect route
+	 7. Supply checkpoint times manually
+	 8. Supply checkpoint times from a file
+	 9. Display results list
+	10. Exit the program
+
+16:48  >>  10
