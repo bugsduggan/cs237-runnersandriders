@@ -1,8 +1,8 @@
 Please enter name file: extended_data/name.txt
 Please enter nodes file: extended_data/nodes.txt
-Please enter tracks file: extended_data/trakc.   cks.txt
+Please enter tracks file: extended_data/tracks.txt
 Please enter courses file: extended_data/courses.txt
-Please enter entrants file: extended_data/entrant. s.txt
+Please enter entrants file: extended_data/entrants.txt
 
 
 	Endurance Horse Race - The Main Event
@@ -579,7 +579,7 @@ Please select from the following options:
 	10. Exit the program
 
 10:24  >>  8
-Enter checkpoint file: extende_ d_data/cp_times_3.txt
+Enter checkpoint file: extended_data/cp_times_3.txt
 
 	Finished:
 		 26: Bella Fudge                                       
@@ -1065,7 +1065,7 @@ Please select from the following options:
 	10. Exit the program
 
 12:55  >>  8
-Enter checkpoint file: extended_datapc  /cp_times_5.txt
+Enter checkpoint file: extended_data/cp_times_5.txt
 
 	Finished:
 		 26: Bella Fudge                                       
