@@ -27,6 +27,7 @@ void string_dispose(void* string) {
  * http://cboard.cprogramming.com/c-programming/
  * 95462-compiler-error-warning-implicit-declaration-function-strdup.html
  * as it's not part of the c89 standard but it is really *really* useful
+ * See ref [1]
  */
 char* strdup(const char* str) {
   int n = strlen(str) + 1;
@@ -42,6 +43,7 @@ char* strdup(const char* str) {
  * http://stackoverflow.com/questions/314401/how-to-read-a-line-from-the-console-in-c
  * I could have used scanf, but I think just reading in a whole line each time and
  * then parsing it makes everything easier to read in the rest of the source
+ * See ref [2]
  */
 char* readline() {
   char* line = malloc(100), *linep = line;

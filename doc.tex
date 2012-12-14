@@ -5,6 +5,7 @@
 \setlength{\oddsidemargin}{0in} \setlength{\evensidemargin}{0in}
 \setlength{\textwidth}{6.2in}
 \setlength{\topmargin}{-0.3in} \setlength{\textheight}{9.8in}
+\setlength{\parskip}{0.3in}
 
 \title{CS23710 - Runners and Riders}
 \author{Tom Leaman (thl5)}
@@ -18,6 +19,33 @@ The main function (in main.c) is a very simple function which starts by reading
 in the data from the user supplied filenames and then executes a while loop
 which displays the menu, prompts for input and then calls helper functions
 based on what the user requires from the program.
+
+\subsection{Nodes \& tracks}
+The nodes and tracks are designed as very simple data structures which hold the
+data as it comes out of the files. The tracks are created in duplicate, one
+from start node to end node and one in reverse, this simplifies the code which
+finds a track from two nodes and also allows for alternative safe completion
+times in the future (e.g. going up a hill may take longer than going down a
+hill).
+
+\subsection{Courses}
+The courses are similarly quite simple data structures that also hold a pointer
+to a vector of nodes and a pointer to a vector of tracks which comprise the
+course. These are used extensively when updating entrant's times and locations.
+
+\subsection{Entrant}
+The entrant is one of the most complex data structures in the program. It holds
+data on the id, name and course of the entrant. It also contains a pointer to
+the last timed/medical checkpoint node and time, the last assumed node and time
+and the current track and time. These are used to keep track of the entrant's
+location around the course as they pass checkpoints. They are also used to
+update which track the entrant is assumed to be on.
+
+\subsection{Event}
+The event contains the data read in from file (title, date and start time).
+Once the other data has been read in, it also contains a pointer to a vector
+of entrants and a pointer to a vector of nodes. The nodes are required for
+finding entrants which have gone off-track.
 
 \subsection{Vector}
 I decided to implement an array-backed vector to store the data being passed to
@@ -41,36 +69,48 @@ eliminates the benefit of using a linked list (the linked list would also have
 more memory overhead per item due to each item needing a pointer to the next
 node).
 
-\section{Compilation}
+\newpage
+\section{Compilation (extended mission)}
+\verbatiminput{compilation_output.txt}
 
+\newpage
 \section{Output}
 
+\newpage
 \section{Source}
-\subsection{vector.h}
+\subsection{Main Mission}
+
+\newpage
+\subsection{Extended Mission}
+\subsubsection{vector.h}
 \verbatiminput{vector.h}
-\subsection{vector.c}
+\subsubsection{vector.c}
 \verbatiminput{vector.c}
-\subsection{vectortest.c}
+\subsubsection{vectortest.c}
 \verbatiminput{vectortest.c}
-\subsection{util.h}
+\subsubsection{util.h}
 \verbatiminput{util.h}
-\subsection{util.c}
+\subsubsection{util.c}
 \verbatiminput{util.c}
-\subsection{data.h}
+\subsubsection{data.h}
 \verbatiminput{data.h}
-\subsection{node.c}
+\subsubsection{node.c}
 \verbatiminput{node.c}
-\subsection{track.c}
+\subsubsection{track.c}
 \verbatiminput{track.c}
-\subsection{course.c}
+\subsubsection{course.c}
 \verbatiminput{course.c}
-\subsection{entrant.c}
+\subsubsection{entrant.c}
 \verbatiminput{entrant.c}
-\subsection{event.c}
+\subsubsection{event.c}
 \verbatiminput{event.c}
-\subsection{main.c}
+\subsubsection{main.c}
 \verbatiminput{main.c}
 
 \section{References}
+\begin{itemize}
+\item{1. http://cboard.cprogramming.com/c-programming/95462-compiler-error-warning-implicit-declaration-function-strdup.html (util.c)}
+\item{2. http://stackoverflow.com/questions/314401/how-to-read-a-line-from-the-console-in-c (util.c)}
+\end{itemize}
 
 \end{document}
