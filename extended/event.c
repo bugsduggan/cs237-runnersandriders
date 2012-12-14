@@ -52,3 +52,4 @@ void update_time(Event* event, Time* time, int entrant_id) {
       entrant_update_time(event, entrant);
   }
 }
+

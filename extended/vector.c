@@ -119,3 +119,4 @@ int Vector_size(Vector* vector) {
    * consistent to get them to call a function */
   return vector->size;
 }
+
