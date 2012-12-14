@@ -1,0 +1,237 @@
+Please enter name file: main_data/name.txt
+Please enter nodes file: main_data/nodes.txt
+Please enter tracks file: main_data/tracks.txt
+Please enter courses file: main_data/courses.txt
+Please enter entrants file: main_data/entrants.txt
+
+
+	Endurance Horse Race - Beginners Event
+	26th June 2012
+	7:30
+
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+07:30  >>  6
+Enter checkpoint file: main_data/cp_times_1.txt
+
+	Running:
+		  1: Donald Duck                                       
+			Course: D Track: 11 Run time:  84 mins
+		  2: Mickey Mouse                                      
+			Course: D Track: 11 Run time:  79 mins
+		  3: Jemima Julieta Mouse                              
+			Course: E Track: 16 Run time:  75 mins
+		  4: Minnie Duck                                       
+			Course: F Track: 14 Run time:  71 mins
+		  5: Minnie Mouse                                      
+			Course: E Track: 15 Run time:  67 mins
+		  6: Minnie Mouse Junior                               
+			Course: E Track:  9 Run time:  63 mins
+		  7: Deputy Doug                                       
+			Course: D Track:  5 Run time:  58 mins
+		  8: Deputy Duck                                       
+			Course: D Track:  4 Run time:  53 mins
+		  9: Bewick Swan                                       
+			Course: F Track: 12 Run time:  49 mins
+		 10: Black Swan                                        
+			Course: F Track: 12 Run time:  44 mins
+		 11: Albert Einstein                                   
+			Course: E Track: 11 Run time:  40 mins
+		 12: Albert Mouse                                      
+			Course: D Track:  3 Run time:  36 mins
+		 13: Donald Duck Senior                                
+			Course: E Track:  2 Run time:  32 mins
+		 14: Egbert Einstein                                   
+			Course: F Track:  2 Run time:  28 mins
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+08:54  >>  2
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+08:54  >>  3
+	14
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+08:54  >>  4
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+08:54  >>  1
+Enter entrant id: 3
+
+	  3: Jemima Julieta Mouse                              
+		Running course:         E
+		Started at:             07:39
+		Estimated location:     Track 16
+		Last checkpoint:        Node 9 at 08:20 (34 mins ago)
+		Run time:               75 mins
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+08:54  >>  6
+Enter checkpoint file: main_data/cp_times_2.txt
+
+	Finished:
+		  9: Bewick Swan                                       
+			Course: F Total time: 111 mins
+		 14: Egbert Einstein                                   
+			Course: F Total time: 114 mins
+		  2: Mickey Mouse                                      
+			Course: D Total time: 119 mins
+		 10: Black Swan                                        
+			Course: F Total time: 119 mins
+		  1: Donald Duck                                       
+			Course: D Total time: 121 mins
+		  3: Jemima Julieta Mouse                              
+			Course: E Total time: 123 mins
+		  4: Minnie Duck                                       
+			Course: F Total time: 123 mins
+		 12: Albert Mouse                                      
+			Course: D Total time: 125 mins
+		  7: Deputy Doug                                       
+			Course: D Total time: 126 mins
+		  6: Minnie Mouse Junior                               
+			Course: E Total time: 127 mins
+		  8: Deputy Duck                                       
+			Course: D Total time: 130 mins
+		 13: Donald Duck Senior                                
+			Course: E Total time: 131 mins
+		 11: Albert Einstein                                   
+			Course: E Total time: 132 mins
+		  5: Minnie Mouse                                      
+			Course: E Total time: 138 mins
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+10:33  >>  2
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+10:33  >>  3
+	0
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+10:33  >>  4
+	14
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+10:33  >>  1
+Enter entrant id: 4
+
+	  4: Minnie Duck                                       
+		Running course:         F
+		Started at:             07:43
+		Finished at:            09:46
+		Total time:             123 mins
+
+Please select from the following options:
+
+	 1. Locate a entrant
+	 2. Show how many entrants have not yet started
+	 3. Show how many entrants are currently on the course
+	 4. Show how many entrants have finished
+	 5. Supply checkpoint times manually
+	 6. Supply checkpoint times from a file
+	 7. Display results list
+	 8. Exit the program
+
+10:33  >>  8

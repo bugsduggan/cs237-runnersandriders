@@ -1,0 +1,77 @@
+"/opt/csw/bin/gmake" -f nbproject/Makefile-Debug.mk QMAKE= SUBPROJECTS=
+.clean-conf
+gmake[1]: Entering directory `/ceri/homes1/t/thl5/cs237-handin'
+rm -f -r build/Debug
+rm -f dist/Debug/NewGnu-Solaris-Sparc/cs237-handin
+gmake[1]: Leaving directory `/ceri/homes1/t/thl5/cs237-handin'
+
+
+CLEAN SUCCESSFUL (total time: 668ms)
+
+"/opt/csw/bin/gmake" -f nbproject/Makefile-Debug.mk QMAKE= SUBPROJECTS=
+.build-conf
+gmake[1]: Entering directory `/ceri/homes1/t/thl5/cs237-handin'
+"/opt/csw/bin/gmake"  -f nbproject/Makefile-Debug.mk
+dist/Debug/NewGnu-Solaris-Sparc/cs237-handin
+gmake[2]: Entering directory `/ceri/homes1/t/thl5/cs237-handin'
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/vector.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/vector.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/vector.o vector.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/track.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/track.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/track.o track.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/util.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/util.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/util.o util.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/course.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/course.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/course.o course.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/vectortest.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/vectortest.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/vectortest.o vectortest.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/main.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/main.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/main.o main.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/node.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/node.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/node.o node.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/event.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/event.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/event.o event.c
+mkdir -p build/Debug/NewGnu-Solaris-Sparc
+rm -f build/Debug/NewGnu-Solaris-Sparc/entrant.o.d
+gcc    -c -g -Wall -std=c89 -MMD -MP -MF
+build/Debug/NewGnu-Solaris-Sparc/entrant.o.d -o
+build/Debug/NewGnu-Solaris-Sparc/entrant.o entrant.c
+mkdir -p dist/Debug/NewGnu-Solaris-Sparc
+gcc     -o dist/Debug/NewGnu-Solaris-Sparc/cs237-handin
+build/Debug/NewGnu-Solaris-Sparc/vector.o
+build/Debug/NewGnu-Solaris-Sparc/track.o
+build/Debug/NewGnu-Solaris-Sparc/util.o
+build/Debug/NewGnu-Solaris-Sparc/course.o
+build/Debug/NewGnu-Solaris-Sparc/vectortest.o
+build/Debug/NewGnu-Solaris-Sparc/main.o
+build/Debug/NewGnu-Solaris-Sparc/node.o
+build/Debug/NewGnu-Solaris-Sparc/event.o
+build/Debug/NewGnu-Solaris-Sparc/entrant.o  
+gmake[2]: Leaving directory `/ceri/homes1/t/thl5/cs237-handin'
+gmake[1]: Leaving directory `/ceri/homes1/t/thl5/cs237-handin'
+
+
+BUILD SUCCESSFUL (total time: 10s)
