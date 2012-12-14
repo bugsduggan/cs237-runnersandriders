@@ -13,6 +13,33 @@
 \maketitle
 
 \section{Design}
+\subsection{Program loop \& main}
+The main function (in main.c) is a very simple function which starts by reading
+in the data from the user supplied filenames and then executes a while loop
+which displays the menu, prompts for input and then calls helper functions
+based on what the user requires from the program.
+
+\subsection{Vector}
+I decided to implement an array-backed vector to store the data being passed to
+the program. As the code does not know the size of the file before reading, I
+felt that a dynamically resizable data structure would be preferable and a
+vector seemed like the simplest option. I implemented all of the functionality
+that I felt would be necessary (including originally a remove function which
+proved to not be needed) and tested it with vectortest.c.
+
+The vector uses a doubling strategy when it becomes full which means that it
+will only resize every $2^n$ inserts. I think the benefit of readable,
+understandable (I hope) code out-weighs the extra memory allocated at the
+end of the vector.
+
+I did contemplate implementing a generic linked list structure as well but I
+actually don't believe it to be necessary; the only time data is being shuffled
+around is when the vector resizes or when it is being sorted. The sorting
+algorithm used is bubble sort which means that during any one operation, only
+two sections of memory are being swapped. This (as far as I am concerned)
+eliminates the benefit of using a linked list (the linked list would also have
+more memory overhead per item due to each item needing a pointer to the next
+node).
 
 \section{Compilation}
 
@@ -23,6 +50,8 @@
 \verbatiminput{vector.h}
 \subsection{vector.c}
 \verbatiminput{vector.c}
+\subsection{vectortest.c}
+\verbatiminput{vectortest.c}
 \subsection{util.h}
 \verbatiminput{util.h}
 \subsection{util.c}
